@@ -56,7 +56,7 @@ public class Mage extends Player{
         int hits = 0;
         while (hits < hitscnt /* && need to implement the check if any enemy exist in rang*/ ){
             List<Enemy> lst = SelectEnemyInRange();
-            lst.getFirst().SetHp(lst.getFirst().getHp() - spellpower);
+            attack(lst.getFirst());
             hits++;
         }
 

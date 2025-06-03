@@ -1,5 +1,6 @@
 package game.tiles.units.enemies;
 
+import game.tiles.units.player.Player;
 import game.utils.Position;
 
 import java.util.List;
@@ -51,14 +52,14 @@ public class Trap extends Enemy{
     }
 
     public void tick() {
-        visible = ( ticks_cnt < visibility_time);
-        if (ticks_cnt == (visibility_time + invisibility_time)
+        visible = (ticks_cnt < visibility_time);
+        if (ticks_cnt == (visibility_time + invisibility_time))
             ticks_cnt = 0;
         else
             ticks_cnt++;
-        List<Enemy> list = Select
-        attack(player)
-
+        Player player = SelectPlayerInRange();
+        if (player == null) return;
+        attack(player);
     }
 
 }
