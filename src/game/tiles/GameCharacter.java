@@ -2,10 +2,10 @@ package game.tiles;
 
 import game.utils.Position;
 
-public class Character {
+public class GameCharacter {
     private Position position;
 
-    public Character(Position position){
+    public GameCharacter(Position position){
         this.position = position;
     }
 

@@ -9,10 +9,12 @@ import java.util.List;
 
 public class Enemy extends Unit {
     private int experience_val;
+    private char tile;
 
-    public Enemy(String name, int maxhp, int attack, int defense, Position position, int range, int exp) {
+    public Enemy(String name, int maxhp, int attack, int defense, Position position, int range, int exp, char tile) {
         super(name, maxhp, attack, defense, position, range);
         experience_val = exp;
+        this.tile = tile;
     }
 
     public int getExperience() {
@@ -25,5 +27,13 @@ public class Enemy extends Unit {
 
     public Player SelectPlayerInRange() throws ExecutionControl.NotImplementedException {
         throw new ExecutionControl.NotImplementedException("");
+    }
+
+    public char getTile() {
+        return tile;
+    }
+
+    public void setTile(char tile) {
+        this.tile = tile;
     }
 }

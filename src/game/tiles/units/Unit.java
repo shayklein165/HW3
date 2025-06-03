@@ -1,9 +1,9 @@
 package game.tiles.units;
 
-import game.tiles.Character;
+import game.tiles.GameCharacter;
 import game.utils.Position;
 
-public class Unit extends Character {
+public class Unit extends GameCharacter {
     private String name;
     private Health health;
     private int attack;

@@ -2,7 +2,7 @@ package game.tiles;
 
 import game.utils.Position;
 
-public class Tile extends Character{
+public class Tile extends GameCharacter{
     private Position position;
     private char tile;
 
