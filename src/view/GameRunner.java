@@ -57,7 +57,7 @@ public class GameRunner {
             sendMessage("Select player: ");
             List<Player> playerList = tileFactory.listPlayers();
             for(int i=0; i<playerList.size();i++){
-                sendMessage(String.format("%d. %s", i+1, playerList.get(i).describe()))
+                sendMessage(String.format("%d. %s", i+1, playerList.get(i).describe()));
             }
 
             try {

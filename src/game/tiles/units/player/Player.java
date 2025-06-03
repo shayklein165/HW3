@@ -1,13 +1,13 @@
 package game.tiles.units.player;
 
+import game.tiles.units.Mana;
 import game.tiles.units.Unit;
 import game.utils.Position;
 
 public class Player extends Unit {
     private int experience;
     private int level;
-    private int mana;
-    private int manaPool;
+    private Mana mana;
 
 
 
@@ -15,16 +15,15 @@ public class Player extends Unit {
         super(name, maxhp, attack, defense, position);
         this.experience = 0;
         this.level = 1;
-        this.manaPool = manaPool;
-        this.mana = manaPool;
+        this.mana = new Mana(manaPool);
     }
 
     public int getMana() {
-        return mana;
+        return mana.getCurrmana();
     }
 
     public int getManaPool() {
-        return manaPool;
+        return mana.getMaxMana();
     }
 
 
@@ -44,14 +43,14 @@ public class Player extends Unit {
     }
 
     public void setMana(int mana) {
-        this.mana = mana;
+        this.mana.setCurrmana(mana);
     }
 
     public void setManaPool(int manaPool) {
-        this.manaPool = manaPool;
+        this.mana.setMaxMana(manaPool);
     }
 
-    public void levelUp(){
+    protected void LevelUp(){
         this.experience -= 50*level;
         this.level += 1;
         SetMaxHp(getMaxHp() + 10*level);
