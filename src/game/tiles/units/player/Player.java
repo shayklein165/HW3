@@ -1,43 +1,22 @@
 package game.tiles.units.player;
 
+import game.tiles.units.Unit;
 import game.utils.Position;
 
-public class Player {
-    private String name;
+public class Player extends Unit {
     private int experience;
     private int level;
-    private int healthPool;
-    private int currentHelath;
     private int mana;
     private int manaPool;
-    private int attack;
-    private int defense;
-    private Position position;
 
 
-    public Player(String name, Position position, int healthPool, int manaPool, int attack, int defense){
+
+    public Player(String name, Position position, int maxhp, int manaPool, int attack, int defense){
+        super(name, maxhp, attack, defense, position);
         this.experience = 0;
         this.level = 1;
-        this.healthPool = healthPool;
-        this.currentHelath = healthPool;
         this.manaPool = manaPool;
         this.mana = manaPool;
-        this.defense = defense;
-        this.attack = attack;
-        this.name = name;
-        this.position = position;
-    }
-
-    public int getAttack() {
-        return attack;
-    }
-
-    public int getDefense() {
-        return defense;
-    }
-
-    public int getCurrentHelath() {
-        return currentHelath;
     }
 
     public int getMana() {
@@ -48,9 +27,6 @@ public class Player {
         return manaPool;
     }
 
-    public int getHealthPool() {
-        return healthPool;
-    }
 
     public int getExperience() {
         return experience;
@@ -60,37 +36,11 @@ public class Player {
         return level;
     }
 
-    public Position getPosition() {
-        return position;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     public void setExperience(int experience) {
         this.experience = experience;
     }
     public void setLevel(int level) {
         this.level = level;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setHealth(int health){
-        this.currentHelath = health;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    public void setHealthPool(int healthPool) {
-        this.healthPool = healthPool;
-    }
-
-    public void setCurrentHelath(int currentHelath) {
-        this.currentHelath = currentHelath;
     }
 
     public void setMana(int mana) {
@@ -101,20 +51,12 @@ public class Player {
         this.manaPool = manaPool;
     }
 
-    public void setAttack(int attack){
-        this.attack = attack;
-    }
-
-    public void setDefense(int defense){
-        this.defense = defense;
-    }
-
     public void levelUp(){
         this.experience -= 50*level;
         this.level += 1;
-        this.healthPool += 10*level;
-        this.currentHelath = healthPool;
-        this.attack += 4*level;
-        this.defense += level;
+        SetMaxHp(getMaxHp() + 10*level);
+        SetHp(getMaxHp());
+        SetAttack(4 * level);
+        SetDefense(level);
     }
 }

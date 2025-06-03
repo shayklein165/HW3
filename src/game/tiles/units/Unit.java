@@ -1,16 +1,20 @@
 package game.tiles.units;
 
+import game.utils.Position;
+
 public class Unit {
     private String name;
     private Health health;
     private int attack;
     private int defense;
+    private Position position;
 
-    public Unit(String name, int maxhp, int attack, int defense){
+    public Unit(String name, int maxhp, int attack, int defense, Position position){
         this.name = name;
         health = new Health(maxhp, maxhp);
         this.attack = attack;
         this.defense = defense;
+        this.position = position;
     }
 
     public String getName() {return name;}
@@ -45,6 +49,14 @@ public class Unit {
 
     public void SetDefense(int defense){
         this.defense = defense;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
 }
