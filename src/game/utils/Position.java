@@ -9,7 +9,7 @@ public class Position {
         this.y = y;
     }
 
-    public double dist(Position p){
+    public double Range(Position p){
         return Math.sqrt((this.x - p.x)*(this.x - p.x) + (this.y - p.y)*(this.y - p.y));
     }
 
