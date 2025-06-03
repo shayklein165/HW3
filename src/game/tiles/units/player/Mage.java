@@ -1,19 +1,21 @@
 package game.tiles.units.player;
 
+import game.tiles.units.enemies.Enemy;
 import game.utils.Position;
+
+import java.util.List;
 
 public class Mage extends Player{
     private int costmana;
     private int spellpower;
     private int hitscnt;
-    private int range;
+
 
     public Mage(String name, Position position, int maxhp, int manaPool, int attack, int defense, int costmana, int spellpower, int hitscnt, int range) {
-        super(name, position, maxhp, manaPool, attack, defense);
+        super(name, position, maxhp, manaPool, attack, defense, range);
         this.costmana = costmana;
         this.spellpower = spellpower;
         this.hitscnt = hitscnt;
-        this.range = range;
     }
     public int getCostmana() {
         return costmana;
@@ -24,9 +26,6 @@ public class Mage extends Player{
     public int getHitscnt() {
         return hitscnt;
     }
-    public int getRange() {
-        return range;
-    }
     public void setCostmana(int costmana) {
         this.costmana = costmana;
     }
@@ -35,9 +34,6 @@ public class Mage extends Player{
     }
     public void setHitscnt(int hitscnt) {
         this.hitscnt = hitscnt;
-    }
-    public void setRange(int range) {
-        this.range = range;
     }
 
     public void LeveUp(){
@@ -57,6 +53,12 @@ public class Mage extends Player{
 
     public void OnAbilityCast(){
         setMana(getMana() - costmana);
-        
+        int hits = 0;
+        while (hits < hitscnt /* && need to implement the check if any enemy exist in rang*/ ){
+            List<Enemy> lst = SelectEnemyInRange();
+            lst.getFirst().SetHp(lst.getFirst().getHp() - spellpower);
+            hits++;
+        }
+
     }
 }

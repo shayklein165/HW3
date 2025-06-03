@@ -6,8 +6,8 @@ import game.utils.Position;
 public class Enemy extends Unit {
     private int experience_val;
 
-    public Enemy(String name, int maxhp, int attack, int defense, Position position, int exp) {
-        super(name, maxhp, attack, defense, position);
+    public Enemy(String name, int maxhp, int attack, int defense, Position position, int range, int exp) {
+        super(name, maxhp, attack, defense, position, range);
         experience_val = exp;
     }
 

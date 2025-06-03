@@ -8,13 +8,15 @@ public class Unit {
     private int attack;
     private int defense;
     private Position position;
+    private int range;
 
-    public Unit(String name, int maxhp, int attack, int defense, Position position){
+    public Unit(String name, int maxhp, int attack, int defense, Position position, int range){
         this.name = name;
         health = new Health(maxhp, maxhp);
         this.attack = attack;
         this.defense = defense;
         this.position = position;
+        this.range = range;
     }
 
     public String getName() {return name;}
@@ -57,6 +59,14 @@ public class Unit {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public int getRange() {
+        return range;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
     }
 
 }
