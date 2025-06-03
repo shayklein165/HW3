@@ -2,7 +2,11 @@ package game.tiles.units.player;
 
 import game.tiles.units.Mana;
 import game.tiles.units.Unit;
+import game.tiles.units.enemies.Enemy;
 import game.utils.Position;
+import jdk.jshell.spi.ExecutionControl;
+
+import java.util.List;
 
 public class Player extends Unit {
     private int experience;
@@ -57,5 +61,9 @@ public class Player extends Unit {
         SetHp(getMaxHp());
         SetAttack(4 * level);
         SetDefense(level);
+    }
+
+    public List<Enemy> SelectEnemyInRange() throws ExecutionControl.NotImplementedException {
+        throw new ExecutionControl.NotImplementedException("");
     }
 }
