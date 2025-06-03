@@ -11,8 +11,8 @@ public class Trap extends Enemy{
     private int ticks_cnt;
     private boolean visible;
 
-    public Trap(String name, int maxhp, int attack, int defense, Position position, int range, int exp ,char tile, int visibility_time, int invisibility_time,  boolean visible) {
-        super(name, maxhp, attack, defense, position, range, exp, tile);
+    public Trap(String name, char tile, Position position, int maxhp, int attack, int defense,  int range, int exp , int visibility_time, int invisibility_time,  boolean visible) {
+        super(name, tile, position, maxhp, attack, defense, range, exp);
         this.visibility_time = visibility_time;
         this.invisibility_time = invisibility_time;
         this.ticks_cnt = 0;

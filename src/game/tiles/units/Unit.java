@@ -1,9 +1,9 @@
 package game.tiles.units;
 
-import game.tiles.GameCharacter;
+import game.tiles.Tile;
 import game.utils.Position;
 
-public class Unit extends GameCharacter {
+public class Unit extends Tile {
     private String name;
     private Health health;
     private int attack;
@@ -11,8 +11,8 @@ public class Unit extends GameCharacter {
     private Position position;
     private int range;
 
-    public Unit(String name, int maxhp, int attack, int defense, Position position, int range){
-        super(position);
+    public Unit(String name, char tile, Position position, int maxhp, int attack, int defense,  int range){
+        super(position, tile);
         this.name = name;
         health = new Health(maxhp, maxhp);
         this.attack = attack;

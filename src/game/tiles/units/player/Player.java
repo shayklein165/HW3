@@ -16,7 +16,7 @@ public class Player extends Unit {
 
 
     public Player(String name, Position position, int maxhp, int manaPool, int attack, int defense , int range){
-        super(name, maxhp, attack, defense, position, range);
+        super(name, '@' ,position, maxhp, attack, defense, range);
         this.experience = 0;
         this.level = 1;
         this.mana = new Mana(manaPool);
