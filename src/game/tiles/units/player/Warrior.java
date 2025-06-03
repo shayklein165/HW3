@@ -10,8 +10,8 @@ public class Warrior extends Player{
     private int abilityCooldown;
     private int remainingColldown;
 
-    public Warrior(String name, Position position, int maxhp, int manaPool, int attack, int defense, int damage, int health, int abilityCooldown, int remainingColldown) {
-        super(name, position, maxhp, manaPool, attack, defense);
+    public Warrior(String name, Position position, int maxhp, int manaPool, int attack, int defense, int range, int damage, int health, int abilityCooldown, int remainingColldown) {
+        super(name, position, maxhp, manaPool, attack, defense, range);
         this.damage = damage;
         this.health = new Health(health,health);
         this.abilityCooldown = abilityCooldown;
@@ -54,8 +54,8 @@ public class Warrior extends Player{
         this.LevelUp();
         this.remainingColldown = 0;
         this.health.setMaxHp(this.health.getMaxHp()+5*this.getLevel());
-        this.SetAttack(this.getAttack()+2*this.getLevel());
-        this.SetDefense(this.getDefense()+this.getLevel());
+        this.setAttack(this.getAttack()+2*this.getLevel());
+        this.setDefense(this.getDefense()+this.getLevel());
     }
 
     public void OnGameTick(){

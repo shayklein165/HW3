@@ -1,8 +1,9 @@
 package game.tiles.units;
 
+import game.tiles.Character;
 import game.utils.Position;
 
-public class Unit {
+public class Unit extends Character {
     private String name;
     private Health health;
     private int attack;
@@ -11,11 +12,11 @@ public class Unit {
     private int range;
 
     public Unit(String name, int maxhp, int attack, int defense, Position position, int range){
+        super(position);
         this.name = name;
         health = new Health(maxhp, maxhp);
         this.attack = attack;
         this.defense = defense;
-        this.position = position;
         this.range = range;
     }
 
@@ -33,23 +34,23 @@ public class Unit {
 
     public int getDefense(){return defense;}
 
-    public void SetName(String name){
+    public void setName(String name){
         this.name = name;
     }
 
-    public void SetHp(int hp){
+    public void setHp(int hp){
         health.setHp(hp);
     }
 
-    public void SetMaxHp(int maxHp){
+    public void setMaxHp(int maxHp){
         health.setMaxHp(maxHp);
     }
 
-    public void SetAttack(int attack){
+    public void setAttack(int attack){
         this.attack = attack;
     }
 
-    public void SetDefense(int defense){
+    public void setDefense(int defense){
         this.defense = defense;
     }
 

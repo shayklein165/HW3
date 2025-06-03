@@ -59,6 +59,5 @@ public class Mage extends Player{
             attack(lst.getFirst());
             hits++;
         }
-
     }
 }

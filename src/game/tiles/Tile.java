@@ -2,12 +2,12 @@ package game.tiles;
 
 import game.utils.Position;
 
-public class Tile {
+public class Tile extends Character{
     private Position position;
     private char tile;
 
     public Tile(Position position, char tile){
-        this.position = position;
+        super(position);
         this.tile = tile;
     }
 

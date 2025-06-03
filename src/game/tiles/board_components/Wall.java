@@ -1,4 +1,10 @@
 package game.tiles.board_components;
 
-public class Wall {
+import game.tiles.Tile;
+import game.utils.Position;
+
+public class Wall extends Tile {
+     public Wall(Position position) {
+         super(position, '#');
+     }
 }

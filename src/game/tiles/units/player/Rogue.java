@@ -16,8 +16,8 @@ public class Rogue extends Player{
     private int remainingColldown;
 
 
-    public Rogue(String name, Position position, int maxhp, int manaPool, int attack, int defense, int maxHealth, int damage, int armor, Energy energy) {
-        super(name, position, maxhp, manaPool, attack, defense);
+    public Rogue(String name, Position position, int maxhp, int manaPool, int attack, int defense, int range, int maxHealth, int damage, int armor, Energy energy) {
+        super(name, position, maxhp, manaPool, attack, defense, range);
         this.health = new Health(maxHealth,maxHealth);
         this.damage = damage;
         this.armor = armor;
@@ -65,8 +65,7 @@ public class Rogue extends Player{
         this.energy.setCurrentEnergy(energy.getCurrentEnergy()- energy.getCost());
         List<Enemy> EnemyInRange = this.SelectEnemyInRange();
         for (Enemy enemy : EnemyInRange){
-            if (enemy.getDefense() > this.getAttack()) // need to choose random numbers
-                enemy.SetHp(enemy.getHp() - this.getAttack());
+            attack(enemy);
         }
     }
 }

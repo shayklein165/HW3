@@ -57,10 +57,10 @@ public class Player extends Unit {
     protected void LevelUp(){
         this.experience -= 50*level;
         this.level += 1;
-        SetMaxHp(getMaxHp() + 10*level);
-        SetHp(getMaxHp());
-        SetAttack(4 * level);
-        SetDefense(level);
+        setMaxHp(getMaxHp() + 10*level);
+        setHp(getMaxHp());
+        setAttack(4 * level);
+        setDefense(level);
     }
 
     public List<Enemy> SelectEnemyInRange() throws ExecutionControl.NotImplementedException {
