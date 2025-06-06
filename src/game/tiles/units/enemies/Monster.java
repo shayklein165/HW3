@@ -1,20 +1,22 @@
 package game.tiles.units.enemies;
 
+import game.tiles.Tile;
 import game.tiles.units.Energy;
 import game.tiles.units.actions.Movement;
 import game.utils.Position;
 
-public class Monster extends Energy {
+public class Monster extends Enemy {
     private Movement movement;
     private int range;
-    private Position position;
+    private Tile tile;
 
-    public Monster(int cost, int specialAbilityCost, int currentEnergy,int range, Position playerPosition, Position position) {
-        super(cost, specialAbilityCost, currentEnergy);
+    public Monster(String name, int maxhp, int attack, int defense, Position position, int range, int exp, char tile) {
+        super(name, maxhp, attack, defense, position, range, exp);
+        this.tile = new Tile(position, tile);
         this.range = range;
-        this.position = position;
-        movement = new Movement(position, playerPosition, range);
+        this.mobt
     }
+
 
     public Position getPosition() {
         return position;

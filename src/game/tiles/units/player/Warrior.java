@@ -63,11 +63,17 @@ public class Warrior extends Player{
     }
 
     public void OnAbilityCast(){
+        if(!canCastAbility()){
+            return;
+        }
         this.remainingColldown = this.abilityCooldown;
         this.health.setHp(Math.min(this.health.getHp()+10*this.getDefense(),this.health.getMaxHp()));
 
     }
 
+    public boolean canCastAbility(){
+        return this.remainingColldown <= 0;
+    }
     public void randomHit(){
         return;
     }

@@ -1,5 +1,6 @@
 package game.tiles;
 
+import game.tiles.units.Unit;
 import game.utils.Position;
 
 public class Tile{
@@ -31,4 +32,6 @@ public class Tile{
     public String toString(){
         return String.valueOf(tile);
     }
+
+    public void accept(Unit unit){};
 }

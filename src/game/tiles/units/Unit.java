@@ -1,6 +1,10 @@
 package game.tiles.units;
 
+import game.callbacks.MessageCallback;
 import game.tiles.Tile;
+import game.tiles.board_components.Empty;
+import game.tiles.board_components.Wall;
+import game.tiles.units.enemies.Enemy;
 import game.utils.Position;
 
 public class Unit extends Tile {
@@ -10,14 +14,16 @@ public class Unit extends Tile {
     private int defense;
     private Position position;
     private int range;
+    protected MessageCallback messageCallback;
 
-    public Unit(String name, char tile, Position position, int maxhp, int attack, int defense,  int range){
+    public Unit(String name, char tile, Position position, int maxhp, int attack, int defense,  int range, MessageCallback messageCallback){
         super(position, tile);
         this.name = name;
         health = new Health(maxhp, maxhp);
         this.attack = attack;
         this.defense = defense;
         this.range = range;
+        this.messageCallback = messageCallback;
     }
 
     public String getName() {return name;}
@@ -62,6 +68,14 @@ public class Unit extends Tile {
         this.position = position;
     }
 
+    public MessageCallback getMessageCallback() {
+        return messageCallback;
+    }
+
+    public void setMessageCallback(MessageCallback messageCallback) {
+        this.messageCallback = messageCallback;
+    }
+
     public int getRange() {
         return range;
     }
@@ -69,5 +83,9 @@ public class Unit extends Tile {
     public void setRange(int range) {
         this.range = range;
     }
+
+    public void visit(Empty empty){}
+    public void visit(Wall wall){}
+    public void visit(Enemy enemy){}
 
 }
