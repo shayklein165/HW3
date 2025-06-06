@@ -4,24 +4,16 @@ import game.tiles.units.Energy;
 import game.tiles.units.actions.Movement;
 import game.utils.Position;
 
-public class Monster extends Energy {
+import java.util.Random;
+
+public class Monster extends Enemy {
     private Movement movement;
     private int range;
-    private Position position;
 
-    public Monster(int cost, int specialAbilityCost, int currentEnergy,int range, Position playerPosition, Position position) {
-        super(cost, specialAbilityCost, currentEnergy);
+    public Monster(String name, char tile, Position position, int maxhp, int attack, int defense,  int range, int exp) {
+        super(name, tile, position, maxhp, attack, defense,  range, exp);
         this.range = range;
-        this.position = position;
-        movement = new Movement(position, playerPosition, range);
-    }
-
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
+        movement = new Movement(position, null ,range);
     }
 
     public Movement getMovement() {
@@ -41,19 +33,22 @@ public class Monster extends Energy {
     }
 
     public void OnEnemyTurn(){
-        int move = movement.Move();
-
-        if(move == 0){
-            this.position.setX(this.position.getX() + 1);
+        int move;
+        if(movement.getPlayerPostition() != null) {
+            move = movement.Move();
         }
-        else if(move == 1){
-            this.position.setX(this.position.getX() - 1);
+        else{
+            Random random = new Random();
+            move = random.nextInt(5);
         }
-        else if(move == 2){
-            this.position.setY(this.position.getY() + 1);
-        }
-        else if(move == 3){
-            this.position.setY(this.position.getY() - 1);
+        if (move == 0) {
+            this.getPosition().setX(this.getPosition().getX() + 1);
+        } else if (move == 1) {
+            this.getPosition().setX(this.getPosition().getX() - 1);
+        } else if (move == 2) {
+            this.getPosition().setY(this.getPosition().getY() + 1);
+        } else if (move == 3) {
+            this.getPosition().setY(this.getPosition().getY() - 1);
         }
     }
 }
