@@ -57,7 +57,7 @@ public class Mage extends Player{
         int hits = 0;
         while (hits < hitscnt /* && need to implement the check if any enemy exist in rang*/ ){
             List<Enemy> lst = SelectEnemyInRange();
-            attackEnemy(lst.getFirst());
+            attackEnemy(getRange(),lst.getFirst());
             hits++;
         }
     }

@@ -1,5 +1,6 @@
 package game.tiles.units.player;
 
+import game.board.ArrayGameBoard;
 import game.tiles.units.Health;
 import game.utils.Position;
 import jdk.jshell.spi.ExecutionControl;
@@ -10,8 +11,8 @@ public class Warrior extends Player{
     private int abilityCooldown;
     private int remainingColldown;
 
-    public Warrior(String name, Position position, int maxhp, int manaPool, int attack, int defense, int range, int damage, int health, int abilityCooldown, int remainingColldown) {
-        super(name, position, maxhp, manaPool, attack, defense, range);
+    public Warrior(String name, Position position, int maxhp, int manaPool, int attack, int defense, int range, int damage, int health, int abilityCooldown, int remainingColldown, ArrayGameBoard arrayGameBoard) {
+        super(name, position, maxhp, manaPool, attack, defense, range, arrayGameBoard);
         this.damage = damage;
         this.health = new Health(health,health);
         this.abilityCooldown = abilityCooldown;
