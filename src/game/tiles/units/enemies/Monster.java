@@ -1,5 +1,6 @@
 package game.tiles.units.enemies;
 
+import game.board.ArrayGameBoard;
 import game.callbacks.MessageCallback;
 import game.tiles.units.Energy;
 import game.tiles.units.actions.Movement;
@@ -11,8 +12,8 @@ public class Monster extends Enemy {
     private Movement movement;
     private int range;
 
-    public Monster(String name, char tile, Position position, int maxhp, int attack, int defense, int range, int exp) {
-        super(name, tile, position, maxhp, attack, defense,  range, exp);
+    public Monster(String name, char tile, Position position, int maxhp, int attack, int defense, int range, int exp, ArrayGameBoard arrayGameBoard) {
+        super(name, tile, position, maxhp, attack, defense,  range, exp, arrayGameBoard);
         this.range = range;
         movement = new Movement(position, null ,range);
     }
@@ -40,7 +41,7 @@ public class Monster extends Enemy {
         }
         else{
             Random random = new Random();
-            move = random.nextInt(5);
+            move = random.nextInt(4)-1;
         }
         if (move == 0) {
             this.getPosition().setX(this.getPosition().getX() + 1);
@@ -51,5 +52,11 @@ public class Monster extends Enemy {
         } else if (move == 3) {
             this.getPosition().setY(this.getPosition().getY() - 1);
         }
+
+
+        if(movement.getPlayerPostition().getX()==getPosition().getX() && movement.getPlayerPostition().getY()==getPosition().getY()){
+            attack(SelectPlayer());
+        }
     }
+
 }

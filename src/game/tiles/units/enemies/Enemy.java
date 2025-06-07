@@ -1,5 +1,6 @@
 package game.tiles.units.enemies;
 
+import game.board.ArrayGameBoard;
 import game.callbacks.MessageCallback;
 import game.tiles.board_components.Empty;
 import game.tiles.board_components.Wall;
@@ -12,9 +13,11 @@ import java.util.List;
 
 public class Enemy extends Unit {
     private int experience_val;
+    private ArrayGameBoard arrayGameBoard;
 
-    public Enemy(String name, char tile, Position position, int maxhp, int attack, int defense, int range, int exp) {
+    public Enemy(String name, char tile, Position position, int maxhp, int attack, int defense, int range, int exp,ArrayGameBoard arrayGameBoard) {
         super(name, tile, position, maxhp, attack, defense,  range );
+        this.arrayGameBoard = arrayGameBoard;
         experience_val = exp;
     }
 
@@ -26,8 +29,8 @@ public class Enemy extends Unit {
         this.experience_val = experience;
     }
 
-    public Player SelectPlayerInRange() throws ExecutionControl.NotImplementedException {
-        throw new ExecutionControl.NotImplementedException("");
+    public Player SelectPlayer() {
+        return arrayGameBoard.getPlayer();
     }
 
     @Override
@@ -51,11 +54,13 @@ public class Enemy extends Unit {
         return getHp() > 0;
     }
 
-    public void interact(Player player){
+    public void attack(Player player){
         int attackRoll = (int)(Math.random() * getAttack());
         int defenseRoll = (int)(Math.random() * player.getDefense());
         int damage = Math.max(attackRoll-defenseRoll,0);
 
         player.reciveDamage(damage);
     }
+
+
 }

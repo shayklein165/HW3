@@ -1,5 +1,6 @@
 package game.tiles.units.enemies;
 
+import game.board.ArrayGameBoard;
 import game.tiles.units.player.Player;
 import game.utils.Position;
 
@@ -11,8 +12,8 @@ public class Trap extends Enemy{
     private int ticks_cnt;
     private boolean visible;
 
-    public Trap(String name, char tile, Position position, int maxhp, int attack, int defense,  int range, int exp , int visibility_time, int invisibility_time,  boolean visible) {
-        super(name, tile, position, maxhp, attack, defense, range, exp);
+    public Trap(String name, char tile, Position position, int maxhp, int attack, int defense, int range, int exp , int visibility_time, int invisibility_time, boolean visible, ArrayGameBoard arrayGameBoard) {
+        super(name, tile, position, maxhp, attack, defense, range, exp, arrayGameBoard);
         this.visibility_time = visibility_time;
         this.invisibility_time = invisibility_time;
         this.ticks_cnt = 0;
@@ -57,7 +58,7 @@ public class Trap extends Enemy{
             ticks_cnt = 0;
         else
             ticks_cnt++;
-        Player player = SelectPlayerInRange();
+        Player player = SelectPlayer();
         if (player == null) return;
         attack(player);
     }

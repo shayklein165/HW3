@@ -1,6 +1,6 @@
 package game.tiles.units.player;
 
-import game.callbacks.MessageCallback;
+import game.board.ArrayGameBoard;
 import game.tiles.Tile;
 import game.tiles.board_components.Empty;
 import game.tiles.board_components.Wall;
@@ -19,14 +19,16 @@ public class Player extends Unit {
     private int experience;
     private int level;
     private Mana mana;
+    private final ArrayGameBoard arrayGameBoard;
 
 
 
-    public Player(String name, Position position, int maxhp, int manaPool, int attack, int defense , int range){
+    public Player(String name, Position position, int maxhp, int manaPool, int attack, int defense , int range, ArrayGameBoard arrayGameBoard){
         super(name, '@' ,position, maxhp, attack, defense, range);
         this.experience = 0;
         this.level = 1;
         this.mana = new Mana(manaPool);
+        this.arrayGameBoard = arrayGameBoard;
     }
 
     public int getMana() {
@@ -66,53 +68,65 @@ public class Player extends Unit {
         this.level += 1;
         setMaxHp(getMaxHp() + 10*level);
         setHp(getMaxHp());
-        setAttack(4 * level);
-        setDefense(level);
+        setAttack(getAttack() + 4 * level);
+        setDefense(getDefense() + level);
     }
 
-    public List<Enemy> SelectEnemyInRange(){
-        //throw new ExecutionControl.NotImplementedException("");
-        List<Enemy> ret = new ArrayList<>();
-        return ret;
+    public List<Enemy> SelectEnemyInRange() {
+        List<Enemy> inRange = new ArrayList<>();
+        for (Enemy enemy : arrayGameBoard.getEnemies()) {
+            double distance = this.getPosition().Range(enemy.getPosition());
+            if (distance <= this.getRange()) {
+                inRange.add(enemy);
+            }
+        }
+        return inRange;
     }
 
-    public void move(char action, Tile[][] board){
+
+    public void move(char action){
         Position newPosition = Movement.getNewPosition(this.getPosition(), action);
-        if(!inBounds(newPosition,board)){
+        if(!inBounds(newPosition)){
             return;
         }
-        Tile tile = board[newPosition.getX()][newPosition.getY()];
+        Tile tile = arrayGameBoard.getBoard()[newPosition.getX()][newPosition.getY()];
         tile.accept(this);
     }
 
-    public void castAbility(Tile[][] board){
-        new CastAbility(board).executeAbility(this);
+    public void castAbility(){
+        new CastAbility().executeAbility(this);
     }
 
-    protected boolean inBounds(Position position, Tile[][] board){
-        return position.getX()>=0 && position.getX()<board.length && position.getY()>=0 && position.getY()<board[0].length;
+    protected boolean inBounds(Position position){
+        return position.getX()>=0 && position.getX()<arrayGameBoard.getBoard().length && position.getY()>=0 && position.getY()<arrayGameBoard.getBoard()[0].length;
     }
 
-    public void visit(Empty empty, Tile[][] board){
+    public void visit(Empty empty){
         Position newPosition = empty.getPosition();
         Position oldPosition = this.getPosition();
-        
-        board[oldPosition.getX()][oldPosition.getY()] = empty;
-        board[newPosition.getX()][newPosition.getY()] = this;
+
+        arrayGameBoard.setTile(empty,oldPosition);
+        arrayGameBoard.setTile(this, newPosition);
+
         this.setPosition(newPosition);
         empty.setPosition(oldPosition);
         
     }
     
-    public void visit(Wall wall, Tile[][] board){
+    public void visit(Wall wall){
+        return;
     }
 
 
-    public void visit(Enemy enemy, Tile[][] board){
-        this.interact(enemy, board);
+    public void visit(Enemy enemy){
+        this.attackEnemy(getRange(),enemy);
+        if(!enemy.isAlive()){
+            arrayGameBoard.setTile(this,enemy.getPosition());
+            this.setPosition(enemy.getPosition());
+        }
     }
 
-    public void interact(Enemy enemy, Tile[][] board) {
+    public void attackEnemy(int range,Enemy enemy) {
         int attackRoll = (int) (Math.random() * getAttack());
         int defenseRoll = (int) (Math.random() * enemy.getDefense());
         int damage = Math.max(attackRoll-defenseRoll,0);
@@ -120,11 +134,16 @@ public class Player extends Unit {
         enemy.reciveDamage(damage);
 
         if(!enemy.isAlive()){
-            board[enemy.getPosition().getX()][enemy.getPosition().getY()] = new Empty(enemy.getPosition());
-            this.experience += enemy.getExperience();
-            if(this.experience >= 50*level){
-                LevelUp();
-            }
+            arrayGameBoard.setTile(new Empty(enemy.getPosition()), enemy.getPosition());
+            gainExperience(enemy.getExperience());
+            arrayGameBoard.RemoveEnemy(enemy);
+        }
+    }
+
+    public void gainExperience(int xp) {
+        experience += xp;
+        while (experience >= 50 * level) {
+            LevelUp();
         }
     }
 
@@ -132,6 +151,9 @@ public class Player extends Unit {
         setHp(getHp() - damage);
         if(getHp() < 0){
             setHp(0);
+        }
+        if (!isAlive()){
+            arrayGameBoard.setTile(new Tile(getPosition(), 'X'), getPosition());
         }
     }
 

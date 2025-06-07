@@ -1,6 +1,5 @@
 package game.tiles.units;
 
-import game.callbacks.MessageCallback;
 import game.tiles.Tile;
 import game.tiles.board_components.Empty;
 import game.tiles.board_components.Wall;
@@ -14,7 +13,6 @@ public class Unit extends Tile {
     private int defense;
     private Position position;
     private int range;
-    //protected MessageCallback messageCallback;
 
     public Unit(String name, char tile, Position position, int maxhp, int attack, int defense,  int range){
         super(position, tile);
@@ -23,7 +21,6 @@ public class Unit extends Tile {
         this.attack = attack;
         this.defense = defense;
         this.range = range;
-        //this.messageCallback = messageCallback;
     }
 
     public String getName() {return name;}

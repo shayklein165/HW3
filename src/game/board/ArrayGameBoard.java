@@ -115,6 +115,9 @@ public class ArrayGameBoard {
         return enemies.remove(enemy);
     }
 
+    public void setTile(Tile tile, Position position){
+        this.board[position.getX()][position.getY()] = tile;
+    }
 
 
 }

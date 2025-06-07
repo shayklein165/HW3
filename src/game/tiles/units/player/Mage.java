@@ -1,5 +1,6 @@
 package game.tiles.units.player;
 
+import game.board.ArrayGameBoard;
 import game.tiles.units.enemies.Enemy;
 import game.utils.Position;
 
@@ -11,8 +12,8 @@ public class Mage extends Player{
     private int hitscnt;
 
 
-    public Mage(String name, Position position, int maxhp, int manaPool, int attack, int defense, int costmana, int spellpower, int hitscnt, int range) {
-        super(name, position, maxhp, manaPool, attack, defense, range);
+    public Mage(String name, Position position, int maxhp, int manaPool, int attack, int defense, int costmana, int spellpower, int hitscnt, int range, ArrayGameBoard arrayGameBoard) {
+        super(name, position, maxhp, manaPool, attack, defense, range, arrayGameBoard);
         this.costmana = costmana;
         this.spellpower = spellpower;
         this.hitscnt = hitscnt;
@@ -56,7 +57,7 @@ public class Mage extends Player{
         int hits = 0;
         while (hits < hitscnt /* && need to implement the check if any enemy exist in rang*/ ){
             List<Enemy> lst = SelectEnemyInRange();
-            attack(lst.getFirst());
+            attackEnemy(lst.getFirst());
             hits++;
         }
     }

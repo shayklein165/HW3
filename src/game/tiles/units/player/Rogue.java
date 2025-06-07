@@ -1,5 +1,6 @@
 package game.tiles.units.player;
 
+import game.board.ArrayGameBoard;
 import game.tiles.units.Energy;
 import game.tiles.units.Health;
 import game.tiles.units.enemies.Enemy;
@@ -16,8 +17,8 @@ public class Rogue extends Player{
     private int remainingColldown;
 
 
-    public Rogue(String name, Position position, int maxhp, int manaPool, int attack, int defense, int range, int maxHealth, int damage, int armor, Energy energy) {
-        super(name, position, maxhp, manaPool, attack, defense, range);
+    public Rogue(String name, Position position, int maxhp, int manaPool, int attack, int defense, int range, int maxHealth, int damage, int armor, Energy energy, int remainingColldown, ArrayGameBoard arrayGameBoard) {
+        super(name, position, maxhp, manaPool, attack, defense, range, arrayGameBoard);
         this.health = new Health(maxHealth,maxHealth);
         this.damage = damage;
         this.armor = armor;
@@ -61,11 +62,17 @@ public class Rogue extends Player{
         this.energy.setCurrentEnergy(Math.min(energy.getCurrentEnergy()+10, 100));
     }
 
+    public void OnLevelUp(){
+        LevelUp();
+        energy.setCurrentEnergy(100);
+        setAttack(getAttack()+3*getLevel());
+    }
+
     public void OnAbilityCast() throws ExecutionControl.NotImplementedException {
         this.energy.setCurrentEnergy(energy.getCurrentEnergy()- energy.getCost());
         List<Enemy> EnemyInRange = this.SelectEnemyInRange();
         for (Enemy enemy : EnemyInRange){
-            attack(enemy);
+            attackEnemy(2,enemy);
         }
     }
 }
