@@ -22,8 +22,8 @@ public class Player extends Unit {
 
 
 
-    public Player(String name, Position position, int maxhp, int manaPool, int attack, int defense , int range, MessageCallback messageCallback){
-        super(name, '@' ,position, maxhp, attack, defense, range, messageCallback);
+    public Player(String name, Position position, int maxhp, int manaPool, int attack, int defense , int range){
+        super(name, '@' ,position, maxhp, attack, defense, range);
         this.experience = 0;
         this.level = 1;
         this.mana = new Mana(manaPool);
@@ -79,7 +79,6 @@ public class Player extends Unit {
     public void move(char action, Tile[][] board){
         Position newPosition = Movement.getNewPosition(this.getPosition(), action);
         if(!inBounds(newPosition,board)){
-            messageCallback.send(getName() + " can't move to " + newPosition.toString());
             return;
         }
         Tile tile = board[newPosition.getX()][newPosition.getY()];
@@ -88,7 +87,6 @@ public class Player extends Unit {
 
     public void castAbility(Tile[][] board){
         new CastAbility(board).executeAbility(this);
-        messageCallback.send(getName() + " casts a spell");
     }
 
     protected boolean inBounds(Position position, Tile[][] board){
@@ -104,11 +102,9 @@ public class Player extends Unit {
         this.setPosition(newPosition);
         empty.setPosition(oldPosition);
         
-        messageCallback.send(getName() + " moved to " + newPosition.toString());
     }
     
     public void visit(Wall wall, Tile[][] board){
-        messageCallback.send(getName() + " can't move to " + wall.getPosition().toString());
     }
 
 
@@ -121,11 +117,9 @@ public class Player extends Unit {
         int defenseRoll = (int) (Math.random() * enemy.getDefense());
         int damage = Math.max(attackRoll-defenseRoll,0);
 
-        messageCallback.send(getName()+ " attack " + enemy.getName() + " for " + damage + " damage");
         enemy.reciveDamage(damage);
 
         if(!enemy.isAlive()){
-            messageCallback.send(enemy.getName()+" is dead");
             board[enemy.getPosition().getX()][enemy.getPosition().getY()] = new Empty(enemy.getPosition());
             this.experience += enemy.getExperience();
             if(this.experience >= 50*level){

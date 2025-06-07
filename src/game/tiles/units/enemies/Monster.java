@@ -1,5 +1,6 @@
 package game.tiles.units.enemies;
 
+import game.callbacks.MessageCallback;
 import game.tiles.units.Energy;
 import game.tiles.units.actions.Movement;
 import game.utils.Position;
@@ -10,7 +11,7 @@ public class Monster extends Enemy {
     private Movement movement;
     private int range;
 
-    public Monster(String name, char tile, Position position, int maxhp, int attack, int defense,  int range, int exp) {
+    public Monster(String name, char tile, Position position, int maxhp, int attack, int defense, int range, int exp) {
         super(name, tile, position, maxhp, attack, defense,  range, exp);
         this.range = range;
         movement = new Movement(position, null ,range);
@@ -35,7 +36,7 @@ public class Monster extends Enemy {
     public void OnEnemyTurn(){
         int move;
         if(movement.getPlayerPostition() != null) {
-            move = movement.Move();
+            move = movement.MonsterMove();
         }
         else{
             Random random = new Random();

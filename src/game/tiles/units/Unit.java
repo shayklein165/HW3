@@ -14,16 +14,16 @@ public class Unit extends Tile {
     private int defense;
     private Position position;
     private int range;
-    protected MessageCallback messageCallback;
+    //protected MessageCallback messageCallback;
 
-    public Unit(String name, char tile, Position position, int maxhp, int attack, int defense,  int range, MessageCallback messageCallback){
+    public Unit(String name, char tile, Position position, int maxhp, int attack, int defense,  int range){
         super(position, tile);
         this.name = name;
         health = new Health(maxhp, maxhp);
         this.attack = attack;
         this.defense = defense;
         this.range = range;
-        this.messageCallback = messageCallback;
+        //this.messageCallback = messageCallback;
     }
 
     public String getName() {return name;}
@@ -66,14 +66,6 @@ public class Unit extends Tile {
 
     public void setPosition(Position position) {
         this.position = position;
-    }
-
-    public MessageCallback getMessageCallback() {
-        return messageCallback;
-    }
-
-    public void setMessageCallback(MessageCallback messageCallback) {
-        this.messageCallback = messageCallback;
     }
 
     public int getRange() {
