@@ -97,6 +97,10 @@ public class ArrayGameBoard {
                 }
             }
         }
+        for(Enemy enemy: enemies){
+            enemy.setArrayGameBoard(this);
+        }
+        player.setArrayGameBoard(this);
     }
 
     public Tile[][] getBoard() {
@@ -120,5 +124,7 @@ public class ArrayGameBoard {
     }
 
 
-
+    public void KillPlayer() {
+        setTile(new Tile(player.getPosition(), 'X'), player.getPosition());
+    }
 }

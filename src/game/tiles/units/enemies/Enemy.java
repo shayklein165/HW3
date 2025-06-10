@@ -63,4 +63,7 @@ public class Enemy extends Unit {
     }
 
 
+    public void setArrayGameBoard(ArrayGameBoard arrayGameBoard) {
+        this.arrayGameBoard = arrayGameBoard;
+    }
 }

@@ -19,7 +19,7 @@ public class Player extends Unit {
     private int experience;
     private int level;
     private Mana mana;
-    private final ArrayGameBoard arrayGameBoard;
+    private ArrayGameBoard arrayGameBoard;
 
 
 
@@ -110,9 +110,9 @@ public class Player extends Unit {
 
         this.setPosition(newPosition);
         empty.setPosition(oldPosition);
-        
+
     }
-    
+
     public void visit(Wall wall){
         return;
     }
@@ -121,7 +121,10 @@ public class Player extends Unit {
     public void visit(Enemy enemy){
         this.attackEnemy(getRange(),enemy);
         if(!enemy.isAlive()){
+            gainExperience(enemy.getExperience());
+            arrayGameBoard.RemoveEnemy(enemy);
             arrayGameBoard.setTile(this,enemy.getPosition());
+            arrayGameBoard.setTile(new Empty(getPosition()),this.getPosition());
             this.setPosition(enemy.getPosition());
         }
     }
@@ -134,9 +137,6 @@ public class Player extends Unit {
         enemy.reciveDamage(damage);
 
         if(!enemy.isAlive()){
-            arrayGameBoard.setTile(new Empty(enemy.getPosition()), enemy.getPosition());
-            gainExperience(enemy.getExperience());
-            arrayGameBoard.RemoveEnemy(enemy);
         }
     }
 
@@ -159,5 +159,9 @@ public class Player extends Unit {
 
     public boolean isAlive(){
         return getHp() > 0;
+    }
+
+    public void setArrayGameBoard(ArrayGameBoard arrayGameBoard) {
+        this.arrayGameBoard = arrayGameBoard;
     }
 }

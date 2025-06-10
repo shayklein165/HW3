@@ -28,4 +28,5 @@ public class CastAbility {
     public boolean isAbleToCast(Player player){
         return player.getMana() >= 10 && !player.SelectEnemyInRange().isEmpty();
     }
+
 }

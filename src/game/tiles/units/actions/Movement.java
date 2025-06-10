@@ -41,7 +41,6 @@ public class Movement {
         this.distance = distance;
     }
 
-
     public int MonsterMove(){
         // need to check if there is a wall. this method only choose a new movement.
         this.distance = this.enemyPostition.Range(this.playerPostition);
@@ -92,4 +91,5 @@ public class Movement {
                 return current; // Invalid direction = no movement
         }
     }
+
 }

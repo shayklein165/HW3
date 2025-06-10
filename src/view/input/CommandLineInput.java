@@ -18,7 +18,6 @@ public class CommandLineInput {
             put("s", Movement.Down::new);
             put("d", Movement.Right::new);
             put("q", Movement.NoOperation::new);
-            put("e",CastAbility::new);
         }
     };
 
@@ -28,7 +27,6 @@ public class CommandLineInput {
         this.scanner = scanner;
     }
 
-    @Override
     public Function<Player, Action> inputQuery(){
         String input = scanner.next().toLowerCase();
         while(!actionMap.containsKey(input)){
