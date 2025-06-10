@@ -1,12 +1,14 @@
 package game;
 
 import game.board.ArrayGameBoard;
+import game.callbacks.MessageCallback;
 import game.tiles.Tile;
 import game.tiles.board_components.Empty;
 import game.tiles.units.enemies.Enemy;
 import game.tiles.units.enemies.Monster;
 import game.tiles.units.player.Player;
 import game.utils.Position;
+import view.input.InputProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.List;
 public class Level {
     ArrayGameBoard arrayGameBoard;
     private char[] moves;
+    MessageCallback messageCallback;
+    private InputProvider inputProvider;
 
     public Level(ArrayGameBoard arrayGameBoard){
         this.arrayGameBoard = arrayGameBoard;
@@ -180,12 +184,29 @@ public class Level {
         return true;
     }
 
+    public void gameDisplay(){
+        // ???
+    }
+
     public boolean processRound() {
         // need to implement
+        gameDisplay();
         return false;
     }
 
     public void start() {
-        // need to implement
+        gameDisplay();
+        System.out.println("Starting new level...");
+
+        while(arrayGameBoard.getPlayer().isAlive() && !won()){
+            boolean continueRound = processRound();
+            if(!continueRound){
+                break;
+            }
+        }
+
+        if(arrayGameBoard.getPlayer().isAlive()){
+
+        }
     }
 }

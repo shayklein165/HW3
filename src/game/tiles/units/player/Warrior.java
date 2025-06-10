@@ -61,7 +61,6 @@ public class Warrior extends Player{
 
         CastAbility castAbility = new CastAbility();
         castAbility.WarriorAttack(this);
-
     }
 
     public boolean canCastAbility(){
