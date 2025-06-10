@@ -1,5 +1,7 @@
 package game.tiles.units.actions;
 
+import game.Level;
+import game.board.ArrayGameBoard;
 import game.tiles.Tile;
 import game.tiles.units.enemies.Enemy;
 import game.tiles.units.player.Player;
@@ -8,11 +10,11 @@ import java.util.List;
 
 public class CastAbility {
 
-    public CastAbility() {
+    public CastAbility(ArrayGameBoard arrayGameBoard) {
     }
 
     public void executeAbility(Player player) {
-        List<Enemy> enemies = player.SelectEnemyInRange();
+        List<Enemy> enemies = Level.;
         if(enemies.isEmpty()){
             return;
         }

@@ -1,9 +1,13 @@
 package game.tiles;
 
+import game.tiles.board_components.Empty;
+import game.tiles.board_components.Wall;
 import game.tiles.units.Unit;
+import game.tiles.units.enemies.Enemy;
+import game.tiles.units.player.Player;
 import game.utils.Position;
 
-public class Tile{
+public class Tile implements Visited,Visitor{
     private Position position;
     private char tile;
 
@@ -37,4 +41,28 @@ public class Tile{
         return false;
     };
 
+    @Override
+    public boolean accept(Tile tile) {
+        return false;
+    }
+
+    @Override
+    public boolean visit(Player player) {
+        return false;
+    }
+
+    @Override
+    public boolean visit(Enemy enemy) {
+        return false;
+    }
+
+    @Override
+    public boolean visit(Wall wall) {
+        return false;
+    }
+
+    @Override
+    public boolean visit(Empty empty) {
+        return false;
+    }
 }
