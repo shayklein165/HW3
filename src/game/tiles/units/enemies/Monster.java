@@ -1,12 +1,6 @@
 package game.tiles.units.enemies;
 
-import game.board.ArrayGameBoard;
-import game.callbacks.MessageCallback;
-import game.tiles.units.Energy;
-import game.tiles.units.actions.Movement;
 import game.utils.Position;
-
-import java.util.Random;
 
 public class Monster extends Enemy {
     private int range;

@@ -1,73 +1,70 @@
 package game.tiles.units.player;
-
-import game.board.ArrayGameBoard;
-import game.tiles.units.Health;
+import game.tiles.units.actions.CastAbility;
 import game.utils.Position;
-import jdk.jshell.spi.ExecutionControl;
 
 public class Warrior extends Player{
     private int damage;
     private int abilityCooldown;
-    private int remainingColldown;
+    private int remainingCooldown;
 
     public Warrior(String name, Position position, int maxhp, int attack, int defense, int abilityCooldown) {
         super(name, position, maxhp, attack, defense, 3);
-        this.damage = damage;
         this.abilityCooldown = abilityCooldown;
-        this.remainingColldown = 0;
+        this.remainingCooldown = 0;
+    }
+
+
+    @Override
+    public void gameTick() {
+        remainingCooldown+=1;
     }
 
     public int getDamage() {
         return damage;
     }
-
-
     public int getAbilityCooldown() {
         return abilityCooldown;
     }
-
     public int getRemainingColldown() {
-        return remainingColldown;
+        return remainingCooldown;
     }
-
-    public void setRemainingColldown(int remainingColldown) {
-        this.remainingColldown = remainingColldown;
+    public void setRemainingColldown(int remainingCooldown) {
+        this.remainingCooldown = remainingCooldown;
     }
-
     public void setAbilityCooldown(int abilityCooldown) {
         this.abilityCooldown = abilityCooldown;
     }
-
-
     public void setDamage(int damage) {
         this.damage = damage;
     }
 
+
     public void WlevelUp(){
         this.LevelUp();
-        this.remainingColldown = 0;
+        this.remainingCooldown = 0;
         this.setMaxHp(this.getMaxHp()+5*this.getLevel());
         this.setAttack(this.getAttack()+2*this.getLevel());
         this.setDefense(this.getDefense()+this.getLevel());
     }
 
     public void OnGameTick(){
-        this.remainingColldown--;
+        this.remainingCooldown--;
     }
 
-    public void OnAbilityCast(){
+    @Override
+    public void abilityCast(){
         if(!canCastAbility()){
             return;
         }
-        this.remainingColldown = this.abilityCooldown;
+        this.remainingCooldown = this.abilityCooldown; // ???
         this.setHp(Math.min(this.getHp()+10*this.getDefense(),this.getMaxHp()));
+
+        CastAbility castAbility = new CastAbility();
+        castAbility.WarriorAttack(this);
 
     }
 
     public boolean canCastAbility(){
-        return this.remainingColldown <= 0;
-    }
-    public void randomHit(){
-        return;
+        return this.remainingCooldown <= 0;
     }
 }

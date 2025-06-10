@@ -2,17 +2,12 @@ package game.tiles.units.player;
 
 import game.tiles.board_components.Empty;
 import game.tiles.board_components.Wall;
-import game.tiles.units.Mana;
 import game.tiles.units.Unit;
-import game.tiles.units.actions.CastAbility;
 import game.utils.Position;
 
 public abstract class Player extends Unit {
     private int experience;
     private int level;
-
-
-
 
     public Player(String name, Position position, int maxhp, int attack, int defense , int range){
         super(name, '@' ,position, maxhp, attack, defense, range);
@@ -24,11 +19,9 @@ public abstract class Player extends Unit {
     public int getExperience() {
         return experience;
     }
-
     public int getLevel() {
         return level;
     }
-
     public void setExperience(int experience) {
         this.experience = experience;
     }
@@ -45,8 +38,6 @@ public abstract class Player extends Unit {
         setAttack(getAttack() + 4 * level);
         setDefense(getDefense() + level);
     }
-
-    public abstract void castAbility();
 
 
     @Override
@@ -86,5 +77,8 @@ public abstract class Player extends Unit {
 
         return ""; // to remove the error
     }
+
+    public abstract void gameTick();
+    public abstract void abilityCast();
 
 }
