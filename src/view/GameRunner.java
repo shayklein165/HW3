@@ -2,6 +2,7 @@ package view;
 
 import game.Level;
 import game.tiles.units.player.Player;
+import game.utils.Position;
 import view.input.CommandLineInput;
 import view.input.InputProvider;
 import view.parser.FileParser;

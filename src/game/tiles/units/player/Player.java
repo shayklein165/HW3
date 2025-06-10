@@ -81,4 +81,12 @@ public class Player extends Unit {
         return getHp() > 0;
     }
 
+    public String describe(){
+        String description = "";
+        description += getName() + "         ";
+        description += getHp() + "/" + getMaxHp() + "         ";
+
+
+    }
+
 }

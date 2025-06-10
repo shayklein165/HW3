@@ -145,4 +145,15 @@ public class TileFactory {
         return enemies;
     }
 
+    public List<Player> listPlayers(){
+        List<Player> list = new ArrayList<>();
+        list.add(players.get("Jon Snow").apply(new Position(0,0)));
+        list.add(players.get("The Hound").apply(new Position(0,0)));
+        list.add(players.get("Melisandre").apply(new Position(0,0)));
+        list.add(players.get("Thoros of Myr").apply(new Position(0,0)));
+        list.add(players.get("Arya Stark").apply(new Position(0,0)));
+        list.add(players.get("Bronn").apply(new Position(0,0)));
+        return list;
+    }
+
 }
