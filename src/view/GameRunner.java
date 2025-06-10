@@ -9,11 +9,7 @@ import view.parser.FileParser;
 import view.parser.TileFactory;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class GameRunner {
     private Scanner scanner;
@@ -30,10 +26,22 @@ public class GameRunner {
 
     public void initialize(String levelsDirectory){
         int idx = choosePlayer();
+        Player player = tileFactory.listPlayers().get(idx); // need to be changed.
 
-        FileParser parser = new FileParser(tileFactory, this::sendMessage, inputProvider, idx);
+        FileParser parser = new FileParser(player);
         File root = new File(levelsDirectory);
-        levels = Arrays.stream(Objects.requireNonNull(root.listFiles())).map(parser::parseLevel).collect(Collectors.toList());
+        File[] files = root.listFiles();
+        if(files == null || files.length == 0){
+            System.out.println("No levels found.");
+            return;
+        }
+        Arrays.sort(files, Comparator.comparing(File::getName)); // sorting by the levels
+
+        levels = new ArrayList<>();
+        for(File file: files){
+            parser.parseLevel(file);
+            levels.add(parser.interpret());
+        }
     }
 
     public void start(){

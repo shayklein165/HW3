@@ -169,4 +169,23 @@ public class Level {
             default -> current; // Invalid direction = no movement
         };
     }
+
+    public boolean won() {
+        List<Enemy> enemies= arrayGameBoard.getEnemies();
+        for(Enemy e: enemies){
+            if(e.isAlive()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean processRound() {
+        // need to implement
+        return false;
+    }
+
+    public void start() {
+        // need to implement
+    }
 }

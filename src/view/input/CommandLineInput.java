@@ -4,33 +4,35 @@ import game.tiles.units.actions.Movement;
 import game.tiles.units.player.Player;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
 
-public class CommandLineInput {
-    private static Map<String, Function<Player, Action>> actionMap = new HashMap<String, Function<Player,Action>>(){
-        {
-            put("w", Movement.Up::new);
-            put("a", Movement.Left::new);
-            put("s", Movement.Down::new);
-            put("d", Movement.Right::new);
-            put("q", Movement.NoOperation::new);
-        }
-    };
+public class CommandLineInput implements InputProvider {
+    private static HashSet<Character> validInputs = new HashSet<Character>();
 
     private final Scanner scanner;
 
     public CommandLineInput(Scanner scanner){
         this.scanner = scanner;
+        validInputs.add('w');
+        validInputs.add('a');
+        validInputs.add('s');
+        validInputs.add('d');
+        validInputs.add('q');
     }
 
-    public Function<Player, Action> inputQuery(){
-        String input = scanner.next().toLowerCase();
-        while(!actionMap.containsKey(input)){
-            input = scanner.next().toLowerCase();
-        }
+    public char inputQuery() {
+        while (true) {
+            System.out.print("Enter move (w/a/s/d/q): ");
+            String input = scanner.nextLine().trim().toLowerCase();
 
-        return actionMap.get(input);
+            if (input.length() == 1 && validInputs.contains(input.charAt(0))) {
+                return input.charAt(0);
+            }
+
+            System.out.println("Invalid input. Please enter w, a, s, d or q.");
+        }
     }
 }

@@ -11,7 +11,7 @@ import jdk.jshell.spi.ExecutionControl;
 
 import java.util.List;
 
-public class Enemy extends Unit {
+public abstract class Enemy extends Unit {
     private int experience_val;
 
     public Enemy(String name, char tile, Position position, int maxhp, int attack, int defense, int range, int exp) {

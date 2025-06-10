@@ -18,7 +18,7 @@ public class FileParser {
         this.player = player;
     }
 
-    public void readFile(File file) {
+    public void parseLevel(File file) {
         if (file == null || !file.exists() || !file.isFile()) {
             return;
         }
@@ -63,5 +63,6 @@ public class FileParser {
         Level level = new Level(arrayGameBoard);
         return level;
     }
+
 }
 

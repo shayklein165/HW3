@@ -7,7 +7,7 @@ import game.tiles.units.enemies.Enemy;
 import game.tiles.units.player.Player;
 import game.utils.Position;
 
-public class Tile implements Visited,Visitor{
+public abstract class Tile implements Visited,Visitor{
     private Position position;
     private char tile;
 

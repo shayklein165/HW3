@@ -52,6 +52,6 @@ public class ArrayGameBoard {
 
 
     public void KillPlayer() {
-        setTile(new Tile(player.getPosition(), 'X'), player.getPosition());
+        board[player.getPosition().getX()][player.getPosition().getY()].setTile('X');
     }
 }

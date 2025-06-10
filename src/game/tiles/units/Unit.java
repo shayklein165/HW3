@@ -5,7 +5,7 @@ import game.tiles.board_components.Empty;
 import game.tiles.board_components.Wall;
 import game.utils.Position;
 
-public class Unit extends Tile {
+public abstract class Unit extends Tile {
     private String name;
     private Health health;
     private int attack;

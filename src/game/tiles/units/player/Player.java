@@ -7,7 +7,7 @@ import game.tiles.units.Unit;
 import game.tiles.units.actions.CastAbility;
 import game.utils.Position;
 
-public class Player extends Unit {
+public abstract class Player extends Unit {
     private int experience;
     private int level;
 
@@ -46,9 +46,7 @@ public class Player extends Unit {
         setDefense(getDefense() + level);
     }
 
-    public void castAbility(){
-        new CastAbility().executeAbility(this);
-    }
+    public abstract void castAbility();
 
 
     @Override
@@ -86,7 +84,7 @@ public class Player extends Unit {
         description += getName() + "         ";
         description += getHp() + "/" + getMaxHp() + "         ";
 
-
+        return ""; // to remove the error
     }
 
 }
