@@ -7,25 +7,20 @@ import jdk.jshell.spi.ExecutionControl;
 
 public class Warrior extends Player{
     private int damage;
-    private Health health;
     private int abilityCooldown;
     private int remainingColldown;
 
-    public Warrior(String name, Position position, int maxhp, int manaPool, int attack, int defense, int range, int damage, int health, int abilityCooldown, int remainingColldown, ArrayGameBoard arrayGameBoard) {
-        super(name, position, maxhp, manaPool, attack, defense, range, arrayGameBoard);
+    public Warrior(String name, Position position, int maxhp, int attack, int defense, int abilityCooldown) {
+        super(name, position, maxhp, attack, defense, 3);
         this.damage = damage;
-        this.health = new Health(health,health);
         this.abilityCooldown = abilityCooldown;
-        this.remainingColldown = remainingColldown;
+        this.remainingColldown = 0;
     }
 
     public int getDamage() {
         return damage;
     }
 
-    public Health getHealth() {
-        return health;
-    }
 
     public int getAbilityCooldown() {
         return abilityCooldown;
@@ -43,9 +38,6 @@ public class Warrior extends Player{
         this.abilityCooldown = abilityCooldown;
     }
 
-    public void setHealth(int health) {
-        this.health.setHp(health);
-    }
 
     public void setDamage(int damage) {
         this.damage = damage;
@@ -54,7 +46,7 @@ public class Warrior extends Player{
     public void WlevelUp(){
         this.LevelUp();
         this.remainingColldown = 0;
-        this.health.setMaxHp(this.health.getMaxHp()+5*this.getLevel());
+        this.setMaxHp(this.getMaxHp()+5*this.getLevel());
         this.setAttack(this.getAttack()+2*this.getLevel());
         this.setDefense(this.getDefense()+this.getLevel());
     }
@@ -68,7 +60,7 @@ public class Warrior extends Player{
             return;
         }
         this.remainingColldown = this.abilityCooldown;
-        this.health.setHp(Math.min(this.health.getHp()+10*this.getDefense(),this.health.getMaxHp()));
+        this.setHp(Math.min(this.getHp()+10*this.getDefense(),this.getMaxHp()));
 
     }
 

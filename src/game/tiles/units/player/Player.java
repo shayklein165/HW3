@@ -10,25 +10,16 @@ import game.utils.Position;
 public class Player extends Unit {
     private int experience;
     private int level;
-    private Mana mana;
 
 
 
-    public Player(String name, Position position, int maxhp, int manaPool, int attack, int defense , int range){
+
+    public Player(String name, Position position, int maxhp, int attack, int defense , int range){
         super(name, '@' ,position, maxhp, attack, defense, range);
         this.experience = 0;
         this.level = 1;
-        this.mana = new Mana(manaPool);
-    }
 
-    public int getMana() {
-        return mana.getCurrmana();
     }
-
-    public int getManaPool() {
-        return mana.getMaxMana();
-    }
-
 
     public int getExperience() {
         return experience;
@@ -45,13 +36,6 @@ public class Player extends Unit {
         this.level = level;
     }
 
-    public void setMana(int mana) {
-        this.mana.setCurrmana(mana);
-    }
-
-    public void setManaPool(int manaPool) {
-        this.mana.setMaxMana(manaPool);
-    }
 
     protected void LevelUp(){
         this.experience -= 50*level;

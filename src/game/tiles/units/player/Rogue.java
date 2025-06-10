@@ -10,52 +10,22 @@ import jdk.jshell.spi.ExecutionControl;
 import java.util.List;
 
 public class Rogue extends Player{
-    private Health health;
-    private int damage;
-    private int armor;
+
+    private int cost;
     private Energy energy;
-    private int remainingColldown;
 
 
-    public Rogue(String name, Position position, int maxhp, int manaPool, int attack, int defense, int range, int maxHealth, int damage, int armor, Energy energy, int remainingColldown, ArrayGameBoard arrayGameBoard) {
-        super(name, position, maxhp, manaPool, attack, defense, range, arrayGameBoard);
-        this.health = new Health(maxHealth,maxHealth);
-        this.damage = damage;
-        this.armor = armor;
-        this.remainingColldown = remainingColldown;
-        this.energy = energy;
+    public Rogue(String name, Position position, int maxhp, int attack, int defense, int cost) {
+        super(name, position, maxhp, attack, defense, 2);
+        this.cost = cost;
+        this.energy = new Energy(cost, 100);
     }
 
-    public Health getHealth() {
-        return health;
+    public int getCost() {
+        return cost;
     }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public int getArmor() {
-        return armor;
-    }
-
-    public Energy getEnergy() {
-        return energy;
-    }
-
-    public void setEnergy(Energy energy) {
-        this.energy = energy;
-    }
-
-    public void setArmor(int armor) {
-        this.armor = armor;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public void setHealth(int health) {
-        this.health.setHp(health);
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     public void OnGameTick(){

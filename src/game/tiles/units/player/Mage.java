@@ -1,6 +1,7 @@
 package game.tiles.units.player;
 
 import game.board.ArrayGameBoard;
+import game.tiles.units.Mana;
 import game.tiles.units.enemies.Enemy;
 import game.utils.Position;
 
@@ -10,14 +11,25 @@ public class Mage extends Player{
     private int costmana;
     private int spellpower;
     private int hitscnt;
+    private Mana mana;
 
 
-    public Mage(String name, Position position, int maxhp, int manaPool, int attack, int defense, int costmana, int spellpower, int hitscnt, int range, ArrayGameBoard arrayGameBoard) {
-        super(name, position, maxhp, manaPool, attack, defense, range, arrayGameBoard);
+    public Mage(String name, Position position, int maxhp, int attack, int defense, int manaPool , int costmana, int spellpower, int hitscnt, int range) {
+        super(name, position, maxhp, attack, defense, range);
         this.costmana = costmana;
         this.spellpower = spellpower;
         this.hitscnt = hitscnt;
+        this.mana = new Mana(manaPool);
     }
+
+    public int getMana() {
+        return mana.getCurrmana();
+    }
+
+    public int getManaPool() {
+        return mana.getMaxMana();
+    }
+
     public int getCostmana() {
         return costmana;
     }
@@ -36,6 +48,15 @@ public class Mage extends Player{
     public void setHitscnt(int hitscnt) {
         this.hitscnt = hitscnt;
     }
+
+    public void setMana(int mana) {
+        this.mana.setCurrmana(mana);
+    }
+
+    public void setManaPool(int manaPool) {
+        this.mana.setMaxMana(manaPool);
+    }
+
 
     public void LeveUp(){
         LevelUp();

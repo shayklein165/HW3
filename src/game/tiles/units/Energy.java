@@ -2,21 +2,15 @@ package game.tiles.units;
 
 public class Energy {
     private int cost;
-    private int specialAbilityCost;
     private int currentEnergy;
 
-    public Energy(int cost, int specialAbilityCost, int currentEnergy) {
+    public Energy(int cost, int currentEnergy) {
         this.cost = cost;
-        this.specialAbilityCost = specialAbilityCost;
-        this.currentEnergy = 100;
+        this.currentEnergy = currentEnergy;
     }
 
     public int getCost() {
         return cost;
-    }
-
-    public int getSpecialAbilityCost() {
-        return specialAbilityCost;
     }
 
     public int getCurrentEnergy() {
@@ -30,10 +24,5 @@ public class Energy {
     public void setCost(int cost) {
         this.cost = cost;
     }
-
-    public void setSpecialAbilityCost(int specialAbilityCost) {
-        this.specialAbilityCost = specialAbilityCost;
-    }
-
 
 }
