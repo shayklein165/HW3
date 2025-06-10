@@ -12,10 +12,10 @@ import java.util.List;
 
 public class FileParser {
     private List<String> lines;
-    private TileFactory tileFactory;
+    private Player player;
 
-    public FileParser(TileFactory fileFactory) {
-        this.tileFactory = fileFactory;
+    public FileParser(Player player) {
+        this.player = player;
     }
 
     public void readFile(File file) {
@@ -40,7 +40,7 @@ public class FileParser {
         }
     }
 
-    public Level interpret(Player player) {
+    public Level interpret() {
         if(lines == null || lines.isEmpty()) {
             return null;
         }
@@ -59,7 +59,7 @@ public class FileParser {
                 board[x][y] = c;
             }
         }
-        ArrayGameBoard arrayGameBoard = new ArrayGameBoard(new char[width][hight],player);
+        ArrayGameBoard arrayGameBoard = new ArrayGameBoard(board,player);
         Level level = new Level(arrayGameBoard);
         return level;
     }
