@@ -22,7 +22,7 @@ import java.util.function.Supplier;
 public class TileFactory {
     private Map<Character, Function<Position, Enemy>> enemylist;
     private Map<String, Function<Position, Player>> players;
-    List<Enemy> enemies;
+    private List<Enemy> enemies;
 
     public TileFactory() {
         enemylist = InitEnemyList();
@@ -67,13 +67,13 @@ public class TileFactory {
         return map;
     }
 
-    public Tile CreateTile(char c, Position position){
+    public Tile CreateTile(char c, Position position, Player player){
         if (c == '.')
             return CreateEmpty().apply(position);
         else if (c == '#')
             return CreateWall().apply(position);
         else if (c == '@')
-            return this.board[i][j] = player; // need to change something to know which player do i need to create
+            return player;
         else if (c == 's') {
             Enemy enemy = enemylist.get(c).apply(position);
             enemies.add(enemy);
@@ -139,6 +139,10 @@ public class TileFactory {
             enemies.add(enemy);
             return enemy;
         }
+    }
+
+    public List<Enemy> getEnemies(){
+        return enemies;
     }
 
 }

@@ -20,14 +20,14 @@ public class ArrayGameBoard {
     TileFactory tileFactory = new TileFactory();
 
     public ArrayGameBoard(char[][] board, Player player) {
-        enemies = new ArrayList<>();
         this.board = new Tile[board.length][board[0].length];
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
                 Position position = new Position(i, j);
-                this.board[i][j] = tileFactory.CreateTile(board[i][j], position);
+                this.board[i][j] = tileFactory.CreateTile(board[i][j], position, player);
             }
         }
+        enemies = tileFactory.getEnemies();
     }
 
     public Tile[][] getBoard() {
