@@ -10,7 +10,7 @@ public class Wall extends Tile {
      }
 
      @Override
-     public void accept(Unit unit){
+     public boolean accept(Unit unit){
          unit.visit(this);
      }
 }

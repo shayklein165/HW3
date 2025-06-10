@@ -6,6 +6,7 @@ import game.tiles.board_components.Empty;
 import game.tiles.board_components.Wall;
 import game.tiles.units.Mana;
 import game.tiles.units.Unit;
+import game.tiles.units.actions.Action;
 import game.tiles.units.actions.CastAbility;
 import game.tiles.units.actions.Movement;
 import game.tiles.units.enemies.Enemy;
@@ -19,16 +20,14 @@ public class Player extends Unit {
     private int experience;
     private int level;
     private Mana mana;
-    private ArrayGameBoard arrayGameBoard;
 
 
 
-    public Player(String name, Position position, int maxhp, int manaPool, int attack, int defense , int range, ArrayGameBoard arrayGameBoard){
+    public Player(String name, Position position, int maxhp, int manaPool, int attack, int defense , int range){
         super(name, '@' ,position, maxhp, attack, defense, range);
         this.experience = 0;
         this.level = 1;
         this.mana = new Mana(manaPool);
-        this.arrayGameBoard = arrayGameBoard;
     }
 
     public int getMana() {
@@ -72,73 +71,21 @@ public class Player extends Unit {
         setDefense(getDefense() + level);
     }
 
-    public List<Enemy> SelectEnemyInRange() {
-        List<Enemy> inRange = new ArrayList<>();
-        for (Enemy enemy : arrayGameBoard.getEnemies()) {
-            double distance = this.getPosition().Range(enemy.getPosition());
-            if (distance <= this.getRange()) {
-                inRange.add(enemy);
-            }
-        }
-        return inRange;
-    }
-
-
-    public void move(char action){
-        Position newPosition = Movement.getNewPosition(this.getPosition(), action);
-        if(!inBounds(newPosition)){
-            return;
-        }
-        Tile tile = arrayGameBoard.getBoard()[newPosition.getX()][newPosition.getY()];
-        tile.accept(this);
-    }
-
     public void castAbility(){
         new CastAbility().executeAbility(this);
     }
 
-    protected boolean inBounds(Position position){
-        return position.getX()>=0 && position.getX()<arrayGameBoard.getBoard().length && position.getY()>=0 && position.getY()<arrayGameBoard.getBoard()[0].length;
+
+
+    public boolean visit(Empty empty){
+        return true;
     }
 
-    public void visit(Empty empty){
-        Position newPosition = empty.getPosition();
-        Position oldPosition = this.getPosition();
-
-        arrayGameBoard.setTile(empty,oldPosition);
-        arrayGameBoard.setTile(this, newPosition);
-
-        this.setPosition(newPosition);
-        empty.setPosition(oldPosition);
-
-    }
-
-    public void visit(Wall wall){
-        return;
+    public boolean visit(Wall wall){
+        return false;
     }
 
 
-    public void visit(Enemy enemy){
-        this.attackEnemy(getRange(),enemy);
-        if(!enemy.isAlive()){
-            gainExperience(enemy.getExperience());
-            arrayGameBoard.RemoveEnemy(enemy);
-            arrayGameBoard.setTile(this,enemy.getPosition());
-            arrayGameBoard.setTile(new Empty(getPosition()),this.getPosition());
-            this.setPosition(enemy.getPosition());
-        }
-    }
-
-    public void attackEnemy(int range,Enemy enemy) {
-        int attackRoll = (int) (Math.random() * getAttack());
-        int defenseRoll = (int) (Math.random() * enemy.getDefense());
-        int damage = Math.max(attackRoll-defenseRoll,0);
-
-        enemy.reciveDamage(damage);
-
-        if(!enemy.isAlive()){
-        }
-    }
 
     public void gainExperience(int xp) {
         experience += xp;
@@ -152,16 +99,10 @@ public class Player extends Unit {
         if(getHp() < 0){
             setHp(0);
         }
-        if (!isAlive()){
-            arrayGameBoard.setTile(new Tile(getPosition(), 'X'), getPosition());
-        }
     }
 
     public boolean isAlive(){
         return getHp() > 0;
     }
 
-    public void setArrayGameBoard(ArrayGameBoard arrayGameBoard) {
-        this.arrayGameBoard = arrayGameBoard;
-    }
 }

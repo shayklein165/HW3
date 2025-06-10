@@ -73,8 +73,11 @@ public class Unit extends Tile {
         this.range = range;
     }
 
-    public void visit(Empty empty){}
-    public void visit(Wall wall){}
-    public void visit(Enemy enemy){}
+    public boolean visit(Empty empty){
+        return true;
+    }
+    public boolean visit(Wall wall){
+        return false;
+    }
 
 }

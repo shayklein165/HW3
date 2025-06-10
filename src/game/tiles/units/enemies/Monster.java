@@ -11,8 +11,8 @@ import java.util.Random;
 public class Monster extends Enemy {
     private int range;
 
-    public Monster(String name, char tile, Position position, int maxhp, int attack, int defense, int range, int exp, ArrayGameBoard arrayGameBoard) {
-        super(name, tile, position, maxhp, attack, defense,  range, exp, arrayGameBoard);
+    public Monster(String name, char tile, Position position, int maxhp, int attack, int defense, int range, int exp) {
+        super(name, tile, position, maxhp, attack, defense,  range, exp);
         this.range = range;
     }
 

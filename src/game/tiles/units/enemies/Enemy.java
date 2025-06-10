@@ -13,11 +13,9 @@ import java.util.List;
 
 public class Enemy extends Unit {
     private int experience_val;
-    private ArrayGameBoard arrayGameBoard;
 
-    public Enemy(String name, char tile, Position position, int maxhp, int attack, int defense, int range, int exp,ArrayGameBoard arrayGameBoard) {
+    public Enemy(String name, char tile, Position position, int maxhp, int attack, int defense, int range, int exp) {
         super(name, tile, position, maxhp, attack, defense,  range );
-        this.arrayGameBoard = arrayGameBoard;
         experience_val = exp;
     }
 
@@ -28,19 +26,6 @@ public class Enemy extends Unit {
     public void setExperience(int experience) {
         this.experience_val = experience;
     }
-
-    public Player SelectPlayer() {
-        return arrayGameBoard.getPlayer();
-    }
-
-    @Override
-    public void accept(Unit unit){
-        unit.visit(this);
-    };
-
-    public void visit(Empty empty){}
-    public void visit(Wall wall){}
-    public void visit(Enemy enemy){}
 
 
     public void reciveDamage(int damage) {
@@ -54,16 +39,4 @@ public class Enemy extends Unit {
         return getHp() > 0;
     }
 
-    public void attack(Player player){
-        int attackRoll = (int)(Math.random() * getAttack());
-        int defenseRoll = (int)(Math.random() * player.getDefense());
-        int damage = Math.max(attackRoll-defenseRoll,0);
-
-        player.reciveDamage(damage);
-    }
-
-
-    public void setArrayGameBoard(ArrayGameBoard arrayGameBoard) {
-        this.arrayGameBoard = arrayGameBoard;
-    }
 }
