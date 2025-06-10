@@ -1,20 +1,11 @@
 package game.tiles.units.player;
 
-import game.board.ArrayGameBoard;
-import game.tiles.Tile;
 import game.tiles.board_components.Empty;
 import game.tiles.board_components.Wall;
 import game.tiles.units.Mana;
 import game.tiles.units.Unit;
-import game.tiles.units.actions.Action;
 import game.tiles.units.actions.CastAbility;
-import game.tiles.units.actions.Movement;
-import game.tiles.units.enemies.Enemy;
 import game.utils.Position;
-import jdk.jshell.spi.ExecutionControl;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Player extends Unit {
     private int experience;
@@ -76,11 +67,12 @@ public class Player extends Unit {
     }
 
 
-
+    @Override
     public boolean visit(Empty empty){
         return true;
     }
 
+    @Override
     public boolean visit(Wall wall){
         return false;
     }

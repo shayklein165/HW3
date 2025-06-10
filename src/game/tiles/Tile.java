@@ -33,6 +33,8 @@ public class Tile{
         return String.valueOf(tile);
     }
 
-    public boolean accept(Unit unit){};
+    public boolean accept(Unit unit){
+        return false;
+    };
 
 }

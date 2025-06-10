@@ -3,7 +3,6 @@ package game.tiles.units;
 import game.tiles.Tile;
 import game.tiles.board_components.Empty;
 import game.tiles.board_components.Wall;
-import game.tiles.units.enemies.Enemy;
 import game.utils.Position;
 
 public class Unit extends Tile {
