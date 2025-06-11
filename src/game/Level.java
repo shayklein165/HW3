@@ -106,10 +106,9 @@ public class Level {
     }
 
     public void MonsterMove(Monster monster){
-        char move = this.MonsterChooseMove(monster);
-
         Position newPosition;
         do {
+            char move = this.MonsterChooseMove(monster);
             newPosition = getNewPosition(monster.getPosition(), move);
         } while (!inBounds(newPosition));
 
@@ -131,9 +130,9 @@ public class Level {
 
 
     public char MonsterChooseMove(Monster monster){
-        double distance = monster.getPosition().Range(arrayGameBoard.getPlayer().getPosition());
+
         char move;
-        if(distance < monster.getRange()){
+        if(monster.InRange(arrayGameBoard.getPlayer().getPosition())){
             move = this.followPlayer(monster);
         }
         else{
