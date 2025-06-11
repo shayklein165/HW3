@@ -23,7 +23,7 @@ public class GameRunner {
         tileFactory = new TileFactory();
     }
 
-    public void initialize(String levelsDirectory){
+    public void initialize(String levelsDirectory) {
         int idx = choosePlayer();
         Player player = tileFactory.listPlayers().get(idx); // need to be changed.
 
@@ -43,9 +43,8 @@ public class GameRunner {
         }
     }
 
-    public void start(){
+    public void start() {
         for(Level currentLevel: levels){
-            currentLevel.start();
             while(!currentLevel.won()){
                 System.out.println(currentLevel);
                 if(!currentLevel.processRound()){

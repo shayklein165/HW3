@@ -21,11 +21,12 @@ public class CommandLineInput implements InputProvider {
         validInputs.add('s');
         validInputs.add('d');
         validInputs.add('q');
+        validInputs.add('e');
     }
 
     public char inputQuery() {
         while (true) {
-            System.out.print("Enter move (w/a/s/d/q): ");
+            System.out.print("Enter move (w/a/s/d/e/q): ");
             String input = scanner.nextLine().trim().toLowerCase();
 
             if (input.length() == 1 && validInputs.contains(input.charAt(0))) {

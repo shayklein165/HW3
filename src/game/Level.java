@@ -15,13 +15,17 @@ import java.util.List;
 
 public class Level {
     ArrayGameBoard arrayGameBoard;
-    private char[] moves;
+    private ArrayList<Character> moves;
     MessageCallback messageCallback;
     private InputProvider inputProvider;
 
     public Level(ArrayGameBoard arrayGameBoard){
         this.arrayGameBoard = arrayGameBoard;
-        this.moves = new char[]{'a', 'd', 'w', 's'};
+        this.moves = new ArrayList<Character>();
+        this.moves.add('a');
+        this.moves.add('d');
+        this.moves.add('w');
+        this.moves.add('s');
     }
 
     public void setArrayGameBoard(ArrayGameBoard arrayGameBoard) {
@@ -37,7 +41,7 @@ public class Level {
     public boolean attack(Enemy enemy, Player player) {
         int attackRoll = (int) (Math.random() * enemy.getAttack());
         int defenseRoll = (int) (Math.random() * player.getDefense());
-        int damage = Math.max(attackRoll-defenseRoll,0);
+        int damage = Math.max(attackRoll - defenseRoll, 0);
 
         player.reciveDamage(damage);
 
@@ -53,14 +57,10 @@ public class Level {
     public boolean attack(Player player, Enemy enemy){
         int attackRoll = (int) (Math.random() * player.getAttack());
         int defenseRoll = (int) (Math.random() * enemy.getDefense());
-        int damage = Math.max(attackRoll-defenseRoll,0);
+        int damage = Math.max(attackRoll - defenseRoll,0);
 
         enemy.reciveDamage(damage);
-
-        if(enemy.isAlive()) {
-            return true;
-        }
-        return false;
+        return enemy.isAlive();
     }
 
     public List<Enemy> SelectEnemyInRange() {
@@ -74,7 +74,7 @@ public class Level {
         return inRange;
     }
 
-    public void PlayerMove(char action){
+    public void playerMove(char action){
         Position newPosition = getNewPosition(arrayGameBoard.getPlayer().getPosition(), action);
         if(!inBounds(newPosition)){
             return;
@@ -107,11 +107,12 @@ public class Level {
 
     public void MonsterMove(Monster monster){
         char move = this.MonsterChooseMove(monster);
-        Position newPosition = getNewPosition(monster.getPosition(), move);
 
-        if(!inBounds(newPosition)){
-            return;
-        }
+        Position newPosition;
+        do {
+            newPosition = getNewPosition(monster.getPosition(), move);
+        } while (!inBounds(newPosition));
+
 
         List<Enemy> enemies = arrayGameBoard.getEnemies();
         for(Enemy e: enemies){
@@ -132,19 +133,19 @@ public class Level {
     public char MonsterChooseMove(Monster monster){
         double distance = monster.getPosition().Range(arrayGameBoard.getPlayer().getPosition());
         char move;
-        if(distance<monster.getRange()){
+        if(distance < monster.getRange()){
             move = this.followPlayer(monster);
         }
         else{
-            move = moves[(int) (Math.random() * moves.length)];
+            move = moves.get((int) (Math.random() * moves.size()));
         }
         return move;
     }
 
     // 0 = left, 1 = right, 2 = up, 3 = down
     public char followPlayer(Monster monster){
-        int distX = monster.getPosition().getX()-arrayGameBoard.getPlayer().getPosition().getX();
-        int distY = monster.getPosition().getY()-arrayGameBoard.getPlayer().getPosition().getY();
+        int distX = monster.getPosition().getX() - arrayGameBoard.getPlayer().getPosition().getX();
+        int distY = monster.getPosition().getY() - arrayGameBoard.getPlayer().getPosition().getY();
 
         if(Math.abs(distX) > Math.abs(distY)){
             if(distX > 0){
@@ -175,38 +176,49 @@ public class Level {
     }
 
     public boolean won() {
-        List<Enemy> enemies= arrayGameBoard.getEnemies();
-        for(Enemy e: enemies){
-            if(e.isAlive()){
-                return false;
+        return arrayGameBoard.getEnemies().isEmpty();
+    }
+
+    public void gameDisplay()
+    {
+        Tile[][] board = arrayGameBoard.getBoard();
+        for (int i = 0; i < board.length; i++)
+        {
+            for (int j = 0; j < board[0].length; j++)
+            {
+                System.out.println(board[i][j]);
             }
         }
-        return true;
+        System.out.println();
     }
 
-    public void gameDisplay(){
-        // ???
-    }
-
-    public boolean processRound() {
-        // need to implement
+    public boolean processRound()
+    {
         gameDisplay();
+        char move = inputProvider.inputQuery();
+        if (this.moves.contains(move))
+        {
+            playerMove(move);
+            List<Enemy> enemies= arrayGameBoard.getEnemies();
+            for(Enemy e: enemies)
+            {
+                MonsterMove(e);
+            }
+        }
         return false;
     }
 
+    /*
     public void start() {
         gameDisplay();
         System.out.println("Starting new level...");
 
-        while(arrayGameBoard.getPlayer().isAlive() && !won()){
-            boolean continueRound = processRound();
-            if(!continueRound){
-                break;
-            }
-        }
+
 
         if(arrayGameBoard.getPlayer().isAlive()){
 
         }
     }
+    */
+
 }
