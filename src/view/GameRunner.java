@@ -5,7 +5,7 @@ import game.tiles.units.player.Player;
 import view.input.CommandLineInput;
 import view.input.InputProvider;
 import view.parser.FileParser;
-import view.parser.TileFactory;
+import game.board.TileFactory;
 
 import java.io.File;
 import java.util.*;

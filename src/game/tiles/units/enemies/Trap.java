@@ -52,6 +52,7 @@ public class Trap extends Enemy{
         this.visibility_time = visibility_time;
     }
 
+    /*
     public void tick() {
         visible = (ticks_cnt < visibility_time);
         if (ticks_cnt == (visibility_time + invisibility_time))
@@ -62,5 +63,6 @@ public class Trap extends Enemy{
         if (player == null) return;
         attack(player);
     }
+     */
 
 }

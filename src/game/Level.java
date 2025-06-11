@@ -186,8 +186,9 @@ public class Level {
         {
             for (int j = 0; j < board[0].length; j++)
             {
-                System.out.println(board[i][j]);
+                System.out.print(board[i][j]);
             }
+            System.out.println();
         }
         System.out.println();
     }
@@ -199,11 +200,13 @@ public class Level {
         if (this.moves.contains(move))
         {
             playerMove(move);
+            /*
             List<Enemy> enemies= arrayGameBoard.getEnemies();
             for(Enemy e: enemies)
             {
                 MonsterMove(e);
             }
+            */
         }
         return false;
     }

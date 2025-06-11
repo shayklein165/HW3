@@ -3,7 +3,7 @@ package view;
 public class Program {
     public static void main(String[] args){
         System.out.println("Welcome to the game!");
-        if(args.length == 0){
+        if(args.length == 0) {
             System.out.println("Please enter the game levels you want to play!");
             return;
         }
