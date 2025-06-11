@@ -76,66 +76,79 @@ public class TileFactory {
             return player;
         else if (c == 's') {
             Enemy enemy = enemylist.get(c).apply(position);
+            enemy.setPosition(position);
             enemies.add(enemy);
             return enemy;
         }
         else if (c == 'k') {
             Enemy enemy = enemylist.get(c).apply(position);
+            enemy.setPosition(position);
             enemies.add(enemy);
             return enemy;
         }
         else if (c == 'q') {
             Enemy enemy = enemylist.get(c).apply(position);
+            enemy.setPosition(position);
             enemies.add(enemy);
             return enemy;
         }
         else if (c == 'z') {
             Enemy enemy = enemylist.get(c).apply(position);
+            enemy.setPosition(position);
             enemies.add(enemy);
             return enemy;
         }
         else if (c == 'b'){
             Enemy enemy = enemylist.get(c).apply(position);
+            enemy.setPosition(position);
             enemies.add(enemy);
             return enemy;
         }
         else if (c == 'g') {
             Enemy enemy = enemylist.get(c).apply(position);
+            enemy.setPosition(position);
             enemies.add(enemy);
             return enemy;
         }
         else if (c == 'w') {
             Enemy enemy = enemylist.get(c).apply(position);
+            enemy.setPosition(position);
             enemies.add(enemy);
             return enemy;
         }
         else if (c == 'M') {
             Enemy enemy = enemylist.get(c).apply(position);
+            enemy.setPosition(position);
             enemies.add(enemy);
             return enemy;
         }
         else if (c == 'C') {
             Enemy enemy = enemylist.get(c).apply(position);
+            enemy.setPosition(position);
             enemies.add(enemy);
             return enemy;
         }
         else if (c == 'K') {
             Enemy enemy = enemylist.get(c).apply(position);
+            enemy.setPosition(position);
             enemies.add(enemy);
             return enemy;
         }
         else if (c == 'B') {
             Enemy enemy = enemylist.get(c).apply(position);
+            enemy.setPosition(position);
             enemies.add(enemy);
             return enemy;
         }
         else if (c == 'Q') {
             Enemy enemy = enemylist.get(c).apply(position);
+            enemy.setPosition(position);
             enemies.add(enemy);
             return enemy;
         }
         else {
             Enemy enemy = enemylist.get(c).apply(position);
+            enemy.setPosition(position);
             enemies.add(enemy);
             return enemy;
         }

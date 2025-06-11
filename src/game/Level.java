@@ -102,7 +102,7 @@ public class Level {
 
 
     protected boolean inBounds(Position position){
-        return position.getX()>=0 && position.getX()<arrayGameBoard.getBoard().length && position.getY()>=0 && position.getY()<arrayGameBoard.getBoard()[0].length;
+        return position.getX()>0 && position.getX()<arrayGameBoard.getBoard().length && position.getY()>0 && position.getY()<arrayGameBoard.getBoard()[0].length;
     }
 
     public void MonsterMove(Monster monster){
@@ -207,7 +207,7 @@ public class Level {
             }
             */
         }
-        return false;
+        return arrayGameBoard.getPlayer().isAlive();
     }
 
     public void start(InputProvider input) {
