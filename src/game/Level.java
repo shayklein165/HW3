@@ -6,12 +6,16 @@ import game.tiles.Tile;
 import game.tiles.board_components.Empty;
 import game.tiles.units.enemies.Enemy;
 import game.tiles.units.enemies.Monster;
+import game.tiles.units.player.Mage;
 import game.tiles.units.player.Player;
+import game.tiles.units.player.Rogue;
+import game.tiles.units.player.Warrior;
 import game.utils.Position;
 import view.input.InputProvider;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Level {
     ArrayGameBoard arrayGameBoard;
@@ -60,7 +64,12 @@ public class Level {
         int damage = Math.max(attackRoll - defenseRoll,0);
 
         enemy.reciveDamage(damage);
-        return enemy.isAlive();
+        boolean b = enemy.isAlive();
+        if (!b){
+            arrayGameBoard.RemoveEnemy(enemy);
+            arrayGameBoard.setTile(new Empty(enemy.getPosition()), enemy.getPosition());
+        }
+        return (!b);
     }
 
     public List<Enemy> SelectEnemyInRange() {
@@ -77,7 +86,7 @@ public class Level {
     public void playerMove(char action){
         Position newPosition = getNewPosition(arrayGameBoard.getPlayer().getPosition(), action);
         if(!inBounds(newPosition)){
-            return;
+            return; // need to insert callback
         }
 
         Tile tile = arrayGameBoard.getBoard()[newPosition.getX()][newPosition.getY()];
@@ -105,21 +114,47 @@ public class Level {
         return position.getX()>=0 && position.getX()<arrayGameBoard.getBoard().length && position.getY()>=0 && position.getY()<arrayGameBoard.getBoard()[0].length;
     }
 
+    private boolean canMove(Monster monster){
+        int i = arrayGameBoard.getBoard().length;
+        int j = arrayGameBoard.getBoard()[0].length;
+        Position position = monster.getPosition();
+        boolean ans = false;
+        if (position.getX() < i-1)
+            ans = arrayGameBoard.getBoard()[i+1][j].accept(monster);
+        if (!ans && position.getX() < j-1)
+            ans = arrayGameBoard.getBoard()[i][j+1].accept(monster);
+        if (!ans && position.getX() > 0)
+            ans = arrayGameBoard.getBoard()[i-1][j].accept(monster);
+        if (!ans && position.getX() > 0)
+            ans = arrayGameBoard.getBoard()[i][j-1].accept(monster);
+        return ans;
+    }
+
     public void MonsterMove(Monster monster){
         Position newPosition;
+        boolean isEmpty;
+        List<Enemy> enemies = arrayGameBoard.getEnemies();
+
+        if(!canMove(monster))
+            return;
+
         do {
             char move = this.MonsterChooseMove(monster);
             newPosition = getNewPosition(monster.getPosition(), move);
+            isEmpty = true;
+            for(Enemy e: enemies) {
+                if (e.getPosition().equals(newPosition)) {
+                    isEmpty = false;
+                }
+            }
         } while (!inBounds(newPosition));
 
-
-        List<Enemy> enemies = arrayGameBoard.getEnemies();
-        for(Enemy e: enemies){
-            if(e.getPosition().equals(newPosition)){
-                return;
-            }
+        Player p = arrayGameBoard.getPlayer();
+        if(newPosition.equals(p.getPosition())){
+            attack(monster, p);
         }
-        boolean isEmpty = arrayGameBoard.getBoard()[newPosition.getX()][newPosition.getY()].accept(monster);
+
+        isEmpty = arrayGameBoard.getBoard()[newPosition.getX()][newPosition.getY()].accept(monster);
         if(isEmpty){
             Position oldPosition = monster.getPosition();
             monster.setPosition(newPosition);
@@ -212,6 +247,59 @@ public class Level {
 
     public void start(InputProvider input) {
         this.inputProvider = input;
+    }
+
+    public void WarriorAttack(Warrior warrior){
+        if (!warrior.canCastAbility())
+            return;
+        Random rnd = new Random();
+        int i = 0;
+        List<Enemy> list = SelectEnemyInRange();
+        i = rnd.nextInt(list.size());
+        Enemy e = list.get(i);
+        e.reciveDamage(e.getHp() - warrior.getMaxHp()/10);
+        if (!e.isAlive()) {
+            arrayGameBoard.RemoveEnemy(e);
+            arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
+        }
+        warrior.setHp(Math.min(warrior.getHp() + (10 * warrior.getDefense()), warrior.getMaxHp()));
+        warrior.setRemainingColldown(warrior.getAbilityCooldown());
+    }
+
+    public void MageAttack(Mage mage){
+        if (!mage.canCastabilityCast())
+            return;
+        Random rnd = new Random();
+        int i = 0;
+        List<Enemy> list = SelectEnemyInRange();
+        mage.setMana(mage.getMana() - mage.getCostmana());
+        int hits = 0;
+        while (hits < mage.getHitscnt()) { // need to implement the check if any enemy exist in rang
+            i = rnd.nextInt(list.size());
+            Enemy e = list.get(i);
+            e.reciveDamage(e.getHp() - mage.getSpellpower());
+            if (!e.isAlive()) {
+                arrayGameBoard.RemoveEnemy(e);
+                arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
+            }
+            hits++;
+        }
+    }
+
+    public void RogueAttack(Rogue rogue){
+        if(!rogue.CanCastAbility())
+            return;
+        rogue.setCurrentEnergy(rogue.getCurrentEnergy()- rogue.getEnergycost());
+        List<Enemy> EnemyInRange = this.SelectEnemyInRange();
+        for (Enemy enemy : EnemyInRange){
+            int defenseRoll = (int) (Math.random() * enemy.getDefense());
+            if (rogue.getAttack() > defenseRoll)
+                enemy.reciveDamage(rogue.getAttack() - defenseRoll);
+            if (!enemy.isAlive()) {
+                arrayGameBoard.RemoveEnemy(enemy);
+                arrayGameBoard.setTile(new Empty(enemy.getPosition()), enemy.getPosition());
+            }
+        }
     }
 
 }

@@ -4,26 +4,23 @@ import jdk.jshell.spi.ExecutionControl;
 
 public class Rogue extends Player{
 
-    private int cost;
+    private int energycost;
     private int currentEnergy;
 
 
     public Rogue(String name, Position position, int maxhp, int attack, int defense, int cost) {
         super(name, position, maxhp, attack, defense, 2);
-        this.cost = cost;
+        this.energycost = cost;
         this.currentEnergy = 100;
     }
 
     @Override
     public void gameTick() {this.currentEnergy = (Math.min(currentEnergy+10, 100));}
 
-    @Override
-    public void abilityCast() {}
-
     public int getCurrentEnergy() {return currentEnergy;}
     public void setCurrentEnergy(int currentEnergy) {}
-    public int getCost() {return cost;}
-    public void setCost(int cost) {this.cost = cost;}
+    public int getEnergycost() {return energycost;}
+    public void setEnergycost(int cost) {this.energycost = cost;}
 
     public void OnLevelUp(){
         LevelUp();
@@ -39,6 +36,13 @@ public class Rogue extends Player{
             attackEnemy(2,enemy);
         }
          */
+    }
+
+    public boolean CanCastAbility(){
+        if (currentEnergy >= energycost)
+            return true;
+        return false;
+
     }
 
     public String describe(){

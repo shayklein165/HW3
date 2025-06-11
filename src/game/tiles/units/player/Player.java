@@ -85,7 +85,6 @@ public abstract class Player extends Unit {
     }
 
     public abstract void gameTick();
-    public abstract void abilityCast();
 
 
 
