@@ -1,5 +1,6 @@
 package game.tiles.units.player;
 
+import game.tiles.Tile;
 import game.tiles.board_components.Empty;
 import game.tiles.board_components.Wall;
 import game.tiles.units.Unit;
@@ -77,8 +78,15 @@ public abstract class Player extends Unit {
 
         return ""; // to remove the error
     }
+    @Override
+    public boolean accept(Tile tile)
+    {
+        return tile.visit(this);
+    }
 
     public abstract void gameTick();
     public abstract void abilityCast();
+
+
 
 }

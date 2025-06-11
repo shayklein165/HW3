@@ -40,4 +40,16 @@ public class Rogue extends Player{
         }
          */
     }
+
+    public String describe(){
+        String description = "";
+        description += getName() + "          ";
+        description += getHp() + "/" + getMaxHp() + "          ";
+        description += getAttack() + "          ";
+        description += getDefense() + "          ";
+        description += getLevel() + "          ";
+        description += getExperience() + "/" + (50*getLevel()) + "          ";
+        description += getCurrentEnergy() + "/" + "100" + "          ";
+        return description;
+    }
 }
