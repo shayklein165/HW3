@@ -66,4 +66,16 @@ public class Warrior extends Player{
     public boolean canCastAbility(){
         return this.remainingCooldown <= 0;
     }
+
+    public String describe(){
+        String description = "";
+        description += getName() + "          ";
+        description += getHp() + "/" + getMaxHp() + "          ";
+        description += getAttack() + "          ";
+        description += getDefense() + "          ";
+        description += getLevel() + "          ";
+        description += getExperience() + "/" + (50*getLevel()) + "          ";
+        description += getRemainingColldown() + "/" + getAbilityCooldown() + "          ";
+        return description;
+    }
 }

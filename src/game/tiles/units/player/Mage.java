@@ -65,4 +65,16 @@ public class Mage extends Player{
         */
     }
 
+    public String describe(){
+        String description = "";
+        description += getName() + "          ";
+        description += getHp() + "/" + getMaxHp() + "          ";
+        description += getAttack() + "          ";
+        description += getDefense() + "          ";
+        description += getLevel() + "          ";
+        description += getExperience() + "/" + (50*getLevel()) + "          ";
+        description += getMana() + "/" + getManaPool() + "          ";
+        return description;
+    }
+
 }
