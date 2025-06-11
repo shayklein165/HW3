@@ -17,6 +17,15 @@ public class Mage extends Player{
         this.mana = new Mana(manaPool);
     }
 
+    public int getCostmana()
+    {
+        return costmana;
+    }
+
+    public int getHitscnt(){
+        return hitscnt;
+    }
+
     public int getMana() {
         return mana.getCurrmana();
     }
@@ -36,6 +45,13 @@ public class Mage extends Player{
         this.mana.setMaxMana(manaPool);
     }
 
+    public void setCostMana(int costmana){
+        this.costmana = costmana;
+    }
+
+    public void setHitscnt(int hitscnt){
+        this.hitscnt = hitscnt;
+    }
 
     public void LeveUp(){
         LevelUp();
@@ -52,17 +68,11 @@ public class Mage extends Player{
         setMana(currmana);
     }
 
-    @Override
-    public void abilityCast(){
-        /*
-        setMana(getMana() - costmana);
-        int hits = 0;
-        while (hits < hitscnt ){ // need to implement the check if any enemy exist in rang
-            List<Enemy> lst = SelectEnemyInRange();
-            attackEnemy(getRange(),lst.getFirst());
-            hits++;
+    public boolean canCastabilityCast(){
+        if (mana.getCurrmana() >= costmana) {
+            return true;
         }
-        */
+        return false;
     }
 
     public String describe(){

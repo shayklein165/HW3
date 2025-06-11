@@ -6,7 +6,8 @@ import game.tiles.units.Unit;
 import game.tiles.units.enemies.Enemy;
 import game.tiles.units.player.Player;
 
-public interface Visitor {
+public interface Visitor
+{
     public boolean visit(Player player);
     public boolean visit(Enemy enemy);
     public boolean visit(Wall wall);

@@ -1,5 +1,4 @@
 package game.tiles.units.player;
-import game.tiles.units.actions.CastAbility;
 import game.utils.Position;
 
 public class Warrior extends Player{
@@ -51,17 +50,6 @@ public class Warrior extends Player{
         this.remainingCooldown--;
     }
 
-    @Override
-    public void abilityCast(){
-        if(!canCastAbility()){
-            return;
-        }
-        this.remainingCooldown = this.abilityCooldown; // ???
-        this.setHp(Math.min(this.getHp()+10*this.getDefense(),this.getMaxHp()));
-
-        CastAbility castAbility = new CastAbility();
-        castAbility.WarriorAttack(this);
-    }
 
     public boolean canCastAbility(){
         return this.remainingCooldown <= 0;
