@@ -14,7 +14,7 @@ public class Program {
         }
 
         GameRunner gameRunner = new GameRunner();
-        try{
+        try {
             gameRunner.initialize(gameLevels);
             gameRunner.start();
         }

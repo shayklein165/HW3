@@ -129,12 +129,12 @@ public class TileFactory {
             enemies.add(enemy);
             return enemy;
         }
-        else if (c == 'Q'){
+        else if (c == 'Q') {
             Enemy enemy = enemylist.get(c).apply(position);
             enemies.add(enemy);
             return enemy;
         }
-        else{
+        else {
             Enemy enemy = enemylist.get(c).apply(position);
             enemies.add(enemy);
             return enemy;

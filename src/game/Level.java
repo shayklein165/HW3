@@ -211,17 +211,8 @@ public class Level {
         return false;
     }
 
-    /*
-    public void start() {
-        gameDisplay();
-        System.out.println("Starting new level...");
-
-
-
-        if(arrayGameBoard.getPlayer().isAlive()){
-
-        }
+    public void start(InputProvider input) {
+        this.inputProvider = input;
     }
-    */
 
 }
