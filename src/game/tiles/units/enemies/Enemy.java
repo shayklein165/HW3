@@ -2,6 +2,7 @@ package game.tiles.units.enemies;
 
 import game.board.ArrayGameBoard;
 import game.callbacks.MessageCallback;
+import game.tiles.Tile;
 import game.tiles.board_components.Empty;
 import game.tiles.board_components.Wall;
 import game.tiles.units.Unit;
@@ -37,6 +38,12 @@ public abstract class Enemy extends Unit {
 
     public boolean isAlive(){
         return getHp() > 0;
+    }
+
+    @Override
+    public boolean accept(Tile tile)
+    {
+        return tile.visit(this);
     }
 
 }

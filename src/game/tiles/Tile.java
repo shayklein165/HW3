@@ -7,7 +7,7 @@ import game.tiles.units.enemies.Enemy;
 import game.tiles.units.player.Player;
 import game.utils.Position;
 
-public abstract class Tile implements Visited,Visitor{
+public abstract class Tile implements Visited, Visitor{
     private Position position;
     private char tile;
 
@@ -37,32 +37,16 @@ public abstract class Tile implements Visited,Visitor{
         return String.valueOf(tile);
     }
 
-    public boolean accept(Unit unit){
-        return false;
-    };
+    @Override
+    public abstract boolean accept(Tile tile);
 
     @Override
-    public boolean accept(Tile tile) {
-        return false;
-    }
-
+    public abstract boolean visit(Player player);
     @Override
-    public boolean visit(Player player) {
-        return false;
-    }
-
+    public abstract boolean visit(Enemy enemy);
     @Override
-    public boolean visit(Enemy enemy) {
-        return false;
-    }
-
+    public abstract boolean visit(Wall wall);
     @Override
-    public boolean visit(Wall wall) {
-        return false;
-    }
+    public abstract boolean visit(Empty empty);
 
-    @Override
-    public boolean visit(Empty empty) {
-        return false;
-    }
 }

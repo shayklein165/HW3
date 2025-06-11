@@ -1,11 +1,15 @@
 package game.tiles.units;
 
 import game.tiles.Tile;
+import game.tiles.Visited;
+import game.tiles.Visitor;
 import game.tiles.board_components.Empty;
 import game.tiles.board_components.Wall;
+import game.tiles.units.enemies.Enemy;
+import game.tiles.units.player.Player;
 import game.utils.Position;
 
-public abstract class Unit extends Tile {
+public abstract class Unit extends Tile implements Visited, Visitor{
     private String name;
     private Health health;
     private int attack;
@@ -72,11 +76,27 @@ public abstract class Unit extends Tile {
         this.range = range;
     }
 
-    public boolean visit(Empty empty){
-        return true;
-    }
-    public boolean visit(Wall wall){
+    @Override
+    public abstract boolean accept(Tile tile);
+
+    @Override
+    public boolean visit(Player player) {
         return false;
+    }
+
+    @Override
+    public boolean visit(Enemy enemy) {
+        return false;
+    }
+
+    @Override
+    public boolean visit(Wall wall) {
+        return false;
+    }
+
+    @Override
+    public boolean visit(Empty empty) {
+        return true;
     }
 
 }
