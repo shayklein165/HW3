@@ -5,7 +5,7 @@ import game.tiles.units.player.Player;
 import view.input.CommandLineInput;
 import view.input.InputProvider;
 import view.parser.FileParser;
-import view.parser.TileFactory;
+import game.board.TileFactory;
 
 import java.io.File;
 import java.util.*;
@@ -25,7 +25,7 @@ public class GameRunner {
 
     public void initialize(String levelsDirectory) {
         int idx = choosePlayer();
-        Player player = tileFactory.listPlayers().get(idx); // need to be changed.
+        Player player = tileFactory.listPlayers().get(idx);
 
         FileParser parser = new FileParser(player);
         File root = new File(levelsDirectory);
@@ -45,6 +45,7 @@ public class GameRunner {
 
     public void start() {
         for(Level currentLevel: levels){
+            currentLevel.start(this.inputProvider);
             while(!currentLevel.won()){
                 System.out.println(currentLevel);
                 if(!currentLevel.processRound()){
