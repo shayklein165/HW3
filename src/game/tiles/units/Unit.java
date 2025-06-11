@@ -80,7 +80,8 @@ public abstract class Unit extends Tile implements Visited, Visitor{
     public abstract boolean accept(Tile tile);
 
     @Override
-    public boolean visit(Player player) {
+    public boolean visit(Player player)
+    {
         return false;
     }
 
