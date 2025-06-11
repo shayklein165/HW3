@@ -181,11 +181,11 @@ public class Level {
     public void gameDisplay()
     {
         Tile[][] board = arrayGameBoard.getBoard();
-        for (int i = 0; i < board.length; i++)
+        for (int i = 0; i < board[0].length; i++)
         {
-            for (int j = 0; j < board[0].length; j++)
+            for (int j = 0; j < board.length; j++)
             {
-                System.out.print(board[i][j]);
+                System.out.print(board[j][i]);
             }
             System.out.println();
         }

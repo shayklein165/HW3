@@ -21,10 +21,14 @@ public class ArrayGameBoard {
 
     public ArrayGameBoard(char[][] board, Player player) {
         this.board = new Tile[board.length][board[0].length];
+        this.player = player;
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
                 Position position = new Position(i, j);
                 this.board[i][j] = tileFactory.CreateTile(board[i][j], position, player);
+
+                if (board[i][j] == '@')
+                    this.player.setPosition(new Position(i, j));
             }
         }
         enemies = tileFactory.getEnemies();

@@ -26,7 +26,9 @@ public class CommandLineInput implements InputProvider {
 
     public char inputQuery() {
         while (true) {
-            System.out.print("Enter move (w/a/s/d/e/q): ");
+            System.out.println("Enter move (w/a/s/d/e/q): ");
+            if (scanner.hasNext())
+                scanner.nextLine();
             String input = scanner.nextLine().trim().toLowerCase();
 
             if (input.length() == 1 && validInputs.contains(input.charAt(0))) {
