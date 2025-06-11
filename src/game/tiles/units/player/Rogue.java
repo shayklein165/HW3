@@ -28,16 +28,6 @@ public class Rogue extends Player{
         setAttack(getAttack()+3*getLevel());
     }
 
-    public void OnAbilityCast(){
-        /*
-        this.energy.setCurrentEnergy(energy.getCurrentEnergy()- energy.getCost());
-        List<Enemy> EnemyInRange = this.SelectEnemyInRange();
-        for (Enemy enemy : EnemyInRange){
-            attackEnemy(2,enemy);
-        }
-         */
-    }
-
     public boolean CanCastAbility(){
         if (currentEnergy >= energycost)
             return true;

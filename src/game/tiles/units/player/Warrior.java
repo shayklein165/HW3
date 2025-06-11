@@ -50,14 +50,6 @@ public class Warrior extends Player{
         this.remainingCooldown--;
     }
 
-    @Override
-    public void abilityCast(){
-        if(!canCastAbility()){
-            return;
-        }
-        this.remainingCooldown = this.abilityCooldown; // ???
-        this.setHp(Math.min(this.getHp()+10*this.getDefense(),this.getMaxHp()));
-    }
 
     public boolean canCastAbility(){
         return this.remainingCooldown <= 0;

@@ -46,10 +46,8 @@ public class GameRunner {
     public void start() {
         for(Level currentLevel: levels){
             currentLevel.start(this.inputProvider);
-            while(!currentLevel.won()){
-                System.out.println(currentLevel);
+            while(!currentLevel.won()) {
                 if(!currentLevel.processRound()){
-                    System.out.println(currentLevel);
                     System.out.println("Game Over");
                     return;
                 }
