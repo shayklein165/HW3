@@ -167,7 +167,7 @@ public class Level {
     public void TrapAction(Trap trap){
         Player p  = arrayGameBoard.getPlayer();
         trap.state();
-        if (!trap.InRange(p.getPosition())){
+        if (trap.InRange(p.getPosition())){
             attack(trap, p);
         }
         if (trap.isVisible())
