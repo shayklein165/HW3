@@ -21,6 +21,7 @@ public class Trap extends Enemy{
         this.ticks_cnt = 0;
         this.visible = visible;
         visibletile = tile;
+        setCurrTile('.');
     }
 
     public int getVisibility_time() {

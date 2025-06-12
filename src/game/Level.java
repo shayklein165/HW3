@@ -121,13 +121,13 @@ public class Level {
         Position position = monster.getPosition();
         boolean ans = false;
         if (position.getX() < i-1)
-            ans = arrayGameBoard.getBoard()[i+1][j].accept(monster);
+            ans = arrayGameBoard.getBoard()[position.getX()+1][position.getY()].accept(monster);
         if (!ans && position.getX() < j-1)
-            ans = arrayGameBoard.getBoard()[i][j+1].accept(monster);
+            ans = arrayGameBoard.getBoard()[position.getX()][position.getY()+1].accept(monster);
         if (!ans && position.getX() > 0)
-            ans = arrayGameBoard.getBoard()[i-1][j].accept(monster);
+            ans = arrayGameBoard.getBoard()[position.getX()-1][position.getY()].accept(monster);
         if (!ans && position.getX() > 0)
-            ans = arrayGameBoard.getBoard()[i][j-1].accept(monster);
+            ans = arrayGameBoard.getBoard()[position.getX()][position.getY()-1].accept(monster);
         return ans;
     }
 
