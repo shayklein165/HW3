@@ -41,17 +41,6 @@ public abstract class Player extends Unit {
     }
 
 
-    @Override
-    public boolean visit(Empty empty){
-        return true;
-    }
-
-    @Override
-    public boolean visit(Wall wall){
-        return false;
-    }
-
-
 
     public void gainExperience(int xp) {
         experience += xp;

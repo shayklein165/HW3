@@ -6,6 +6,7 @@ import game.tiles.Tile;
 import game.tiles.board_components.Empty;
 import game.tiles.units.enemies.Enemy;
 import game.tiles.units.enemies.Monster;
+import game.tiles.units.enemies.Trap;
 import game.tiles.units.player.Mage;
 import game.tiles.units.player.Player;
 import game.tiles.units.player.Rogue;
@@ -97,13 +98,12 @@ public class Level {
                 break;
             }
         }
+        tile = arrayGameBoard.getBoard()[newPosition.getX()][newPosition.getY()];
         boolean isEmpty = tile.accept(arrayGameBoard.getPlayer());
         if(isEmpty){
             Position oldPosition = arrayGameBoard.getPlayer().getPosition();
-
             arrayGameBoard.setTile(new Empty(oldPosition),oldPosition);
             arrayGameBoard.setTile(arrayGameBoard.getPlayer(), newPosition);
-
             arrayGameBoard.getPlayer().setPosition(newPosition);
             tile.setPosition(oldPosition);
         }
@@ -164,6 +164,17 @@ public class Level {
         }
     }
 
+    public void TrapAction(Trap trap){
+        Player p  = arrayGameBoard.getPlayer();
+        trap.state();
+        if (!trap.InRange(p.getPosition())){
+            attack(trap, p);
+        }
+        if (trap.isVisible())
+            trap.setCurrTile(trap.getVisibletile());
+        else
+            trap.setCurrTile('.');
+    }
 
     public char MonsterChooseMove(Monster monster){
 
@@ -235,15 +246,18 @@ public class Level {
         if (this.moves.contains(move))
         {
             playerMove(move);
-            /*
+
             List<Enemy> enemies= arrayGameBoard.getEnemies();
             for(Enemy e: enemies)
             {
-                MonsterMove(e);
+                EnemyMove(e);
             }
-            */
         }
         return arrayGameBoard.getPlayer().isAlive();
+    }
+
+    private void EnemyMove(Enemy e) {
+        e.Move(this);
     }
 
     public void start(InputProvider input) {

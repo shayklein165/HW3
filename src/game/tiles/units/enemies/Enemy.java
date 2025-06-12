@@ -1,5 +1,6 @@
 package game.tiles.units.enemies;
 
+import game.Level;
 import game.board.ArrayGameBoard;
 import game.callbacks.MessageCallback;
 import game.tiles.Tile;
@@ -45,5 +46,7 @@ public abstract class Enemy extends Unit {
     {
         return tile.visit(this);
     }
+
+    public abstract void Move(Level level);
 
 }

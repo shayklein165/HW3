@@ -1,5 +1,6 @@
 package game.tiles.units.enemies;
 
+import game.Level;
 import game.board.ArrayGameBoard;
 import game.tiles.units.player.Player;
 import game.utils.Position;
@@ -11,13 +12,15 @@ public class Trap extends Enemy{
     private int invisibility_time;
     private int ticks_cnt;
     private boolean visible;
+    private char visibletile;
 
-    public Trap(String name, char tile, Position position, int maxhp, int attack, int defense, int range, int exp , int visibility_time, int invisibility_time, boolean visible) {
-        super(name, tile, position, maxhp, attack, defense, range, exp);
+    public Trap(String name, char tile, Position position, int maxhp, int attack, int defense,  int exp , int visibility_time, int invisibility_time, boolean visible) {
+        super(name, tile, position, maxhp, attack, defense, 2, exp);
         this.visibility_time = visibility_time;
         this.invisibility_time = invisibility_time;
         this.ticks_cnt = 0;
         this.visible = visible;
+        visibletile = tile;
     }
 
     public int getVisibility_time() {
@@ -52,17 +55,27 @@ public class Trap extends Enemy{
         this.visibility_time = visibility_time;
     }
 
-    /*
-    public void tick() {
+    public void state() {
         visible = (ticks_cnt < visibility_time);
         if (ticks_cnt == (visibility_time + invisibility_time))
             ticks_cnt = 0;
         else
             ticks_cnt++;
-        Player player = SelectPlayer();
-        if (player == null) return;
-        attack(player);
+
     }
-     */
+
+    public char getVisibletile(){
+        return visibletile;
+    }
+
+    public void setCurrTile(char c){
+        setTile(c);
+    }
+
+    @Override
+    public void Move(Level level){
+        level.TrapAction(this);
+    }
+
 
 }

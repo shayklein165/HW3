@@ -1,5 +1,6 @@
 package game.tiles.units.enemies;
 
+import game.Level;
 import game.utils.Position;
 
 public class Monster extends Enemy {
@@ -11,12 +12,19 @@ public class Monster extends Enemy {
     }
 
 
+
+
     public int getRange() {
         return range;
     }
 
     public void setRange(int range) {
         this.range = range;
+    }
+
+    @Override
+    public void Move(Level level){
+        level.MonsterMove(this);
     }
 
 

@@ -42,9 +42,9 @@ public class TileFactory {
         map.put('M', (Position position)-> new Monster("The Mountain", 'M', position, 1000, 60, 25, 6, 500));
         map.put('C', (Position position)-> new Monster("Queen Cersei", 'C', position, 100, 10, 10, 1, 1000));
         map.put('K', (Position position)-> new Monster("Night's King", 'K', position, 5000, 300, 150, 8, 5000));
-        map.put('B', (Position position)-> new Trap(" Bonus Trap", 'B', position, 1, 1, 1, 2, 250, 1, 5, false));
-        map.put('Q', (Position position)->new Trap(" Queen's Trap", 'Q', position, 250, 50, 10, 2, 100, 3, 7, false));
-        map.put('D', (Position position)->new Trap(" Death Trap", 'D', position, 500, 100, 20, 2, 250, 1, 10, false));
+        map.put('B', (Position position)-> new Trap(" Bonus Trap", 'B', position, 1, 1, 1,  250, 1, 5, false));
+        map.put('Q', (Position position)->new Trap(" Queen's Trap", 'Q', position, 250, 50, 10, 100, 3, 7, false));
+        map.put('D', (Position position)->new Trap(" Death Trap", 'D', position, 500, 100, 20,  250, 1, 10, false));
         return map;
     }
 
