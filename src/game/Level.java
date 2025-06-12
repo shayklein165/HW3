@@ -94,6 +94,7 @@ public class Level {
         for(Enemy e: enemies){
             if(e.getPosition().equals(tile.getPosition())){
                 attack(arrayGameBoard.getPlayer(), e);
+                break;
             }
         }
         boolean isEmpty = tile.accept(arrayGameBoard.getPlayer());
@@ -247,6 +248,7 @@ public class Level {
 
     public void start(InputProvider input) {
         this.inputProvider = input;
+        this.arrayGameBoard.getPlayer().setPosition(this.arrayGameBoard.getInitialPlayerPosition());
     }
 
     public void WarriorAttack(Warrior warrior){

@@ -18,6 +18,7 @@ public class ArrayGameBoard {
     Player player;
     List<Enemy> enemies;
     TileFactory tileFactory = new TileFactory();
+    Position initialPlayerPosition;
 
     public ArrayGameBoard(char[][] charBoard, Player player) {
         this.board = new Tile[charBoard.length][charBoard[0].length];
@@ -27,11 +28,21 @@ public class ArrayGameBoard {
                 Position position = new Position(i, j);
                 this.board[i][j] = tileFactory.CreateTile(charBoard[i][j], position, player);
 
-                if (charBoard[i][j] == '@')
+                if (charBoard[i][j] == '@') {
                     this.player.setPosition(new Position(i, j));
+                    initialPlayerPosition = new Position(i, j);
+                }
             }
         }
         enemies = tileFactory.getEnemies();
+    }
+
+    public Position getInitialPlayerPosition() {
+        return initialPlayerPosition;
+    }
+
+    public void setInitialPlayerPosition(Position initialPlayerPosition) {
+        this.initialPlayerPosition = initialPlayerPosition;
     }
 
     public Tile[][] getBoard() {
