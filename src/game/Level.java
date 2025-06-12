@@ -44,14 +44,23 @@ public class Level {
 
     // here, the monster is the attacker. returns true if the player is dead. otherwise, false.
     public boolean attack(Enemy enemy, Player player) {
+        messageCallback.send(String.format("%s engaged in combat with %s.", enemy.getName(), player.getName()));
+        messageCallback.send(enemy.describe());
+        messageCallback.send(player.describe());
+
         int attackRoll = (int) (Math.random() * enemy.getAttack());
         int defenseRoll = (int) (Math.random() * player.getDefense());
         int damage = Math.max(attackRoll - defenseRoll, 0);
+
+        messageCallback.send(String.format("%s rolled %d attack points.", enemy.getName(), attackRoll));
+        messageCallback.send(String.format("%s rolled %d defense points.", player.getName(), defenseRoll));
+        messageCallback.send(String.format("%s dealt %d damage to %s.", enemy.getName(), damage, player.getName()));
 
         player.reciveDamage(damage);
 
         if(!player.isAlive()){
             arrayGameBoard.KillPlayer();
+            messageCallback.send(String.format("%s died. Game Over.", player.getName()));
             return true;
         }
         return false;
@@ -60,15 +69,27 @@ public class Level {
 
     // here, the player is the attacker. returns true if the enemy is dead. otherwise, false.
     public boolean attack(Player player, Enemy enemy){
+        messageCallback.send(String.format("%s engaged in combat with %s.", player.getName(), enemy.getName()));
+        messageCallback.send(player.describe());
+        messageCallback.send(enemy.describe());
+
         int attackRoll = (int) (Math.random() * player.getAttack());
         int defenseRoll = (int) (Math.random() * enemy.getDefense());
         int damage = Math.max(attackRoll - defenseRoll,0);
+
+        messageCallback.send(String.format("%s rolled %d attack points.", player.getName(), attackRoll));
+        messageCallback.send(String.format("%s rolled %d defense points.", enemy.getName(), defenseRoll));
+        messageCallback.send(String.format("%s dealt %d damage to %s.", player.getName(), damage, enemy.getName()));
 
         enemy.reciveDamage(damage);
         boolean b = enemy.isAlive();
         if (!b){
             arrayGameBoard.RemoveEnemy(enemy);
             arrayGameBoard.setTile(new Empty(enemy.getPosition()), enemy.getPosition());
+            player.gainExperience(enemy.getExperience());
+
+            messageCallback.send(String.format("%s died.", enemy.getName()));
+            messageCallback.send(String.format("%s gained %d experience.", player.getName(), enemy.getExperience()));
         }
         return (!b);
     }
@@ -242,18 +263,26 @@ public class Level {
     public boolean processRound()
     {
         gameDisplay();
+        arrayGameBoard.getPlayer().describe();
         char move = inputProvider.inputQuery();
-        if (this.moves.contains(move))
-        {
+        if (this.moves.contains(move)) {
             playerMove(move);
-
-            List<Enemy> enemies= arrayGameBoard.getEnemies();
-            for(Enemy e: enemies)
-            {
-                EnemyMove(e);
-            }
         }
+        else if (move == 'q') {
+            castAbility(arrayGameBoard.getPlayer());
+        }
+
+        List<Enemy> enemies= arrayGameBoard.getEnemies();
+        for(Enemy e: enemies)
+        {
+            EnemyMove(e);
+        }
+        arrayGameBoard.getPlayer().gameTick();
         return arrayGameBoard.getPlayer().isAlive();
+    }
+
+    private void castAbility(Player player) {
+        player.castAbility(this);
     }
 
     private void EnemyMove(Enemy e) {

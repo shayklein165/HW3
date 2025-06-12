@@ -1,4 +1,5 @@
 package game.tiles.units.player;
+import game.Level;
 import game.utils.Position;
 import jdk.jshell.spi.ExecutionControl;
 
@@ -45,5 +46,10 @@ public class Rogue extends Player{
         description += getExperience() + "/" + (50*getLevel()) + "          ";
         description += getCurrentEnergy() + "/" + "100" + "          ";
         return description;
+    }
+
+    @Override
+    public void castAbility(Level level){
+        level.RogueAttack(this);
     }
 }

@@ -1,5 +1,9 @@
 package game.tiles.units.player;
 
+import game.Level;
+import game.callbacks.MessageCallback;
+import game.callbacks.PlayerDeathCallback;
+import game.callbacks.PositionChangedCallback;
 import game.tiles.Tile;
 import game.tiles.board_components.Empty;
 import game.tiles.board_components.Wall;
@@ -9,6 +13,9 @@ import game.utils.Position;
 public abstract class Player extends Unit {
     private int experience;
     private int level;
+    protected MessageCallback messageCallback;
+    protected PlayerDeathCallback playerDeathCallback;
+    protected PositionChangedCallback positionChangedCallback;
 
     public Player(String name, Position position, int maxhp, int attack, int defense , int range){
         super(name, '@' ,position, maxhp, attack, defense, range);
@@ -16,6 +23,7 @@ public abstract class Player extends Unit {
         this.level = 1;
 
     }
+
 
     public int getExperience() {
         return experience;
@@ -45,7 +53,7 @@ public abstract class Player extends Unit {
     public void gainExperience(int xp) {
         experience += xp;
         while (experience >= 50 * level) {
-            LevelUp();
+            LevelUp(); // need to insert callback.
         }
     }
 
@@ -67,6 +75,7 @@ public abstract class Player extends Unit {
 
         return ""; // to remove the error
     }
+
     @Override
     public boolean accept(Tile tile)
     {
@@ -76,5 +85,5 @@ public abstract class Player extends Unit {
     public abstract void gameTick();
 
 
-
+    public abstract void castAbility(Level level);
 }

@@ -1,4 +1,5 @@
 package game.tiles.units.player;
+import game.Level;
 import game.utils.Position;
 
 public class Warrior extends Player{
@@ -65,5 +66,10 @@ public class Warrior extends Player{
         description += getExperience() + "/" + (50*getLevel()) + "          ";
         description += getRemainingColldown() + "/" + getAbilityCooldown() + "          ";
         return description;
+    }
+
+    @Override
+    public void castAbility(Level level){
+        level.WarriorAttack(this);
     }
 }
