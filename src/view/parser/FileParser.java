@@ -2,6 +2,7 @@ package view.parser;
 
 import game.Level;
 import game.board.ArrayGameBoard;
+import game.callbacks.MessageCallback;
 import game.tiles.units.player.Player;
 
 import java.io.BufferedReader;
@@ -14,10 +15,12 @@ import java.util.List;
 public class FileParser {
     private List<String> lines;
     private Player player;
+    private MessageCallback messageCallback;
 
-    public FileParser(Player player) {
+    public FileParser(Player player, MessageCallback messageCallback) {
         this.player = player;
         lines = new ArrayList<>();
+        this.messageCallback = messageCallback;
     }
 
     public void parseLevel(File file) {
@@ -59,7 +62,7 @@ public class FileParser {
         }
 
         ArrayGameBoard arrayGameBoard = new ArrayGameBoard(board, player);
-        Level level = new Level(arrayGameBoard);
+        Level level = new Level(arrayGameBoard, messageCallback);
         return level;
     }
 

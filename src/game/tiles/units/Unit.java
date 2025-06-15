@@ -60,14 +60,6 @@ public abstract class Unit extends Tile implements Visited, Visitor{
         this.defense = defense;
     }
 
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
     public int getRange() {
         return range;
     }

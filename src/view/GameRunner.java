@@ -27,7 +27,7 @@ public class GameRunner {
         int idx = choosePlayer();
         Player player = tileFactory.listPlayers().get(idx);
 
-        FileParser parser = new FileParser(player);
+        FileParser parser = new FileParser(player, this::send);
         File root = new File(levelsDirectory);
         File[] files = root.listFiles();
         if(files == null || files.length == 0){
@@ -61,16 +61,16 @@ public class GameRunner {
 
     private int choosePlayer(){
         while(true){
-            sendMessage("Select player: ");
+            send("Select player: ");
             List<Player> playerList = tileFactory.listPlayers();
             for(int i=0; i<playerList.size();i++){
-                sendMessage(String.format("%d. %s", i+1, playerList.get(i).describe()));
+                send(String.format("%d. %s", i+1, playerList.get(i).describe()));
             }
 
             try {
                 int selected = Integer.parseInt(scanner.next()) - 1;
                 if (0 <= selected && selected < playerList.size()) {
-                    sendMessage(String.format("You have selected: \n %s", playerList.get(selected).getName()));
+                    send(String.format("You have selected: \n %s", playerList.get(selected).getName()));
                     return selected;
                 }
             }
@@ -80,7 +80,7 @@ public class GameRunner {
         }
     }
 
-    private void sendMessage(String message){
+    private void send(String message){
         System.out.println(message);
     }
 }

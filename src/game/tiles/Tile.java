@@ -1,5 +1,6 @@
 package game.tiles;
 
+import game.callbacks.PositionChanged;
 import game.tiles.board_components.Empty;
 import game.tiles.board_components.Wall;
 import game.tiles.units.Unit;
@@ -10,6 +11,7 @@ import game.utils.Position;
 public abstract class Tile implements Visited, Visitor {
     private Position position;
     private char tile;
+    private PositionChanged listener;
 
     public Tile(Position position, char tile) {
         this.position = position;
@@ -29,7 +31,16 @@ public abstract class Tile implements Visited, Visitor {
     }
 
     public void setPosition(Position position){
+        Position lastposition = this.position;
         this.position = position;
+        listener.call(lastposition, position);
+    }
+
+    public void swapPosition(Tile tile) {
+        Position newPosition = tile.position;
+        Position thisPosition = this.position;
+        this.setPosition(newPosition);
+        tile.setPosition(thisPosition);
     }
 
     @Override
@@ -48,5 +59,9 @@ public abstract class Tile implements Visited, Visitor {
     public abstract boolean visit(Wall wall);
     @Override
     public abstract boolean visit(Empty empty);
+
+    public void setListener(PositionChanged listener){
+        this.listener = listener;
+    }
 
 }

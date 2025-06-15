@@ -1,5 +1,6 @@
 package game.board;
 
+import game.callbacks.PositionChanged;
 import game.tiles.Tile;
 import game.tiles.board_components.Empty;
 import game.tiles.board_components.Wall;
@@ -12,7 +13,7 @@ import game.utils.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrayGameBoard {
+public class ArrayGameBoard implements PositionChanged {
 
     private Tile[][] board;
     Player player;
@@ -27,14 +28,14 @@ public class ArrayGameBoard {
             for (int j = 0; j < charBoard[0].length; j++) {
                 Position position = new Position(i, j);
                 this.board[i][j] = tileFactory.CreateTile(charBoard[i][j], position, player);
-
+                this.board[i][j].setListener(this);
                 if (charBoard[i][j] == '@') {
                     this.player.setPosition(new Position(i, j));
                     initialPlayerPosition = new Position(i, j);
+                    player.setListener(this);
                 }
             }
         }
-        enemies = tileFactory.getEnemies();
     }
 
     public Position getInitialPlayerPosition() {
@@ -65,7 +66,16 @@ public class ArrayGameBoard {
         this.board[position.getX()][position.getY()] = tile;
     }
 
+    public Tile getTile(Position position){
+        return this.board[position.getX()][position.getY()];
+    }
+
     public void KillPlayer() {
         board[player.getPosition().getX()][player.getPosition().getY()].setTile('X');
+    }
+
+    @Override
+    public void call(Position from, Position to) {
+        setTile(getTile(from), to);
     }
 }

@@ -3,7 +3,6 @@ package game.tiles.units.player;
 import game.Level;
 import game.callbacks.MessageCallback;
 import game.callbacks.PlayerDeathCallback;
-import game.callbacks.PositionChangedCallback;
 import game.tiles.Tile;
 import game.tiles.board_components.Empty;
 import game.tiles.board_components.Wall;
@@ -15,7 +14,6 @@ public abstract class Player extends Unit {
     private int level;
     protected MessageCallback messageCallback;
     protected PlayerDeathCallback playerDeathCallback;
-    protected PositionChangedCallback positionChangedCallback;
 
     public Player(String name, Position position, int maxhp, int attack, int defense , int range){
         super(name, '@' ,position, maxhp, attack, defense, range);
@@ -46,6 +44,7 @@ public abstract class Player extends Unit {
         setHp(getMaxHp());
         setAttack(getAttack() + 4 * level);
         setDefense(getDefense() + level);
+
     }
 
 
