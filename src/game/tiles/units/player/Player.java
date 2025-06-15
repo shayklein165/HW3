@@ -44,8 +44,6 @@ public abstract class Player extends Unit {
         setHp(getMaxHp());
         setAttack(getAttack() + 4 * level);
         setDefense(getDefense() + level);
-        this.messageCallback.send(String.format("%s leveled up to level %d! and gained: +%d health, +%d attack, +%d defense", this.getName(), this.level, this.getMaxHp(), this.getAttack(), this.getDefense()));
-
     }
 
 

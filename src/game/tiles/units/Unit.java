@@ -93,8 +93,8 @@ public abstract class Unit extends Tile implements Visited, Visitor{
     }
 
     public boolean InRange(Position position1){
-        double dx = position1.getX() - position.getX();
-        double dy = position1.getY() - position.getY();
+        double dx = position1.getX() - this.getPosition().getX();
+        double dy = position1.getY() - this.getPosition().getY();
         return (range * range >= dx * dx + dy * dy);    }
 
 }

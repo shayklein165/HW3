@@ -83,8 +83,11 @@ public class Level {
         boolean b = enemy.isAlive();
         if (!b){
             arrayGameBoard.RemoveEnemy(enemy);
-            arrayGameBoard.setTile(new Empty(enemy.getPosition()), enemy.getPosition());
+            arrayGameBoard.setTile(new Empty(enemy.getPosition()),enemy.getPosition());
+            arrayGameBoard.getBoard()[enemy.getPosition().getX()][enemy.getPosition().getY()].setListener(arrayGameBoard);
             player.gainExperience(enemy.getExperience());
+            this.messageCallback.send(String.format("%s leveled up to level %d! and gained: +%d health, +%d attack, +%d defense", arrayGameBoard.getPlayer().getName(), arrayGameBoard.getPlayer().getLevel(), arrayGameBoard.getPlayer().getMaxHp(), arrayGameBoard.getPlayer().getAttack(), arrayGameBoard.getPlayer().getDefense()));
+
 
             messageCallback.send(String.format("%s died.", enemy.getName()));
             messageCallback.send(String.format("%s gained %d experience.", player.getName(), enemy.getExperience()));
@@ -245,8 +248,10 @@ public class Level {
     }
 
     public void start(InputProvider input) {
+        this.messageCallback.send("Starting a new Level..");
         this.inputProvider = input;
         this.arrayGameBoard.getPlayer().setPosition(this.arrayGameBoard.getInitialPlayerPosition());
+        this.arrayGameBoard.getPlayer().setListener(arrayGameBoard);
     }
 
     public void WarriorAttack(Warrior warrior){

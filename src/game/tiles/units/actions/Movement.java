@@ -29,6 +29,10 @@ public class Movement {
 
     public void Up(Unit unit){
         Position position = unit.getPosition().up();
+        extracted(unit, position);
+    }
+
+    private void extracted(Unit unit, Position position) {
         unit.swapPosition(arrayGameBoard.getTile(position));
     }
 
