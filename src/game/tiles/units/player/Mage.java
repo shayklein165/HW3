@@ -1,4 +1,5 @@
 package game.tiles.units.player;
+import game.Level;
 import game.tiles.units.Mana;
 import game.utils.Position;
 
@@ -85,6 +86,11 @@ public class Mage extends Player{
         description += getExperience() + "/" + (50*getLevel()) + "          ";
         description += getMana() + "/" + getManaPool() + "          ";
         return description;
+    }
+
+    @Override
+    public void castAbility(Level level){
+        level.MageAttack(this);
     }
 
 }
