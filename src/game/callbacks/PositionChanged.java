@@ -1,7 +1,8 @@
 package game.callbacks;
 
+import game.tiles.Tile;
 import game.utils.Position;
 
 public interface PositionChanged {
-    void call(Position from, Position to);
+    void call(Tile tile, Position from, Position to);
 }

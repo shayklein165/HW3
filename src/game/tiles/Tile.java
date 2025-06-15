@@ -33,7 +33,7 @@ public abstract class Tile implements Visited, Visitor {
     public void setPosition(Position position){
         Position lastposition = this.position;
         this.position = position;
-        listener.call(lastposition, position);
+        listener.call(this, lastposition, position);
     }
 
     public void swapPosition(Tile tile) {
@@ -62,6 +62,10 @@ public abstract class Tile implements Visited, Visitor {
 
     public void setListener(PositionChanged listener){
         this.listener = listener;
+    }
+
+    public void InitPosition(){
+        this.position = new Position(0, 0);
     }
 
 }
