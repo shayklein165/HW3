@@ -29,10 +29,12 @@ public class ArrayGameBoard implements PositionChanged {
                 Position position = new Position(i, j);
                 this.board[i][j] = tileFactory.CreateTile(charBoard[i][j], position, player);
                 this.board[i][j].setListener(this);
+                this.board[i][j].setPosition(position);
                 if (charBoard[i][j] == '@') {
+                    this.player.setListener(this);
                     this.player.setPosition(new Position(i, j));
                     initialPlayerPosition = new Position(i, j);
-                    player.setListener(this);
+
                 }
             }
         }
