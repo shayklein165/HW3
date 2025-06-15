@@ -259,6 +259,7 @@ public class Level {
         Enemy e = list.get(i);
         e.reciveDamage(e.getHp() - warrior.getMaxHp()/10);
         if (!e.isAlive()) {
+            messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), warrior.getName() ,e.getExperience()));
             arrayGameBoard.RemoveEnemy(e);
             arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
         }
@@ -279,6 +280,7 @@ public class Level {
             Enemy e = list.get(i);
             e.reciveDamage(e.getHp() - mage.getSpellpower());
             if (!e.isAlive()) {
+                messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), mage.getName() ,e.getExperience()));
                 arrayGameBoard.RemoveEnemy(e);
                 arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
             }
@@ -291,13 +293,14 @@ public class Level {
             return;
         rogue.setCurrentEnergy(rogue.getCurrentEnergy()- rogue.getEnergycost());
         List<Enemy> EnemyInRange = this.SelectEnemyInRange();
-        for (Enemy enemy : EnemyInRange){
-            int defenseRoll = (int) (Math.random() * enemy.getDefense());
+        for (Enemy e : EnemyInRange){
+            int defenseRoll = (int) (Math.random() * e.getDefense());
             if (rogue.getAttack() > defenseRoll)
-                enemy.reciveDamage(rogue.getAttack() - defenseRoll);
-            if (!enemy.isAlive()) {
-                arrayGameBoard.RemoveEnemy(enemy);
-                arrayGameBoard.setTile(new Empty(enemy.getPosition()), enemy.getPosition());
+                e.reciveDamage(rogue.getAttack() - defenseRoll);
+            if (!e.isAlive()) {
+                messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), rogue.getName() ,e.getExperience()));
+                arrayGameBoard.RemoveEnemy(e);
+                arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
             }
         }
     }
