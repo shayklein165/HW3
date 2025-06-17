@@ -8,6 +8,7 @@ public class Mage extends Player{
     private int spellpower;
     private int hitscnt;
     private Mana mana;
+    private String spellname;
 
 
     public Mage(String name, Position position, int maxhp, int attack, int defense, int manaPool , int costmana, int spellpower, int hitscnt, int range) {
@@ -15,7 +16,8 @@ public class Mage extends Player{
         this.costmana = costmana;
         this.spellpower = spellpower;
         this.hitscnt = hitscnt;
-        this.mana = new Mana(manaPool);
+        this.mana = new Mana(manaPool/4, manaPool);
+        this.spellname = "Blizzard";
     }
 
     public int getCostmana()
@@ -79,12 +81,13 @@ public class Mage extends Player{
     public String describe(){
         String description = "";
         description += getName() + "          ";
-        description += getHp() + "/" + getMaxHp() + "          ";
-        description += getAttack() + "          ";
-        description += getDefense() + "          ";
-        description += getLevel() + "          ";
-        description += getExperience() + "/" + (50*getLevel()) + "          ";
-        description += getMana() + "/" + getManaPool() + "          ";
+        description += "Health: " + getHp() + "/" + getMaxHp() + "          ";
+        description += "Attack: " + getAttack() + "          ";
+        description += "Defense: " + getDefense() + "          ";
+        description += "Level: " + getLevel() + "          ";
+        description += "Experience: " + getExperience() + "/" + (50*getLevel()) + "          ";
+        description += "Mana: " + getMana() + "/" + getManaPool() + "          ";
+        description += "Spellpower: " + getSpellpower() + "          ";
         return description;
     }
 
@@ -93,4 +96,7 @@ public class Mage extends Player{
         level.MageAttack(this);
     }
 
+    public String getSpellName() {
+        return spellname;
+    }
 }

@@ -7,12 +7,13 @@ public class Rogue extends Player{
 
     private int energycost;
     private int currentEnergy;
-
+    private String spellname;
 
     public Rogue(String name, Position position, int maxhp, int attack, int defense, int cost) {
         super(name, position, maxhp, attack, defense, 2);
         this.energycost = cost;
         this.currentEnergy = 100;
+        this.spellname = "Fan of Knives";
     }
 
     @Override
@@ -39,17 +40,20 @@ public class Rogue extends Player{
     public String describe(){
         String description = "";
         description += getName() + "          ";
-        description += getHp() + "/" + getMaxHp() + "          ";
-        description += getAttack() + "          ";
-        description += getDefense() + "          ";
-        description += getLevel() + "          ";
-        description += getExperience() + "/" + (50*getLevel()) + "          ";
-        description += getCurrentEnergy() + "/" + "100" + "          ";
+        description += "Health: " + getHp() + "/" + getMaxHp() + "          ";
+        description += "Attack: " + getAttack() + "          ";
+        description += "Defense: " + getDefense() + "          ";
+        description += "Level: " + getLevel() + "          ";
+        description += "Experience: " + getExperience() + "/" + (50*getLevel()) + "          ";
+        description += "Energy: " + getCurrentEnergy() + "/" + "100" + "          ";
         return description;
     }
+
 
     @Override
     public void castAbility(Level level){
         level.RogueAttack(this);
     }
+
+    public String getSpellName(){return this.spellname;}
 }

@@ -78,5 +78,16 @@ public class Trap extends Enemy{
         level.TrapAction(this);
     }
 
+    @Override
+    public String describe() {
+        String description = "";
+        description += getName() + "          ";
+        description += "Health: " + getHp() + "/" + getMaxHp() + "          ";
+        description += "Attack: " + getAttack() + "          ";
+        description += "Defense: " + getDefense() + "          ";
+        description += "Experience value: " + getExperience() + "          ";
+        return description;
+    }
+
 
 }

@@ -4,8 +4,8 @@ public class Mana {
     private int currmana;
     private int maxMana;
 
-    public Mana(int maxMana) {
-        this.currmana = maxMana;
+    public Mana(int currmana, int maxMana) {
+        this.currmana = currmana;
         this.maxMana = maxMana;
     }
 

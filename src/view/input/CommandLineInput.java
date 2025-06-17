@@ -26,14 +26,11 @@ public class CommandLineInput implements InputProvider {
 
     public char inputQuery() {
         while (true) {
-            System.out.println("Enter move (w/a/s/d/e/q): ");
             String input = scanner.nextLine().trim().toLowerCase();
 
             if (input.length() == 1 && validInputs.contains(input.charAt(0))) {
                 return input.charAt(0);
             }
-
-            System.out.println("Invalid input. Please enter w, a, s, d, e or q.");
         }
     }
 }

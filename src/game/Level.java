@@ -220,8 +220,6 @@ public class Level {
 
     public boolean processRound()
     {
-        gameDisplay();
-        arrayGameBoard.getPlayer().describe();
         char move = inputProvider.inputQuery();
         if (movement.Contains(move)) {
             playerMove(move);
@@ -236,10 +234,13 @@ public class Level {
             EnemyMove(e);
         }
         arrayGameBoard.getPlayer().gameTick();
+        gameDisplay();
+        messageCallback.send(arrayGameBoard.getPlayer().describe());
         return arrayGameBoard.getPlayer().isAlive();
     }
 
     private void castAbility(Player player) {
+        messageCallback.send(player.getName() + " cast " + player.getSpellName());
         player.castAbility(this);
     }
 
@@ -248,10 +249,11 @@ public class Level {
     }
 
     public void start(InputProvider input) {
-        this.messageCallback.send("Starting a new Level..");
         this.inputProvider = input;
         this.arrayGameBoard.getPlayer().setPosition(this.arrayGameBoard.getInitialPlayerPosition());
         this.arrayGameBoard.getPlayer().setListener(arrayGameBoard);
+        gameDisplay();
+        messageCallback.send(arrayGameBoard.getPlayer().describe());
     }
 
     public void WarriorAttack(Warrior warrior){
