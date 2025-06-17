@@ -30,8 +30,8 @@ public class Level {
 
     public void start(InputProvider input) {
         this.inputProvider = input;
-        this.arrayGameBoard.getPlayer().setPosition(this.arrayGameBoard.getInitialPlayerPosition());
         this.arrayGameBoard.getPlayer().setListener(arrayGameBoard);
+        this.arrayGameBoard.getPlayer().setPosition(this.arrayGameBoard.getInitialPlayerPosition());
     }
 
     public void setArrayGameBoard(ArrayGameBoard arrayGameBoard) {

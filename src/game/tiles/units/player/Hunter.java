@@ -66,7 +66,7 @@ public class Hunter extends Player {
     public String canCastability() {
         if (arrowscnt > 0)
             return "";
-        return(String.format("%s tried to shoot an arrow but there were no enemies in range. %s", getName()));
+        return(String.format("%s tried to shoot an arrow but there were no enemies in range.", getName()));
     }
 
     public int getArrowscnt() {return arrowscnt;}
