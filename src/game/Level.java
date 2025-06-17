@@ -154,11 +154,13 @@ public class Level {
     }
 
     public void playerMove(char action){
+        Player player = arrayGameBoard.getPlayer();
+
         Position newPosition = getNewPosition(arrayGameBoard.getPlayer().getPosition(), action);
         if(!inBounds(newPosition)){
-            return; // need to insert callback
+            messageCallback.send(String.format("%s can't move in direction %c.", player.getName(), action));
         }
-
+        player.gameTick();
         Tile tile = arrayGameBoard.getBoard()[newPosition.getX()][newPosition.getY()];
         List<Enemy> enemies = arrayGameBoard.getEnemies();
         for(Enemy e: enemies){
@@ -258,7 +260,7 @@ public class Level {
 
     public void WarriorAttack(Warrior warrior){
         if (!warrior.canCastAbility())
-            return;
+            messageCallback.send(String.format("%s can't cast ability", warrior.getName()));
         Random rnd = new Random();
         int i = 0;
         List<Enemy> list = SelectEnemyInRange();
@@ -276,13 +278,13 @@ public class Level {
 
     public void MageAttack(Mage mage){
         if (!mage.canCastabilityCast())
-            return;
+            messageCallback.send(String.format("%s can't cast ability", mage.getName()));
         Random rnd = new Random();
         int i = 0;
         List<Enemy> list = SelectEnemyInRange();
         mage.setMana(mage.getMana() - mage.getCostmana());
         int hits = 0;
-        while (hits < mage.getHitscnt()) { // need to implement the check if any enemy exist in rang
+        while (hits < mage.getHitscnt()) {
             i = rnd.nextInt(list.size());
             Enemy e = list.get(i);
             e.reciveDamage(e.getHp() - mage.getSpellpower());
@@ -297,7 +299,7 @@ public class Level {
 
     public void RogueAttack(Rogue rogue){
         if(!rogue.CanCastAbility())
-            return;
+            messageCallback.send(String.format("%s can't cast ability", rogue.getName()));
         rogue.setCurrentEnergy(rogue.getCurrentEnergy()- rogue.getEnergycost());
         List<Enemy> EnemyInRange = this.SelectEnemyInRange();
         for (Enemy e : EnemyInRange){

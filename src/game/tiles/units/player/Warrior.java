@@ -39,8 +39,8 @@ public class Warrior extends Player{
     }
 
 
-    public void WlevelUp(){
-        this.LevelUp();
+    public void LevelUp(){
+        super.LevelUp();
         this.remainingCooldown = 0;
         this.setMaxHp(this.getMaxHp()+5*this.getLevel());
         this.setAttack(this.getAttack()+2*this.getLevel());

@@ -55,7 +55,7 @@ public class Mage extends Player{
     }
 
     public void LeveUp(){
-        LevelUp();
+        super.LevelUp();
         setManaPool(getManaPool() + (25 * getLevel()));
         int currmana = getManaPool();
         currmana = Math.min(currmana, getMana() + (currmana/4));

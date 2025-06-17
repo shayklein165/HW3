@@ -23,8 +23,8 @@ public class Rogue extends Player{
     public int getEnergycost() {return energycost;}
     public void setEnergycost(int cost) {this.energycost = cost;}
 
-    public void OnLevelUp(){
-        LevelUp();
+    public void LevelUp(){
+        super.LevelUp();
         currentEnergy = 100;
         setAttack(getAttack()+3*getLevel());
     }
