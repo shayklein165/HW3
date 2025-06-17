@@ -235,9 +235,9 @@ public class Level {
         else if (move == 'q') {
             if(!arrayGameBoard.getPlayer().canCastability()) {
                 messageCallback.send(String.format("%s can't cast ability", arrayGameBoard.getPlayer().getName()));
-                return true;
             }
-            castAbility(arrayGameBoard.getPlayer());
+            else
+                castAbility(arrayGameBoard.getPlayer());
         }
 
         List<Enemy> enemies= arrayGameBoard.getEnemies();
