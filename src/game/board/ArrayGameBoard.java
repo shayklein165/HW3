@@ -38,8 +38,6 @@ public class ArrayGameBoard implements PositionChanged {
                     this.board[i][j].setListener(this);
                     this.board[i][j].setPosition(position);
                 }
-
-
             }
         }
         enemies = tileFactory.getEnemies();
@@ -83,6 +81,6 @@ public class ArrayGameBoard implements PositionChanged {
 
     @Override
     public void call(Tile tile, Position oldPos, Position newPos) {
-        board[newPos.getY()][newPos.getX()] = tile;
+        board[newPos.getX()][newPos.getY()] = tile;
     }
 }

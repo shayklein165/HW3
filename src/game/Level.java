@@ -31,6 +31,11 @@ public class Level {
         this.messageCallback = messageCallback;
     }
 
+    public void start(InputProvider input) {
+        this.inputProvider = input;
+        arrayGameBoard.getPlayer().setPosition(arrayGameBoard.getInitialPlayerPosition());
+    }
+
     public void setArrayGameBoard(ArrayGameBoard arrayGameBoard) {
         this.arrayGameBoard = arrayGameBoard;
     }
@@ -244,10 +249,7 @@ public class Level {
         e.Move(this);
     }
 
-    public void start(InputProvider input) {
-        this.inputProvider = input;
-        this.arrayGameBoard.getPlayer().setPosition(this.arrayGameBoard.getInitialPlayerPosition());
-    }
+
 
     public void WarriorAttack(Warrior warrior){
         if (!warrior.canCastAbility())
