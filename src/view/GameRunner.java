@@ -53,6 +53,7 @@ public class GameRunner {
                     return;
                 }
             }
+            System.out.println("Level over.");
         }
         System.out.println("You won!");
     }
