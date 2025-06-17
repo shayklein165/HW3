@@ -229,8 +229,7 @@ public class Level {
 
     public boolean processRound()
     {
-        gameDisplay();
-        arrayGameBoard.getPlayer().describe();
+        messageCallback.send(arrayGameBoard.getPlayer().describe());
         char move = inputProvider.inputQuery();
         if (movement.Contains(move)) {
             playerMove(move);
@@ -245,17 +244,18 @@ public class Level {
             EnemyMove(e);
         }
         arrayGameBoard.getPlayer().gameTick();
+        gameDisplay();
         return arrayGameBoard.getPlayer().isAlive();
     }
 
     private void castAbility(Player player) {
+        messageCallback.send(player.getName() + " cast " + player.getSpellName());
         player.castAbility(this);
     }
 
     private void EnemyMove(Enemy e) {
         e.Move(this);
     }
-
 
 
     public void WarriorAttack(Warrior warrior){

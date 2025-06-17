@@ -6,11 +6,13 @@ public class Warrior extends Player{
     private int damage;
     private int abilityCooldown;
     private int remainingCooldown;
+    private String spellname;
 
     public Warrior(String name, Position position, int maxhp, int attack, int defense, int abilityCooldown) {
         super(name, position, maxhp, attack, defense, 3);
         this.abilityCooldown = abilityCooldown;
         this.remainingCooldown = 0;
+        this.spellname = "Avenger’s Shield";
     }
 
 
@@ -59,12 +61,12 @@ public class Warrior extends Player{
     public String describe(){
         String description = "";
         description += getName() + "          ";
-        description += getHp() + "/" + getMaxHp() + "          ";
-        description += getAttack() + "          ";
-        description += getDefense() + "          ";
-        description += getLevel() + "          ";
-        description += getExperience() + "/" + (50*getLevel()) + "          ";
-        description += getRemainingColldown() + "/" + getAbilityCooldown() + "          ";
+        description += "Health: " + getHp() + "/" + getMaxHp() + "          ";
+        description += "Attack: " + getAttack() + "          ";
+        description += "Defense: " + getDefense() + "          ";
+        description += "Level: " + getLevel() + "          ";
+        description += "Experience: " + getExperience() + "/" + (50*getLevel()) + "          ";
+        description += "Cooldown: " +getRemainingColldown() + "/" + getAbilityCooldown() + "          ";
         return description;
     }
 
@@ -72,4 +74,6 @@ public class Warrior extends Player{
     public void castAbility(Level level){
         level.WarriorAttack(this);
     }
+
+    public String getSpellName(){return this.spellname;}
 }

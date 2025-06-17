@@ -58,9 +58,9 @@ public class TileFactory {
 
     private Map<String, Function<Position, Player>> InitPlayer(){
         Map<String, Function<Position, Player>> map = new HashMap<>();
-        map.put("Jon Snow", (Position position)-> new Warrior("Jon Snow", position, 300, 40, 4, 3));
+        map.put("Jon Snow", (Position position)-> new Warrior("Jon Snow", position, 300, 30, 4, 3));
         map.put("The Hound", (Position position)-> new Warrior("The Hound", position, 400, 20, 6, 5));
-        map.put("Melisandre", (Position position)-> new Mage("Melisandre", position, 400, 20, 6, 5, 30, 15, 5, 6));
+        map.put("Melisandre", (Position position)-> new Mage("Melisandre", position, 100, 5, 1, 300, 30, 15, 5, 6));
         map.put("Thoros of Myr", (Position position)-> new Mage("Thoros of Myr", position, 250, 25, 4, 150, 20, 20, 3, 4));
         map.put("Arya Stark", (Position position)-> new Rogue("Arya Stark", position, 150, 40, 2, 20));
         map.put("Bronn", (Position position)-> new Rogue("Bronn", position, 250, 35, 3, 50));

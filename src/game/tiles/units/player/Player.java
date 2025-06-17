@@ -66,9 +66,7 @@ public abstract class Player extends Unit {
         return getHp() > 0;
     }
 
-    public String describe(){
-        return ""; // to remove the error
-    }
+    public abstract String describe();
 
     @Override
     public boolean accept(Tile tile)
@@ -80,4 +78,6 @@ public abstract class Player extends Unit {
 
 
     public abstract void castAbility(Level level);
+
+    public abstract String getSpellName();
 }

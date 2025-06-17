@@ -49,8 +49,5 @@ public abstract class Enemy extends Unit {
 
     public abstract void Move(Level level);
 
-    public String describe() {
-        // need to implement
-        return "";
-    }
+    public abstract String describe();
 }

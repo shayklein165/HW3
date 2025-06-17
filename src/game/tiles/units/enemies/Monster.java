@@ -27,7 +27,17 @@ public class Monster extends Enemy {
         level.MonsterMove(this);
     }
 
-
+    @Override
+    public String describe() {
+        String description = "";
+        description += getName() + "          ";
+        description += "Health: " + getHp() + "/" + getMaxHp() + "          ";
+        description += "Attack: " + getAttack() + "          ";
+        description += "Defense: " + getDefense() + "          ";
+        description += "Experience value: " + getExperience() + "          ";
+        description += "Vision range: " + getRange() + "          ";
+        return description;
+    }
 
 
 }
