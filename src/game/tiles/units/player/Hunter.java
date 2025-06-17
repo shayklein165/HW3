@@ -46,10 +46,16 @@ public class Hunter extends Player {
 
     @Override
     public void castAbility(Level level) {
-
+        arrowscnt--;
+        level.HunterAttack(this);
     }
 
     public String getSpellName(){return this.spellname;}
 
 
+    public boolean canCastability() {
+        if (arrowscnt > 0)
+            return true;
+        return false;
+    }
 }

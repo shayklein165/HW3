@@ -6,10 +6,7 @@ import game.tiles.board_components.Wall;
 import game.tiles.units.enemies.Enemy;
 import game.tiles.units.enemies.Monster;
 import game.tiles.units.enemies.Trap;
-import game.tiles.units.player.Mage;
-import game.tiles.units.player.Player;
-import game.tiles.units.player.Rogue;
-import game.tiles.units.player.Warrior;
+import game.tiles.units.player.*;
 import game.utils.Position;
 
 import java.util.ArrayList;
@@ -64,6 +61,7 @@ public class TileFactory {
         map.put("Thoros of Myr", (Position position)-> new Mage("Thoros of Myr", position, 250, 25, 4, 150, 20, 20, 3, 4));
         map.put("Arya Stark", (Position position)-> new Rogue("Arya Stark", position, 150, 40, 2, 20));
         map.put("Bronn", (Position position)-> new Rogue("Bronn", position, 250, 35, 3, 50));
+        map.put("Ygritte", (Position position)-> new Hunter("Ygritte", position, 220, 30, 2, 6));
         return map;
     }
 
@@ -153,6 +151,7 @@ public class TileFactory {
         list.add(players.get("Thoros of Myr").apply(new Position(0,0)));
         list.add(players.get("Arya Stark").apply(new Position(0,0)));
         list.add(players.get("Bronn").apply(new Position(0,0)));
+        list.add(players.get("Ygritte").apply(new Position(0,0)));
         return list;
     }
 

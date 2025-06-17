@@ -54,7 +54,7 @@ public class Warrior extends Player{
     }
 
 
-    public boolean canCastAbility(){
+    public boolean canCastability(){
         return this.remainingCooldown <= 0;
     }
 
@@ -80,6 +80,8 @@ public class Warrior extends Player{
 
     @Override
     public void castAbility(Level level){
+        setHp(Math.min(getHp() + (10 * getDefense()), getMaxHp()));
+        setRemainingColldown(getAbilityCooldown());
         level.WarriorAttack(this);
     }
 

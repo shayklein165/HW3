@@ -8,10 +8,7 @@ import game.tiles.units.actions.Movement;
 import game.tiles.units.enemies.Enemy;
 import game.tiles.units.enemies.Monster;
 import game.tiles.units.enemies.Trap;
-import game.tiles.units.player.Mage;
-import game.tiles.units.player.Player;
-import game.tiles.units.player.Rogue;
-import game.tiles.units.player.Warrior;
+import game.tiles.units.player.*;
 import game.utils.Position;
 import view.input.InputProvider;
 
@@ -236,6 +233,8 @@ public class Level {
             playerMove(move);
         }
         else if (move == 'q') {
+            if(!arrayGameBoard.getPlayer().canCastability())
+                messageCallback.send(String.format("%s can't cast ability", arrayGameBoard.getPlayer().getName()));
             castAbility(arrayGameBoard.getPlayer());
         }
 
@@ -259,8 +258,6 @@ public class Level {
 
 
     public void WarriorAttack(Warrior warrior){
-        if (!warrior.canCastAbility())
-            messageCallback.send(String.format("%s can't cast ability", warrior.getName()));
         Random rnd = new Random();
         int i = 0;
         List<Enemy> list = SelectEnemyInRange();
@@ -268,29 +265,26 @@ public class Level {
         Enemy e = list.get(i);
         e.reciveDamage(e.getHp() - warrior.getMaxHp()/10);
         if (!e.isAlive()) {
-            messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), warrior.getName() ,e.getExperience()));
+            messageCallback.send(String.format("%s died %s gained %d experience", warrior.getName(), e.getName() ,e.getExperience()));
             warrior.gainExperience(e.getExperience());
             arrayGameBoard.RemoveEnemy(e);
             arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
         }
-        warrior.setHp(Math.min(warrior.getHp() + (10 * warrior.getDefense()), warrior.getMaxHp()));
-        warrior.setRemainingColldown(warrior.getAbilityCooldown());
+
     }
 
     public void MageAttack(Mage mage){
-        if (!mage.canCastabilityCast())
-            messageCallback.send(String.format("%s can't cast ability", mage.getName()));
         Random rnd = new Random();
         int i = 0;
         List<Enemy> list = SelectEnemyInRange();
-        mage.setMana(mage.getMana() - mage.getCostmana());
+
         int hits = 0;
         while (hits < mage.getHitscnt()) {
             i = rnd.nextInt(list.size());
             Enemy e = list.get(i);
             e.reciveDamage(e.getHp() - mage.getSpellpower());
             if (!e.isAlive()) {
-                messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), mage.getName() ,e.getExperience()));
+                messageCallback.send(String.format("%s died %s gained %d experience", mage.getName(), e.getName() ,e.getExperience()));
                 mage.gainExperience(e.getExperience());
                 arrayGameBoard.RemoveEnemy(e);
                 arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
@@ -300,16 +294,13 @@ public class Level {
     }
 
     public void RogueAttack(Rogue rogue){
-        if(!rogue.CanCastAbility())
-            messageCallback.send(String.format("%s can't cast ability", rogue.getName()));
-        rogue.setCurrentEnergy(rogue.getCurrentEnergy()- rogue.getEnergycost());
         List<Enemy> EnemyInRange = this.SelectEnemyInRange();
         for (Enemy e : EnemyInRange){
             int defenseRoll = (int) (Math.random() * e.getDefense());
             if (rogue.getAttack() > defenseRoll)
                 e.reciveDamage(rogue.getAttack() - defenseRoll);
             if (!e.isAlive()) {
-                messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), rogue.getName() ,e.getExperience()));
+                messageCallback.send(String.format("%s died %s gained %d experience", rogue.getName(), e.getName() ,e.getExperience()));
                 rogue.gainExperience(e.getExperience());
                 arrayGameBoard.RemoveEnemy(e);
                 arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
@@ -318,4 +309,24 @@ public class Level {
     }
 
 
+    public void HunterAttack(Hunter hunter) {
+        List<Enemy> list = SelectEnemyInRange();
+        Enemy closeste = list.getFirst();
+        double range = hunter.getPosition().Range(closeste.getPosition());
+        for (Enemy e : list) {
+            if (e.getPosition().Range(hunter.getPosition()) < range) {
+                closeste = e;
+                range = e.getPosition().Range(hunter.getPosition());
+            }
+        }
+        int defenseRoll = (int) (Math.random() * closeste.getDefense());
+        if (hunter.getAttack() > defenseRoll)
+            closeste.reciveDamage(hunter.getAttack() - defenseRoll);
+        if (!closeste.isAlive()) {
+            messageCallback.send(String.format("%s died %s gained %d experience", hunter.getName(), closeste.getName() ,closeste.getExperience()));
+            hunter.gainExperience(closeste.getExperience());
+            arrayGameBoard.RemoveEnemy(closeste);
+            arrayGameBoard.setTile(new Empty(closeste.getPosition()), closeste.getPosition());
+        }
+    }
 }

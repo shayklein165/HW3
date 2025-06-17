@@ -70,6 +70,8 @@ public abstract class Player extends Unit {
 
     public abstract void castAbility(Level level);
 
+    public abstract boolean canCastability();
+
     public abstract String getSpellName();
 
     public abstract void gainExperience(int xp);

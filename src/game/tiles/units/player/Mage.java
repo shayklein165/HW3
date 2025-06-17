@@ -71,7 +71,7 @@ public class Mage extends Player{
         setMana(currmana);
     }
 
-    public boolean canCastabilityCast(){
+    public boolean canCastability(){
         if (mana.getCurrmana() >= costmana) {
             return true;
         }
@@ -101,6 +101,7 @@ public class Mage extends Player{
 
     @Override
     public void castAbility(Level level){
+        setMana(getMana() - getCostmana());
         level.MageAttack(this);
     }
 

@@ -30,7 +30,7 @@ public class Rogue extends Player{
         setAttack(getAttack()+3*getLevel());
     }
 
-    public boolean CanCastAbility(){
+    public boolean canCastability(){
         if (currentEnergy >= energycost)
             return true;
         return false;
@@ -59,6 +59,7 @@ public class Rogue extends Player{
 
     @Override
     public void castAbility(Level level){
+        currentEnergy-=energycost;
         level.RogueAttack(this);
     }
 
