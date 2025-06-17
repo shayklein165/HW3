@@ -55,17 +55,18 @@ public class Hunter extends Player {
 
     @Override
     public void castAbility(Level level) {
+        String message = (getName() + " fired an arrow at ");
         arrowscnt--;
-        level.HunterAttack(this);
+        level.HunterAttack(this, message);
     }
 
     public String getSpellName(){return this.spellname;}
 
 
-    public boolean canCastability() {
+    public String canCastability() {
         if (arrowscnt > 0)
-            return true;
-        return false;
+            return "";
+        return(String.format("%s tried to shoot an arrow but there were no enemies in range. %s", getName()));
     }
 
     public int getArrowscnt() {return arrowscnt;}

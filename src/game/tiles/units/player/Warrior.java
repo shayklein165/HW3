@@ -18,7 +18,7 @@ public class Warrior extends Player{
 
     @Override
     public void gameTick() {
-        remainingCooldown+=1;
+        remainingCooldown = Math.max(remainingCooldown-1,0);
     }
 
     public int getDamage() {
@@ -54,8 +54,11 @@ public class Warrior extends Player{
     }
 
 
-    public boolean canCastability(){
-        return this.remainingCooldown <= 0;
+    public String canCastability(){
+        if (this.remainingCooldown <= 0){
+            return "";
+        }
+        return(String.format("%s tried to cast %s, but there is a cooldown: %s", getName(), getSpellName(), getRemainingColldown()));
     }
 
     public String describe(){
@@ -80,9 +83,10 @@ public class Warrior extends Player{
 
     @Override
     public void castAbility(Level level){
+        String message = (getName()+" used " + getSpellName()+", healing for " + (10 * getDefense()) + ".");
         setHp(Math.min(getHp() + (10 * getDefense()), getMaxHp()));
         setRemainingColldown(getAbilityCooldown());
-        level.WarriorAttack(this);
+        level.WarriorAttack(this, message);
     }
 
     public String getSpellName(){return this.spellname;}

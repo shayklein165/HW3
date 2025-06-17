@@ -30,11 +30,10 @@ public class Rogue extends Player{
         setAttack(getAttack()+3*getLevel());
     }
 
-    public boolean canCastability(){
+    public String canCastability(){
         if (currentEnergy >= energycost)
-            return true;
-        return false;
-
+            return "";
+        return(String.format("%s tried to cast %s, but there was not enough energy: %s", getName(), getSpellName(), getCurrentEnergy() + "/" + getEnergycost()));
     }
 
     public String describe(){
@@ -59,8 +58,9 @@ public class Rogue extends Player{
 
     @Override
     public void castAbility(Level level){
+        String message = (getName()+" used " + getSpellName()+".");
         currentEnergy-=energycost;
-        level.RogueAttack(this);
+        level.RogueAttack(this, message);
     }
 
     public String getSpellName(){return this.spellname;}

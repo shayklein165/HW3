@@ -26,10 +26,15 @@ public class CommandLineInput implements InputProvider {
 
     public char inputQuery() {
         while (true) {
-            String input = scanner.nextLine().trim().toLowerCase();
+            String input = "";
+            while(input.isEmpty())
+                input = scanner.nextLine().trim().toLowerCase();
 
             if (input.length() == 1 && validInputs.contains(input.charAt(0))) {
                 return input.charAt(0);
+            }
+            else {
+                System.out.println("Invalid input");
             }
         }
     }

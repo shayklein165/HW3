@@ -19,7 +19,6 @@ public class GameRunner {
 
     public GameRunner(){
         scanner = new Scanner(System.in);
-        inputProvider = new CommandLineInput(scanner);
         tileFactory = new TileFactory();
     }
 
@@ -45,6 +44,7 @@ public class GameRunner {
 
     public void start() {
         for(Level currentLevel: levels){
+            inputProvider = new CommandLineInput(scanner);
             currentLevel.start(this.inputProvider);
             while(!currentLevel.won()) {
                 if(!currentLevel.processRound()){

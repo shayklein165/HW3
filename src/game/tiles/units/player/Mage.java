@@ -56,7 +56,8 @@ public class Mage extends Player{
         this.hitscnt = hitscnt;
     }
 
-    public void LeveUp(){
+
+    public void LevelUp(){
         super.LevelUp();
         setManaPool(getManaPool() + (25 * getLevel()));
         int currmana = getManaPool();
@@ -71,11 +72,12 @@ public class Mage extends Player{
         setMana(currmana);
     }
 
-    public boolean canCastability(){
+    // returns an empty string if true.
+    public String canCastability(){
         if (mana.getCurrmana() >= costmana) {
-            return true;
+            return "";
         }
-        return false;
+        return(String.format("%s tried to cast %s, but there was not enough mana: %s", getName(), getSpellName(), getMana() + "/" + getCostmana()));
     }
 
     public String describe(){
@@ -101,8 +103,9 @@ public class Mage extends Player{
 
     @Override
     public void castAbility(Level level){
+        String message = (getName()+" cast " + getSpellName()+".");
         setMana(getMana() - getCostmana());
-        level.MageAttack(this);
+        level.MageAttack(this, message);
     }
 
     public String getSpellName() {
