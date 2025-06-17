@@ -46,15 +46,6 @@ public abstract class Player extends Unit {
         setDefense(getDefense() + level);
     }
 
-
-
-    public void gainExperience(int xp) {
-        experience += xp;
-        while (experience >= 50 * level) {
-            LevelUp(); // need to insert callback.
-        }
-    }
-
     public void reciveDamage(int damage) {
         setHp(getHp() - damage);
         if(getHp() < 0){
@@ -80,4 +71,6 @@ public abstract class Player extends Unit {
     public abstract void castAbility(Level level);
 
     public abstract String getSpellName();
+
+    public abstract void gainExperience(int xp);
 }

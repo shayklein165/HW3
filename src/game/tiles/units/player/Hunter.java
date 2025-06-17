@@ -14,8 +14,17 @@ public class Hunter extends Player {
         tickscnt = 0;
     }
 
+    @Override
+    public void gainExperience(int xp) {
+        setExperience(getExperience() + xp);
+        while (getExperience() >= 50 * getLevel()) {
+            this.LevelUp();
+        }
+    }
+
     public void LevelUp(){
         LevelUp();
+
     }
 
     @Override

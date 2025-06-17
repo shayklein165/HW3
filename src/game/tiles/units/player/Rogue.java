@@ -49,6 +49,13 @@ public class Rogue extends Player{
         return description;
     }
 
+    @Override
+    public void gainExperience(int xp) {
+        setExperience(getExperience() + xp);
+        while (getExperience() >= 50 * getLevel()) {
+            this.LevelUp();
+        }
+    }
 
     @Override
     public void castAbility(Level level){

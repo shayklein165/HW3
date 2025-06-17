@@ -92,6 +92,14 @@ public class Mage extends Player{
     }
 
     @Override
+    public void gainExperience(int xp) {
+        setExperience(getExperience() + xp);
+        while (getExperience() >= 50 * getLevel()) {
+            this.LevelUp();
+        }
+    }
+
+    @Override
     public void castAbility(Level level){
         level.MageAttack(this);
     }

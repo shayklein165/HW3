@@ -269,6 +269,7 @@ public class Level {
         e.reciveDamage(e.getHp() - warrior.getMaxHp()/10);
         if (!e.isAlive()) {
             messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), warrior.getName() ,e.getExperience()));
+            warrior.gainExperience(e.getExperience());
             arrayGameBoard.RemoveEnemy(e);
             arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
         }
@@ -290,6 +291,7 @@ public class Level {
             e.reciveDamage(e.getHp() - mage.getSpellpower());
             if (!e.isAlive()) {
                 messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), mage.getName() ,e.getExperience()));
+                mage.gainExperience(e.getExperience());
                 arrayGameBoard.RemoveEnemy(e);
                 arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
             }
@@ -308,6 +310,7 @@ public class Level {
                 e.reciveDamage(rogue.getAttack() - defenseRoll);
             if (!e.isAlive()) {
                 messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), rogue.getName() ,e.getExperience()));
+                rogue.gainExperience(e.getExperience());
                 arrayGameBoard.RemoveEnemy(e);
                 arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
             }
