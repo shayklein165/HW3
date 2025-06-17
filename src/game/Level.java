@@ -31,6 +31,13 @@ public class Level {
         this.messageCallback = messageCallback;
     }
 
+    public void start(InputProvider input) {
+        this.messageCallback.send("Starting a new Level..");
+        this.inputProvider = input;
+        this.arrayGameBoard.getPlayer().setPosition(this.arrayGameBoard.getInitialPlayerPosition());
+        this.arrayGameBoard.getPlayer().setListener(arrayGameBoard);
+    }
+
     public void setArrayGameBoard(ArrayGameBoard arrayGameBoard) {
         this.arrayGameBoard = arrayGameBoard;
     }
@@ -220,6 +227,7 @@ public class Level {
 
     public boolean processRound()
     {
+        messageCallback.send(arrayGameBoard.getPlayer().describe());
         char move = inputProvider.inputQuery();
         if (movement.Contains(move)) {
             playerMove(move);
@@ -235,7 +243,6 @@ public class Level {
         }
         arrayGameBoard.getPlayer().gameTick();
         gameDisplay();
-        messageCallback.send(arrayGameBoard.getPlayer().describe());
         return arrayGameBoard.getPlayer().isAlive();
     }
 
@@ -248,13 +255,6 @@ public class Level {
         e.Move(this);
     }
 
-    public void start(InputProvider input) {
-        this.inputProvider = input;
-        this.arrayGameBoard.getPlayer().setPosition(this.arrayGameBoard.getInitialPlayerPosition());
-        this.arrayGameBoard.getPlayer().setListener(arrayGameBoard);
-        gameDisplay();
-        messageCallback.send(arrayGameBoard.getPlayer().describe());
-    }
 
     public void WarriorAttack(Warrior warrior){
         if (!warrior.canCastAbility())

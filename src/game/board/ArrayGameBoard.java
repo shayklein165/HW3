@@ -81,7 +81,7 @@ public class ArrayGameBoard implements PositionChanged {
 
     @Override
     public void call(Tile tile, Position oldPos, Position newPos) {
-        if(newPos.getX()<board.length&&newPos.getY()<board[0].length){
+        if(newPos.getX() < board.length && newPos.getY() < board[0].length){
             board[newPos.getX()][newPos.getY()] = tile;
         }
     }
