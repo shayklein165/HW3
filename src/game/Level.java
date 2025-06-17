@@ -233,8 +233,10 @@ public class Level {
             playerMove(move);
         }
         else if (move == 'q') {
-            if(!arrayGameBoard.getPlayer().canCastability())
+            if(!arrayGameBoard.getPlayer().canCastability()) {
                 messageCallback.send(String.format("%s can't cast ability", arrayGameBoard.getPlayer().getName()));
+                return true;
+            }
             castAbility(arrayGameBoard.getPlayer());
         }
 
