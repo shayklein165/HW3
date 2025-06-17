@@ -49,6 +49,7 @@ public class GameRunner {
             while(!currentLevel.won()) {
                 if(!currentLevel.processRound()){
                     currentLevel.gameDisplay();
+                    System.out.println(currentLevel.getArrayGameBoard().getPlayer().describe());
                     System.out.println("Game Over");
                     return;
                 }
