@@ -7,15 +7,22 @@ public class Hunter extends Player {
 
     private int arrowscnt;
     private int tickscnt;
+    private String spellname;
 
     public Hunter(String name, Position position, int maxhp, int attack, int defense, int range) {
         super(name, position, maxhp, attack, defense, range);
         arrowscnt = 0;
         tickscnt = 0;
+        spellname = "Shoot";
     }
 
     public void LevelUp(){
         LevelUp();
+    }
+
+    @Override
+    public String describe() {
+        return "";
     }
 
     @Override
@@ -32,6 +39,8 @@ public class Hunter extends Player {
     public void castAbility(Level level) {
 
     }
+
+    public String getSpellName(){return this.spellname;}
 
 
 }
