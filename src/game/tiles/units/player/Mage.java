@@ -1,9 +1,10 @@
 package game.tiles.units.player;
 import game.Level;
+import game.tiles.units.HeroicUnit;
 import game.tiles.units.Mana;
 import game.utils.Position;
 
-public class Mage extends Player{
+public class Mage extends Player implements HeroicUnit {
     private int costmana;
     private int spellpower;
     private int hitscnt;

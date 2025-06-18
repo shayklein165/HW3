@@ -6,10 +6,11 @@ import game.callbacks.PlayerDeathCallback;
 import game.tiles.Tile;
 import game.tiles.board_components.Empty;
 import game.tiles.board_components.Wall;
+import game.tiles.units.HeroicUnit;
 import game.tiles.units.Unit;
 import game.utils.Position;
 
-public abstract class Player extends Unit {
+public abstract class Player extends Unit implements HeroicUnit {
     private int experience;
     private int level;
     protected MessageCallback messageCallback;

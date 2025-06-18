@@ -1,9 +1,10 @@
 package game.tiles.units.player;
 import game.Level;
+import game.tiles.units.HeroicUnit;
 import game.utils.Position;
 
 
-public class Hunter extends Player {
+public class Hunter extends Player implements HeroicUnit {
 
     private int arrowscnt;
     private int tickscnt;

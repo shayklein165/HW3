@@ -4,6 +4,7 @@ import game.board.ArrayGameBoard;
 import game.tiles.Tile;
 import game.tiles.board_components.Empty;
 import game.tiles.units.Unit;
+import game.tiles.units.enemies.Boss;
 import game.tiles.units.enemies.Enemy;
 import game.tiles.units.enemies.Monster;
 import game.tiles.units.player.Player;
@@ -79,7 +80,7 @@ public class Movement {
     public char MonsterChooseMove(Monster monster){
         char move;
         if(monster.InRange(arrayGameBoard.getPlayer().getPosition())){
-            move = this.followPlayer(monster);
+            move = followPlayer(monster);
         }
         else{
             move = RandomMove();
@@ -87,10 +88,26 @@ public class Movement {
         return move;
     }
 
+    public char BossChooseMove(Boss boss){
+        char move;
+        if(boss.InRange(arrayGameBoard.getPlayer().getPosition())){
+            move = followPlayer(boss);
+        }
+        else{
+            Random rnd = new Random();
+            int m = rnd.nextInt(moves.size()+1);
+            if(m == moves.size())
+                move = 'n';
+            else
+                move = moves.get(m);
+        }
+        return move;
+    }
+
     // 0 = left, 1 = right, 2 = up, 3 = down
-    public char followPlayer(Monster monster){
-        int distX = monster.getPosition().getX() - arrayGameBoard.getPlayer().getPosition().getX();
-        int distY = monster.getPosition().getY() - arrayGameBoard.getPlayer().getPosition().getY();
+    public char followPlayer(Enemy enemy){
+        int distX = enemy.getPosition().getX() - arrayGameBoard.getPlayer().getPosition().getX();
+        int distY = enemy.getPosition().getY() - arrayGameBoard.getPlayer().getPosition().getY();
 
         if(Math.abs(distX) > Math.abs(distY)){
             if(distX > 0){

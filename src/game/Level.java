@@ -5,6 +5,7 @@ import game.callbacks.MessageCallback;
 import game.tiles.Tile;
 import game.tiles.board_components.Empty;
 import game.tiles.units.actions.Movement;
+import game.tiles.units.enemies.Boss;
 import game.tiles.units.enemies.Enemy;
 import game.tiles.units.enemies.Monster;
 import game.tiles.units.enemies.Trap;
@@ -177,19 +178,19 @@ public class Level {
         return position.getX()>0 && position.getX()<arrayGameBoard.getBoard().length && position.getY()>0 && position.getY()<arrayGameBoard.getBoard()[0].length;
     }
 
-    private boolean canMove(Monster monster){
+    private boolean canMove(Enemy enemy){
         int i = arrayGameBoard.getBoard().length;
         int j = arrayGameBoard.getBoard()[0].length;
-        Position position = monster.getPosition();
+        Position position = enemy.getPosition();
         boolean ans = false;
         if (position.getX() < i-1)
-            ans = arrayGameBoard.getBoard()[position.getX()+1][position.getY()].accept(monster);
+            ans = arrayGameBoard.getBoard()[position.getX()+1][position.getY()].accept(enemy);
         if (!ans && position.getX() < j-1)
-            ans = arrayGameBoard.getBoard()[position.getX()][position.getY()+1].accept(monster);
+            ans = arrayGameBoard.getBoard()[position.getX()][position.getY()+1].accept(enemy);
         if (!ans && position.getX() > 0)
-            ans = arrayGameBoard.getBoard()[position.getX()-1][position.getY()].accept(monster);
+            ans = arrayGameBoard.getBoard()[position.getX()-1][position.getY()].accept(enemy);
         if (!ans && position.getX() > 0)
-            ans = arrayGameBoard.getBoard()[position.getX()][position.getY()-1].accept(monster);
+            ans = arrayGameBoard.getBoard()[position.getX()][position.getY()-1].accept(enemy);
         return ans;
     }
 
@@ -205,12 +206,6 @@ public class Level {
         do {
             move = movement.MonsterChooseMove(monster);
             newPosition = getNewPosition(monster.getPosition(), move);
-            isEmpty = true;
-            for(Enemy e: enemies) {
-                if (e.getPosition().equals(newPosition)) {
-                    isEmpty = false;
-                }
-            }
         } while (!inBounds(newPosition));
 
         Player p = arrayGameBoard.getPlayer();
@@ -356,6 +351,57 @@ public class Level {
             hunter.gainExperience(closeste.getExperience());
             arrayGameBoard.RemoveEnemy(closeste);
             arrayGameBoard.setTile(new Empty(closeste.getPosition()), closeste.getPosition());
+        }
+    }
+
+    public void BossMove(Boss boss) {
+        Position newPosition;
+        boolean isEmpty;
+        char move;
+
+        if(boss.InRange(arrayGameBoard.getPlayer().getPosition()) && boss.canCast()){
+            boss.castAbility(this);
+        }
+        else{ // else, make a move
+            if(!canMove(boss))
+                return;
+
+            if(boss.InRange(arrayGameBoard.getPlayer().getPosition())){
+                boss.setCombatTicks(boss.getCombatTicks() + 1);
+            }
+            else{
+                boss.setCombatTicks(0);
+            }
+
+            do {
+                move = movement.BossChooseMove(boss);
+                if(move == 'n'){
+                    return;
+                }
+                newPosition = getNewPosition(boss.getPosition(), move);
+            } while (!inBounds(newPosition));
+
+
+            isEmpty = arrayGameBoard.getBoard()[newPosition.getX()][newPosition.getY()].accept(boss);
+            if(isEmpty){
+                movement.makeMove(move, boss);
+            }
+        }
+
+    }
+
+    public void BossAttack(Boss boss) {
+        int defenseRoll = (int) (Math.random() * arrayGameBoard.getPlayer().getDefense());
+        arrayGameBoard.getPlayer().reciveDamage(Math.max(boss.getAttack() - defenseRoll,0));
+
+        messageCallback.send(String.format("%s shoots %s for %s damage.", boss.getName(),arrayGameBoard.getPlayer().getName(), boss.getAttack()));
+        messageCallback.send(String.format("%s rolled %s defense points.", arrayGameBoard.getPlayer().getName(), defenseRoll));
+        messageCallback.send(String.format("%s hit %s for %s ability damage.", boss.getName(), arrayGameBoard.getPlayer().getName(), boss.getAttack()-defenseRoll));
+
+        if(!arrayGameBoard.getPlayer().isAlive()){
+            arrayGameBoard.KillPlayer();
+            messageCallback.send(String.format("%s was killed by %s.", arrayGameBoard.getPlayer().getName(),boss.getName()));
+            messageCallback.send("you lost.");
         }
     }
 }

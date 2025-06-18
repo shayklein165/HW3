@@ -1,5 +1,7 @@
 package game.tiles.units;
 
-public interface HeroicUnit {
+import game.Level;
 
+public interface HeroicUnit {
+    public void castAbility(Level level);
 }

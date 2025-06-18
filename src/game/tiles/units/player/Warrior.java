@@ -1,8 +1,9 @@
 package game.tiles.units.player;
 import game.Level;
+import game.tiles.units.HeroicUnit;
 import game.utils.Position;
 
-public class Warrior extends Player{
+public class Warrior extends Player implements HeroicUnit {
     private int damage;
     private int abilityCooldown;
     private int remainingCooldown;

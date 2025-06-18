@@ -1,9 +1,10 @@
 package game.tiles.units.player;
 import game.Level;
+import game.tiles.units.HeroicUnit;
 import game.utils.Position;
 import jdk.jshell.spi.ExecutionControl;
 
-public class Rogue extends Player{
+public class Rogue extends Player implements HeroicUnit {
 
     private int energycost;
     private int currentEnergy;
