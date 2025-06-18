@@ -2,6 +2,7 @@ package game.tiles.units.player;
 import game.Level;
 import game.tiles.units.HeroicUnit;
 import game.utils.Position;
+import game.utils.SoundPlayer;
 
 
 public class Hunter extends Player implements HeroicUnit {
@@ -21,6 +22,7 @@ public class Hunter extends Player implements HeroicUnit {
     public void gainExperience(int xp) {
         setExperience(getExperience() + xp);
         while (getExperience() >= 50 * getLevel()) {
+            SoundPlayer.playSound("sounds/level_up.wav");
             this.LevelUp();
         }
     }

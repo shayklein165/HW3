@@ -11,6 +11,7 @@ import game.tiles.units.enemies.Monster;
 import game.tiles.units.enemies.Trap;
 import game.tiles.units.player.*;
 import game.utils.Position;
+import game.utils.SoundPlayer;
 import view.input.InputProvider;
 
 import java.util.ArrayList;
@@ -61,6 +62,7 @@ public class Level {
         player.reciveDamage(damage);
 
         if(!player.isAlive()){
+            SoundPlayer.playSound("sounds/game_over.wav");
             arrayGameBoard.KillPlayer();
             messageCallback.send(String.format("%s was killed by %s.", player.getName(),enemy.getName()));
             messageCallback.send("you lost.");
@@ -87,6 +89,7 @@ public class Level {
         enemy.reciveDamage(damage);
         boolean b = enemy.isAlive();
         if (!b){
+            SoundPlayer.playSound("sounds/enemy_death.wav");
             arrayGameBoard.RemoveEnemy(enemy);
             arrayGameBoard.setTile(new Empty(enemy.getPosition()),enemy.getPosition());
             arrayGameBoard.getBoard()[enemy.getPosition().getX()][enemy.getPosition().getY()].setListener(arrayGameBoard);
@@ -269,6 +272,7 @@ public class Level {
         // the enemy will try to defend itself?
         // need to insert callback?
         if (!e.isAlive()) {
+            SoundPlayer.playSound("sounds/enemy_death.wav");
             messageCallback.send(String.format("%s died %s gained %d experience", warrior.getName(), e.getName() ,e.getExperience()));
             warrior.gainExperience(e.getExperience());
             arrayGameBoard.RemoveEnemy(e);
@@ -296,6 +300,7 @@ public class Level {
             messageCallback.send(mage.getName() + " hit " + e.getName() + " for " + (mage.getSpellpower()-defenseRoll) + " ability damage.");
 
             if (!e.isAlive()) {
+                SoundPlayer.playSound("sounds/enemy_death.wav");
                 messageCallback.send(String.format("%s died. %s gained %d experience.", mage.getName(), e.getName() ,e.getExperience()));
                 mage.gainExperience(e.getExperience());
                 arrayGameBoard.RemoveEnemy(e);
@@ -320,6 +325,7 @@ public class Level {
             messageCallback.send(rogue.getName() + " hit " + e.getName() + " for " + (rogue.getAttack() - defenseRoll)+" ability damage.");
 
             if (!e.isAlive()) {
+                SoundPlayer.playSound("sounds/enemy_death.wav");
                 messageCallback.send(String.format("%s died %s gained %d experience", rogue.getName(), e.getName() ,e.getExperience()));
                 rogue.gainExperience(e.getExperience());
                 arrayGameBoard.RemoveEnemy(e);
@@ -347,6 +353,7 @@ public class Level {
         if (hunter.getAttack() > defenseRoll)
             closeste.reciveDamage(hunter.getAttack() - defenseRoll);
         if (!closeste.isAlive()) {
+            SoundPlayer.playSound("sounds/enemy_death.wav");
             messageCallback.send(String.format("%s died %s gained %d experience", hunter.getName(), closeste.getName() ,closeste.getExperience()));
             hunter.gainExperience(closeste.getExperience());
             arrayGameBoard.RemoveEnemy(closeste);
@@ -399,6 +406,7 @@ public class Level {
         messageCallback.send(String.format("%s hit %s for %s ability damage.", boss.getName(), arrayGameBoard.getPlayer().getName(), boss.getAttack()-defenseRoll));
 
         if(!arrayGameBoard.getPlayer().isAlive()){
+            SoundPlayer.playSound("sounds/game_over.wav");
             arrayGameBoard.KillPlayer();
             messageCallback.send(String.format("%s was killed by %s.", arrayGameBoard.getPlayer().getName(),boss.getName()));
             messageCallback.send("you lost.");

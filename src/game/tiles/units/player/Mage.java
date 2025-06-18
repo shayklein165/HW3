@@ -3,6 +3,7 @@ import game.Level;
 import game.tiles.units.HeroicUnit;
 import game.tiles.units.Mana;
 import game.utils.Position;
+import game.utils.SoundPlayer;
 
 public class Mage extends Player implements HeroicUnit {
     private int costmana;
@@ -98,6 +99,7 @@ public class Mage extends Player implements HeroicUnit {
     public void gainExperience(int xp) {
         setExperience(getExperience() + xp);
         while (getExperience() >= 50 * getLevel()) {
+            SoundPlayer.playSound("sounds/level_up.wav");
             this.LevelUp();
         }
     }
