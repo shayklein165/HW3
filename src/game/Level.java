@@ -62,10 +62,15 @@ public class Level {
         player.reciveDamage(damage);
 
         if(!player.isAlive()){
-            SoundPlayer.playSound("sounds/game_over.wav");
             arrayGameBoard.KillPlayer();
             messageCallback.send(String.format("%s was killed by %s.", player.getName(),enemy.getName()));
             messageCallback.send("you lost.");
+            SoundPlayer.playSound("sounds/game_over.wav");
+            try{
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                return true;
+            }
             return true;
         }
         return false;
