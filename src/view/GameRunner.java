@@ -58,7 +58,14 @@ public class GameRunner {
             }
         }
         SoundPlayer.playSound("sounds/victory.wav");
-        System.out.println("You won!");
+        try{
+            Thread.sleep(2000);
+        }
+        catch (InterruptedException e){
+        }
+        finally {
+            System.out.println("You won!");
+        }
     }
 
 

@@ -69,7 +69,6 @@ public class Level {
             try{
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
-                return true;
             }
             return true;
         }
