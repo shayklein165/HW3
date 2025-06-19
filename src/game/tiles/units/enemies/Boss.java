@@ -49,6 +49,13 @@ public class Boss extends Enemy implements HeroicUnit {
 
     @Override
     public String describe() {
-        return "";
+        String description = "";
+        description += getName() + "          ";
+        description += "Health: " + getHp() + "/" + getMaxHp() + "          ";
+        description += "Attack: " + getAttack() + "          ";
+        description += "Defense: " + getDefense() + "          ";
+        description += "Experience value: " + getExperience() + "          ";
+        description += "Vision range: " + getRange() + "          ";
+        return description;
     }
 }
