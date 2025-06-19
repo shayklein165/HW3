@@ -21,7 +21,7 @@ public class Movement {
 
     public Movement(ArrayGameBoard arrayGameBoard) {
         this.arrayGameBoard = arrayGameBoard;
-        this.moves = new ArrayList<Character>();
+        this.moves = new ArrayList<>();
         this.moves.add('a');
         this.moves.add('d');
         this.moves.add('w');
