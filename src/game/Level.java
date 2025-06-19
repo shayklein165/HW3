@@ -74,6 +74,7 @@ public class Level {
 
     // here, the player is the attacker. returns true if the enemy is dead. otherwise, false.
     public boolean attack(Player player, Enemy enemy){
+        SoundPlayer.playSound("sounds/attack.wav");
         messageCallback.send(String.format("%s engaged in combat with %s.", player.getName(), enemy.getName()));
         messageCallback.send(player.describe());
         messageCallback.send(enemy.describe());
@@ -89,7 +90,6 @@ public class Level {
         enemy.reciveDamage(damage);
         boolean b = enemy.isAlive();
         if (!b){
-            SoundPlayer.playSound("sounds/enemy_death.wav");
             arrayGameBoard.RemoveEnemy(enemy);
             arrayGameBoard.setTile(new Empty(enemy.getPosition()),enemy.getPosition());
             arrayGameBoard.getBoard()[enemy.getPosition().getX()][enemy.getPosition().getY()].setListener(arrayGameBoard);
@@ -99,6 +99,7 @@ public class Level {
 
             messageCallback.send(String.format("%s died.", enemy.getName()));
             messageCallback.send(String.format("%s gained %d experience.", player.getName(), enemy.getExperience()));
+            SoundPlayer.playSound("sounds/enemy_death.wav");
         }
         return (!b);
     }
@@ -233,6 +234,7 @@ public class Level {
         else if (move == 'e') {
             String canCast = arrayGameBoard.getPlayer().canCastability();
             if(canCast.isEmpty()) {
+                SoundPlayer.playSound("sounds/cast_ability.wav");
                 castAbility(arrayGameBoard.getPlayer());
             }
             else{
@@ -272,11 +274,11 @@ public class Level {
         // the enemy will try to defend itself?
         // need to insert callback?
         if (!e.isAlive()) {
-            SoundPlayer.playSound("sounds/enemy_death.wav");
             messageCallback.send(String.format("%s died %s gained %d experience", warrior.getName(), e.getName() ,e.getExperience()));
             warrior.gainExperience(e.getExperience());
             arrayGameBoard.RemoveEnemy(e);
             arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
+            SoundPlayer.playSound("sounds/enemy_death.wav");
         }
 
     }
@@ -300,11 +302,11 @@ public class Level {
             messageCallback.send(mage.getName() + " hit " + e.getName() + " for " + (mage.getSpellpower()-defenseRoll) + " ability damage.");
 
             if (!e.isAlive()) {
-                SoundPlayer.playSound("sounds/enemy_death.wav");
                 messageCallback.send(String.format("%s died. %s gained %d experience.", mage.getName(), e.getName() ,e.getExperience()));
                 mage.gainExperience(e.getExperience());
                 arrayGameBoard.RemoveEnemy(e);
                 arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
+                SoundPlayer.playSound("sounds/enemy_death.wav");
             }
             hits++;
         }
@@ -325,11 +327,11 @@ public class Level {
             messageCallback.send(rogue.getName() + " hit " + e.getName() + " for " + (rogue.getAttack() - defenseRoll)+" ability damage.");
 
             if (!e.isAlive()) {
-                SoundPlayer.playSound("sounds/enemy_death.wav");
                 messageCallback.send(String.format("%s died %s gained %d experience", rogue.getName(), e.getName() ,e.getExperience()));
                 rogue.gainExperience(e.getExperience());
                 arrayGameBoard.RemoveEnemy(e);
                 arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
+                SoundPlayer.playSound("sounds/enemy_death.wav");
             }
         }
     }
@@ -353,11 +355,11 @@ public class Level {
         if (hunter.getAttack() > defenseRoll)
             closeste.reciveDamage(hunter.getAttack() - defenseRoll);
         if (!closeste.isAlive()) {
-            SoundPlayer.playSound("sounds/enemy_death.wav");
             messageCallback.send(String.format("%s died %s gained %d experience", hunter.getName(), closeste.getName() ,closeste.getExperience()));
             hunter.gainExperience(closeste.getExperience());
             arrayGameBoard.RemoveEnemy(closeste);
             arrayGameBoard.setTile(new Empty(closeste.getPosition()), closeste.getPosition());
+            SoundPlayer.playSound("sounds/enemy_death.wav");
         }
     }
 

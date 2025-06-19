@@ -2,6 +2,7 @@ package view;
 
 import game.Level;
 import game.tiles.units.player.Player;
+import game.utils.SoundPlayer;
 import view.input.CommandLineInput;
 import view.input.InputProvider;
 import view.parser.FileParser;
@@ -44,6 +45,7 @@ public class GameRunner {
 
     public void start() {
         for(Level currentLevel: levels){
+            SoundPlayer.playSound("sounds/game_start.wav");
             inputProvider = new CommandLineInput(scanner);
             currentLevel.start(this.inputProvider);
             while(!currentLevel.won()) {
@@ -55,6 +57,7 @@ public class GameRunner {
                 }
             }
         }
+        SoundPlayer.playSound("sounds/victory.wav");
         System.out.println("You won!");
     }
 
