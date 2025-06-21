@@ -274,7 +274,7 @@ public class Level {
         }
         i = rnd.nextInt(list.size());
         Enemy e = list.get(i);
-        e.reciveDamage(e.getHp() - warrior.getMaxHp()/10);
+        e.reciveDamage(e.getHp() - (warrior.getMaxHp()/10));
         // the enemy will try to defend itself?
         // need to insert callback?
         if (!e.isAlive()) {

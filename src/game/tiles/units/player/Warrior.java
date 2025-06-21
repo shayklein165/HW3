@@ -51,11 +51,6 @@ public class Warrior extends Player implements HeroicUnit {
         this.setDefense(this.getDefense()+this.getLevel());
     }
 
-    public void OnGameTick(){
-        this.remainingCooldown--;
-    }
-
-
     public String canCastability(){
         if (this.remainingCooldown <= 0){
             return "";
