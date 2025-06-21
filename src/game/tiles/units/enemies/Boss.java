@@ -5,20 +5,15 @@ import game.tiles.units.HeroicUnit;
 import game.utils.Position;
 
 public class Boss extends Enemy implements HeroicUnit {
-    private int range;
     private int abilityFrequency;
     private int combatTicks;
 
     public Boss(String name, char tile, Position position, int maxhp, int attack, int defense, int range, int exp, int abilityFrequency) {
         super(name, tile, position, maxhp, attack, defense,  range, exp);
-        this.range = range;
         this.abilityFrequency = abilityFrequency;
         this.combatTicks = 0;
     }
 
-    public int getRange() {return range;}
-
-    public void setRange(int range) {this.range = range;}
 
     public int getAbilityFrequency() {return abilityFrequency;}
 
