@@ -11,15 +11,8 @@ public class Monster extends Enemy {
         this.range = range;
     }
 
-
-
-
     public int getRange() {
         return range;
-    }
-
-    public void setRange(int range) {
-        this.range = range;
     }
 
     @Override

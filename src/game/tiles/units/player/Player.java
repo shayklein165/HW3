@@ -1,11 +1,7 @@
 package game.tiles.units.player;
 
 import game.Level;
-import game.callbacks.MessageCallback;
-import game.callbacks.PlayerDeathCallback;
 import game.tiles.Tile;
-import game.tiles.board_components.Empty;
-import game.tiles.board_components.Wall;
 import game.tiles.units.HeroicUnit;
 import game.tiles.units.Unit;
 import game.utils.Position;
@@ -13,8 +9,6 @@ import game.utils.Position;
 public abstract class Player extends Unit implements HeroicUnit {
     private int experience;
     private int level;
-    protected MessageCallback messageCallback;
-    protected PlayerDeathCallback playerDeathCallback;
 
     public Player(String name, Position position, int maxhp, int attack, int defense , int range){
         super(name, '@' ,position, maxhp, attack, defense, range);

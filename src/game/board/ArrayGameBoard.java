@@ -16,10 +16,10 @@ import java.util.List;
 public class ArrayGameBoard implements PositionChanged {
 
     private Tile[][] board;
-    Player player;
-    List<Enemy> enemies;
-    TileFactory tileFactory = new TileFactory();
-    Position initialPlayerPosition;
+    private Player player;
+    private List<Enemy> enemies;
+    private TileFactory tileFactory = new TileFactory();
+    private Position initialPlayerPosition;
 
     public ArrayGameBoard(char[][] charBoard, Player player) {
         this.board = new Tile[charBoard.length][charBoard[0].length];
@@ -45,10 +45,6 @@ public class ArrayGameBoard implements PositionChanged {
 
     public Position getInitialPlayerPosition() {
         return initialPlayerPosition;
-    }
-
-    public void setInitialPlayerPosition(Position initialPlayerPosition) {
-        this.initialPlayerPosition = initialPlayerPosition;
     }
 
     public Tile[][] getBoard() {

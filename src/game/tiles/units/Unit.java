@@ -9,12 +9,11 @@ import game.tiles.units.enemies.Enemy;
 import game.tiles.units.player.Player;
 import game.utils.Position;
 
-public abstract class Unit extends Tile implements Visited, Visitor{
+public abstract class Unit extends Tile {
     private String name;
     private Health health;
     private int attack;
     private int defense;
-    private Position position;
     private int range;
 
     public Unit(String name, char tile, Position position, int maxhp, int attack, int defense,  int range){
@@ -40,10 +39,6 @@ public abstract class Unit extends Tile implements Visited, Visitor{
 
     public int getDefense(){return defense;}
 
-    public void setName(String name){
-        this.name = name;
-    }
-
     public void setHp(int hp){
         health.setHp(hp);
     }
@@ -64,16 +59,11 @@ public abstract class Unit extends Tile implements Visited, Visitor{
         return range;
     }
 
-    public void setRange(int range) {
-        this.range = range;
-    }
-
     @Override
     public abstract boolean accept(Tile tile);
 
     @Override
-    public boolean visit(Player player)
-    {
+    public boolean visit(Player player) {
         return false;
     }
 
@@ -95,6 +85,6 @@ public abstract class Unit extends Tile implements Visited, Visitor{
     public boolean InRange(Position position1){
         double dx = position1.getX() - this.getPosition().getX();
         double dy = position1.getY() - this.getPosition().getY();
-        return (range * range >= dx * dx + dy * dy);    }
-
+        return (range * range >= dx * dx + dy * dy);
+    }
 }

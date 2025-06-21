@@ -1,17 +1,9 @@
 package game.tiles.units.enemies;
 
 import game.Level;
-import game.board.ArrayGameBoard;
-import game.callbacks.MessageCallback;
 import game.tiles.Tile;
-import game.tiles.board_components.Empty;
-import game.tiles.board_components.Wall;
 import game.tiles.units.Unit;
-import game.tiles.units.player.Player;
 import game.utils.Position;
-import jdk.jshell.spi.ExecutionControl;
-
-import java.util.List;
 
 public abstract class Enemy extends Unit {
     private int experience_val;
@@ -23,10 +15,6 @@ public abstract class Enemy extends Unit {
 
     public int getExperience() {
         return experience_val;
-    }
-
-    public void setExperience(int experience) {
-        this.experience_val = experience;
     }
 
 
