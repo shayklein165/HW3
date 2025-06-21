@@ -1,23 +1,22 @@
 package game.tiles.units;
 
-public class Health {
-    private int hp;
-    private int maxHp;
+import game.utils.Resource;
+
+public class Health extends Resource {
 
     public Health(int hp, int maxHp) {
-        this.maxHp = maxHp;
-        this.hp = Math.min(hp, maxHp);
+        super(hp, maxHp);
     }
     public int getHp() {
-        return hp;
+        return getAmount();
     }
     public int getMaxHp() {
-        return maxHp;
+        return getMaxHp();
     }
     public void setHp(int hp) {
-        this.hp = Math.min(hp, maxHp);
+        setAmount(hp);
     }
     public void setMaxHp(int maxHp) {
-        this.maxHp = maxHp;
+        setCapacity(maxHp);
     }
 }

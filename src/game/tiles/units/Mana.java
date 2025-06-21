@@ -1,25 +1,23 @@
 package game.tiles.units;
+import game.utils.Resource;
 
-public class Mana {
-    private int currmana;
-    private int maxMana;
+public class Mana extends Resource {
 
     public Mana(int currmana, int maxMana) {
-        this.currmana = currmana;
-        this.maxMana = maxMana;
+        super(currmana, maxMana);
     }
 
     public int getCurrmana() {
-        return currmana;
+        return getAmount();
     }
 
     public int getMaxMana() {
-        return maxMana;
+        return getCapacity();
     }
     public void setCurrmana(int currmana) {
-        this.currmana = currmana;
+        setAmount(currmana);
     }
     public void setMaxMana(int maxMana) {
-        this.maxMana = maxMana;
+        setCapacity(maxMana);
     }
 }
