@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.function.Function;
 
 public class CommandLineInput implements InputProvider {
-    private static HashSet<Character> validInputs = new HashSet<Character>();
+    private HashSet<Character> validInputs = new HashSet<Character>();
 
     private final Scanner scanner;
 

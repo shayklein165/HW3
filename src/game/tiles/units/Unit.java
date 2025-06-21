@@ -82,6 +82,19 @@ public abstract class Unit extends Tile {
         return true;
     }
 
+    public void reciveDamage(int damage) {
+        setHp(getHp() - damage);
+        if(getHp() < 0){
+            setHp(0);
+        }
+    }
+
+    public boolean isAlive() {
+        return getHp() > 0;
+    }
+
+    public abstract String describe();
+
     public boolean InRange(Position position1){
         double dx = position1.getX() - this.getPosition().getX();
         double dy = position1.getY() - this.getPosition().getY();

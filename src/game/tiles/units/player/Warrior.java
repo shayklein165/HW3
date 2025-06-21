@@ -4,8 +4,7 @@ import game.tiles.units.HeroicUnit;
 import game.utils.Position;
 import game.utils.SoundPlayer;
 
-public class Warrior extends Player implements HeroicUnit {
-    private int damage;
+public class Warrior extends Player {
     private int abilityCooldown;
     private int remainingCooldown;
     private String spellname;
@@ -22,10 +21,6 @@ public class Warrior extends Player implements HeroicUnit {
     public void gameTick() {
         remainingCooldown = Math.max(remainingCooldown-1,0);
     }
-
-    public int getDamage() {
-        return damage;
-    }
     public int getAbilityCooldown() {
         return abilityCooldown;
     }
@@ -34,12 +29,6 @@ public class Warrior extends Player implements HeroicUnit {
     }
     public void setRemainingColldown(int remainingCooldown) {
         this.remainingCooldown = remainingCooldown;
-    }
-    public void setAbilityCooldown(int abilityCooldown) {
-        this.abilityCooldown = abilityCooldown;
-    }
-    public void setDamage(int damage) {
-        this.damage = damage;
     }
 
 

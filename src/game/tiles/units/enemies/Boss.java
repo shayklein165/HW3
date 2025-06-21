@@ -14,11 +14,6 @@ public class Boss extends Enemy implements HeroicUnit {
         this.combatTicks = 0;
     }
 
-
-    public int getAbilityFrequency() {return abilityFrequency;}
-
-    public void setAbilityFrequency(int abilityFrequency) {this.abilityFrequency = abilityFrequency;}
-
     public void setCombatTicks(int combatTicks){this.combatTicks = combatTicks;}
 
     public int getCombatTicks(){return combatTicks;}

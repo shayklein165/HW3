@@ -41,16 +41,6 @@ public abstract class Player extends Unit implements HeroicUnit {
         setDefense(getDefense() + level);
     }
 
-    public void reciveDamage(int damage) {
-        setHp(getHp() - damage);
-        if(getHp() < 0){
-            setHp(0);
-        }
-    }
-
-    public boolean isAlive(){
-        return getHp() > 0;
-    }
 
     public abstract String describe();
 

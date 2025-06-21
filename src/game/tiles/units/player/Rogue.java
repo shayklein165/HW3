@@ -5,7 +5,7 @@ import game.utils.Position;
 import game.utils.SoundPlayer;
 import jdk.jshell.spi.ExecutionControl;
 
-public class Rogue extends Player implements HeroicUnit {
+public class Rogue extends Player {
 
     private int energycost;
     private int currentEnergy;
@@ -22,9 +22,7 @@ public class Rogue extends Player implements HeroicUnit {
     public void gameTick() {this.currentEnergy = (Math.min(currentEnergy+10, 100));}
 
     public int getCurrentEnergy() {return currentEnergy;}
-    public void setCurrentEnergy(int currentEnergy) {}
     public int getEnergycost() {return energycost;}
-    public void setEnergycost(int cost) {this.energycost = cost;}
 
     public void LevelUp(){
         super.LevelUp();

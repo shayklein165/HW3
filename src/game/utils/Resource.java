@@ -18,28 +18,12 @@ public class Resource {
         this.capacity = capacity;
     }
 
-    public void addCapacity(int capacity){
-        this.capacity += capacity;
-    }
-
     public int getAmount(){
         return amount;
     }
 
     public void setAmount(int amount){
         this.amount = Math.min(amount,capacity);
-    }
-
-    public void addAmount(int amount){
-        this.amount = Math.min(this.amount+amount,capacity);
-    }
-
-    public void reduceAmount(int amount){
-        this.amount = Math.max(this.amount-amount,0);
-    }
-
-    public void restore(){
-        this.amount = this.capacity;
     }
 
     @Override

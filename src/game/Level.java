@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Random;
 
 public class Level {
-    ArrayGameBoard arrayGameBoard;
-    MessageCallback messageCallback;
+    private ArrayGameBoard arrayGameBoard;
+    private MessageCallback messageCallback;
     private InputProvider inputProvider;
     private Movement movement;
 
@@ -34,10 +34,6 @@ public class Level {
         this.inputProvider = input;
         this.arrayGameBoard.getPlayer().setListener(arrayGameBoard);
         this.arrayGameBoard.getPlayer().setPosition(this.arrayGameBoard.getInitialPlayerPosition());
-    }
-
-    public void setArrayGameBoard(ArrayGameBoard arrayGameBoard) {
-        this.arrayGameBoard = arrayGameBoard;
     }
 
     public ArrayGameBoard getArrayGameBoard() {
@@ -182,7 +178,7 @@ public class Level {
         }
     }
 
-    protected boolean inBounds(Position position){
+    private boolean inBounds(Position position){
         return position.getX()>0 && position.getX()<arrayGameBoard.getBoard().length && position.getY()>0 && position.getY()<arrayGameBoard.getBoard()[0].length;
     }
 
@@ -206,7 +202,6 @@ public class Level {
         Position newPosition;
         boolean isEmpty;
         char move;
-        List<Enemy> enemies = arrayGameBoard.getEnemies();
 
         if(!canMove(monster))
             return;

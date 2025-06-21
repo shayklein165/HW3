@@ -24,36 +24,8 @@ public class Trap extends Enemy{
         setCurrTile('.');
     }
 
-    public int getVisibility_time() {
-        return visibility_time;
-    }
-
-    public int getInvisibility_time() {
-        return invisibility_time;
-    }
-
-    public int getTicks_cnt() {
-        return ticks_cnt;
-    }
-
     public boolean isVisible() {
         return visible;
-    }
-
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
-
-    public void setTicks_cnt(int ticks_cnt) {
-        this.ticks_cnt = ticks_cnt;
-    }
-
-    public void setInvisibility_time(int invisibility_time) {
-        this.invisibility_time = invisibility_time;
-    }
-
-    public void setVisibility_time(int visibility_time) {
-        this.visibility_time = visibility_time;
     }
 
     public void state() {
@@ -62,7 +34,6 @@ public class Trap extends Enemy{
             ticks_cnt = 0;
         else
             ticks_cnt++;
-
     }
 
     public char getVisibletile(){

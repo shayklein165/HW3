@@ -17,18 +17,6 @@ public abstract class Enemy extends Unit {
         return experience_val;
     }
 
-
-    public void reciveDamage(int damage) {
-        setHp(getHp() - damage);
-        if(getHp() < 0){
-            setHp(0);
-        }
-    }
-
-    public boolean isAlive(){
-        return getHp() > 0;
-    }
-
     @Override
     public boolean accept(Tile tile)
     {

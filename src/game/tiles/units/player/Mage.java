@@ -5,7 +5,7 @@ import game.tiles.units.Mana;
 import game.utils.Position;
 import game.utils.SoundPlayer;
 
-public class Mage extends Player implements HeroicUnit {
+public class Mage extends Player {
     private int costmana;
     private int spellpower;
     private int hitscnt;
@@ -50,14 +50,6 @@ public class Mage extends Player implements HeroicUnit {
         this.mana.setMaxMana(manaPool);
     }
 
-    public void setCostMana(int costmana){
-        this.costmana = costmana;
-    }
-
-    public void setHitscnt(int hitscnt){
-        this.hitscnt = hitscnt;
-    }
-
 
     public void LevelUp(){
         super.LevelUp();
@@ -68,6 +60,7 @@ public class Mage extends Player implements HeroicUnit {
         setSpellpower(getSpellpower() + (10 * getLevel()));
     }
 
+    @Override
     public void gameTick(){
         int currmana = getManaPool();
         currmana = Math.min(currmana, getMana() + getLevel());
@@ -75,6 +68,7 @@ public class Mage extends Player implements HeroicUnit {
     }
 
     // returns an empty string if true.
+    @Override
     public String canCastability(){
         if (mana.getCurrmana() >= costmana) {
             return "";
@@ -82,6 +76,7 @@ public class Mage extends Player implements HeroicUnit {
         return(String.format("%s tried to cast %s, but there was not enough mana: %s", getName(), getSpellName(), getMana() + "/" + getCostmana()));
     }
 
+    @Override
     public String describe(){
         String description = "";
         description += getName() + "          ";
@@ -111,6 +106,7 @@ public class Mage extends Player implements HeroicUnit {
         level.MageAttack(this, message);
     }
 
+    @Override
     public String getSpellName() {
         return spellname;
     }

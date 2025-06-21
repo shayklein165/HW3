@@ -5,7 +5,7 @@ import game.utils.Position;
 import game.utils.SoundPlayer;
 
 
-public class Hunter extends Player implements HeroicUnit {
+public class Hunter extends Player {
 
     private int arrowscnt;
     private int tickscnt;
@@ -65,9 +65,10 @@ public class Hunter extends Player implements HeroicUnit {
         level.HunterAttack(this, message);
     }
 
+    @Override
     public String getSpellName(){return this.spellname;}
 
-
+    @Override
     public String canCastability() {
         if (arrowscnt > 0)
             return "";
