@@ -28,8 +28,10 @@ public class Hunter extends Player implements HeroicUnit {
     }
 
     public void LevelUp(){
-        LevelUp();
-
+        super.LevelUp();
+        arrowscnt = arrowscnt + 10*getLevel();
+        setAttack(getAttack()+2*getLevel());
+        setDefense(getDefense()+getLevel());
     }
 
     @Override

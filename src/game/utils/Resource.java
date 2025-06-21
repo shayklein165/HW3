@@ -5,7 +5,7 @@ public class Resource {
     private int capacity;
     private int amount;
 
-    public Resource(int capacity, int amount){
+    public Resource( int amount, int capacity){
         this.capacity = capacity;
         this.amount = amount;
     }
