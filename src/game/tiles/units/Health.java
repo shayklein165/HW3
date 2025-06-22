@@ -10,7 +10,10 @@ public class Health extends Resource {
     public int getHp() {
         return getAmount();
     }
-    public int getMaxHp() {return getCapacity();}
+    public int getMaxHp() {
+        return getCapacity();
+    }
+
     public void setHp(int hp) {
         setAmount(hp);
     }

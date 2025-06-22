@@ -29,9 +29,9 @@ public class Hunter extends Player {
 
     public void LevelUp(){
         super.LevelUp();
-        arrowscnt = arrowscnt + 10*getLevel();
-        setAttack(getAttack()+2*getLevel());
-        setDefense(getDefense()+getLevel());
+        arrowscnt +=  (10 * getLevel());
+        setAttack(getAttack()+ (2 * getLevel()));
+        setDefense(getDefense() + getLevel());
     }
 
     @Override
@@ -75,5 +75,7 @@ public class Hunter extends Player {
         return(String.format("%s tried to shoot an arrow but there were no enemies in range.", getName()));
     }
 
-    public int getArrowscnt() {return arrowscnt;}
+    public int getArrowscnt() {
+        return arrowscnt;
+    }
 }

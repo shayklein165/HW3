@@ -35,9 +35,9 @@ public class Warrior extends Player {
     public void LevelUp(){
         super.LevelUp();
         this.remainingCooldown = 0;
-        this.setMaxHp(this.getMaxHp()+5*this.getLevel());
-        this.setAttack(this.getAttack()+2*this.getLevel());
-        this.setDefense(this.getDefense()+this.getLevel());
+        this.setMaxHp(this.getMaxHp() + 5 * this.getLevel());
+        this.setAttack(this.getAttack() + 2 * this.getLevel());
+        this.setDefense(this.getDefense() + this.getLevel());
     }
 
     public String canCastability(){
@@ -70,7 +70,7 @@ public class Warrior extends Player {
 
     @Override
     public void castAbility(Level level){
-        String message = (getName()+" used " + getSpellName()+", healing for " + (10 * getDefense()) + ".");
+        String message = (getName() + " used " + getSpellName() + ", healing for " + (10 * getDefense()) + ".");
         setHp(Math.min(getHp() + (10 * getDefense()), getMaxHp()));
         setRemainingColldown(getAbilityCooldown());
         level.WarriorAttack(this, message);

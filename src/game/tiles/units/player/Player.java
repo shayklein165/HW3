@@ -33,9 +33,9 @@ public abstract class Player extends Unit implements HeroicUnit {
 
 
     protected void LevelUp(){
-        this.experience -= 50*level;
+        this.experience -= 50 * level;
         this.level += 1;
-        setMaxHp(getMaxHp() + 10*level);
+        setMaxHp(getMaxHp() + 10 * level);
         setHp(getMaxHp());
         setAttack(getAttack() + 4 * level);
         setDefense(getDefense() + level);

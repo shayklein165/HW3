@@ -14,9 +14,11 @@ public class Mana extends Resource {
     public int getMaxMana() {
         return getCapacity();
     }
+
     public void setCurrmana(int currmana) {
         setAmount(currmana);
     }
+
     public void setMaxMana(int maxMana) {
         setCapacity(maxMana);
     }

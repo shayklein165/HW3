@@ -60,7 +60,7 @@ public class Rogue extends Player {
     @Override
     public void castAbility(Level level){
         String message = (getName()+" used " + getSpellName()+".");
-        currentEnergy-=energycost;
+        currentEnergy -= energycost;
         level.RogueAttack(this, message);
     }
 
