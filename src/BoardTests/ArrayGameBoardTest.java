@@ -35,14 +35,12 @@ public class ArrayGameBoardTest {
 
     @Test
     public void testGetRowsCols() {
-        // Verifying the size of the board
         assertEquals("The number of rows should match the board initialization", rows, board.getBoard().length);
         assertEquals("The number of columns should match the board initialization", cols, board.getBoard()[0].length);
     }
 
     @Test
     public void testGetAndSetTile() {
-        // Replace a tile and ensure it's updated correctly
         Position position = new Position(1, 2);
         Wall wall = new Wall(position);
         board.setTile(wall, position);
@@ -51,7 +49,6 @@ public class ArrayGameBoardTest {
 
     @Test
     public void testGetPlayer() {
-        // Verify the player is correctly stored and accessible
         assertNotNull("Player should not be null after initialization", board.getPlayer());
         assertEquals("Player name should match the initialized player", "Test Player", board.getPlayer().getName());
         assertEquals("Player position should match the starting position", new Position(1, 1), board.getPlayer().getPosition());
@@ -59,7 +56,6 @@ public class ArrayGameBoardTest {
 
     @Test
     public void testRemoveEnemy() {
-        // Test removing an enemy from the game
         List<Enemy> enemies = board.getEnemies();
         int initialEnemyCount = enemies.size();
 
@@ -78,17 +74,14 @@ public class ArrayGameBoardTest {
 
     @Test
     public void testKillPlayer() {
-        // Test the "KillPlayer" functionality
         board.KillPlayer();
 
-        // Verify player's position is marked as 'X'
         Tile tileAtPlayerPosition = board.getTile(player.getPosition());
         assertEquals("Player's position should be marked with 'X' after death", 'X', tileAtPlayerPosition.getTile());
     }
 
     @Test
     public void testInitialPlayerPosition() {
-        // Verify the initial player position is stored correctly
         Position initialPosition = board.getInitialPlayerPosition();
 
         assertNotNull("Initial player position should not be null", initialPosition);
@@ -97,7 +90,6 @@ public class ArrayGameBoardTest {
 
     @Test
     public void testCallPositionChangeListener() {
-        // Create a new position for the player and verify board updates
         Position newPosition = new Position(2, 1);
         Position oldPosition = player.getPosition();
         Tile playerTile = board.getTile(oldPosition);
@@ -112,14 +104,13 @@ public class ArrayGameBoardTest {
 
     @Test
     public void testPlayersAndEnemiesLocations() {
-        // Validate placement of enemies and player
         Position playerPosition = player.getPosition();
         Tile playerTile = board.getTile(playerPosition);
 
-        // Player's position
+
         assertEquals("Player should be located at (1,1)", '@', playerTile.getTile());
 
-        // Check enemies
+
         for (Enemy enemy : board.getEnemies()) {
             Tile enemyTile = board.getTile(enemy.getPosition());
             assertSame("Enemy at its position should be consistent on the board", enemy, enemyTile);
