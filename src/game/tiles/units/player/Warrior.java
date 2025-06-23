@@ -60,12 +60,15 @@ public class Warrior extends Player {
     }
 
     @Override
-    public void gainExperience(int xp) {
+    public String gainExperience(int xp) {
         setExperience(getExperience() + xp);
+        String ret = "";
         while (getExperience() >= 50 * getLevel()) {
             SoundPlayer.playSound("sounds/level_up.wav");
+            ret = (getName() + "reached level " + getLevel() + ": + " + 5 * this.getLevel()+ " Health, +" + 2 * this.getLevel()+ " Attack, +" +  this.getLevel() + "Defense");
             this.LevelUp();
         }
+        return ret;
     }
 
     @Override

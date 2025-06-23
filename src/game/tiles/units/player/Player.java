@@ -59,5 +59,5 @@ public abstract class Player extends Unit implements HeroicUnit {
 
     public abstract String getSpellName();
 
-    public abstract void gainExperience(int xp);
+    public abstract String gainExperience(int xp);
 }

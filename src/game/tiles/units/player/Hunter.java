@@ -19,12 +19,15 @@ public class Hunter extends Player {
     }
 
     @Override
-    public void gainExperience(int xp) {
+    public String gainExperience(int xp) {
+        String ret = "";
         setExperience(getExperience() + xp);
         while (getExperience() >= 50 * getLevel()) {
+            ret = (getName() + "reached level " + getLevel() + ": + " + 5 * this.getLevel()+ " Health, +" + 2 * this.getLevel()+ " Attack, +" +  this.getLevel() + "Defense");
             SoundPlayer.playSound("sounds/level_up.wav");
             this.LevelUp();
         }
+        return ret;
     }
 
     public void LevelUp(){
