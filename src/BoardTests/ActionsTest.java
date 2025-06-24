@@ -21,7 +21,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class MovementTest {
+public class ActionsTest {
 
     private ArrayGameBoard board;
     private Player player;
