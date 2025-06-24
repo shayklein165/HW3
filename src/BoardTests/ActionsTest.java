@@ -1,27 +1,20 @@
 package BoardTests;
 import game.Level;
 import game.board.ArrayGameBoard;
-import game.tiles.Tile;
-import game.tiles.board_components.Wall;
+import game.tiles.units.enemies.Enemy;
 import game.tiles.units.enemies.Monster;
 import game.tiles.units.player.Player;
-import game.tiles.units.enemies.Enemy;
 import game.tiles.units.player.Warrior;
 import game.utils.Position;
 import org.junit.Before;
 import org.junit.Test;
-import view.GameRunner;
 import view.parser.FileParser;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class MovementTest {
+public class ActionsTest {
 
     private ArrayGameBoard board;
     private Player player;
@@ -97,7 +90,9 @@ public class MovementTest {
         level.playerMove('a');
         level.playerMove('a');
         level.playerMove('a');
-        level.getArrayGameBoard().setTile(new Monster("Lannister Solider", 's', newPos, 80, 8, 3, 3, 25),newPos);
+        Monster e = new Monster("Lannister Solider", 's', newPos, 80, 8, 3, 3, 25);
+        level.getArrayGameBoard().setTile(e,newPos);
+        level.getArrayGameBoard().AddEnemy(e);
 
     }
 
@@ -108,13 +103,13 @@ public class MovementTest {
         level.playerMove('d');
         level.playerMove('d');
         int hp = player.getHp();
+        board.getEnemies().getFirst().setAttack(100);
         level.EnemyMove(board.getEnemies().get(0));
         assertNotEquals("Player should lose HP after attacking", hp, player.getHp());
 
         level.playerMove('a');
         level.playerMove('a');
         level.playerMove('a');
-
     }
 
 

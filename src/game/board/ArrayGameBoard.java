@@ -63,6 +63,8 @@ public class ArrayGameBoard implements PositionChanged {
         return enemies.remove(enemy);
     }
 
+    public void AddEnemy(Enemy enemy){ enemies.add(enemy);}
+
     public void setTile(Tile tile, Position position){
         this.board[position.getX()][position.getY()] = tile;
     }
