@@ -3,6 +3,7 @@ import game.Level;
 import game.board.ArrayGameBoard;
 import game.tiles.units.enemies.Enemy;
 import game.tiles.units.enemies.Monster;
+import game.tiles.units.enemies.Trap;
 import game.tiles.units.player.Player;
 import game.tiles.units.player.Warrior;
 import game.utils.Position;
@@ -82,7 +83,7 @@ public class ActionsTest {
         level.playerMove('d'); // monster s must die.
         assertEquals("Players position should be the monster's position", newPos, player.getPosition());
         assertEquals("Board should have the player at the new position", newPos, board.getTile(player.getPosition()).getPosition());
-        assertEquals("Board should have no enemies", board.getEnemies().size(), 0);
+        assertEquals("Board should have one enemie", 1, board.getEnemies().size());
         assertEquals("Player should gain the monster's experience", 25, player.getExperience());
         assertEquals("Player should level up", 1, player.getLevel());
 
@@ -109,6 +110,20 @@ public class ActionsTest {
 
         level.playerMove('a');
         level.playerMove('a');
+        level.playerMove('a');
+    }
+
+
+    @Test
+    public void testTrapAttackPlayer(){
+        Trap trap = new Trap("test trap", 'B', new Position(3,1), 100, 25, 10, 0, 1, 10, false);
+        Position newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
+        level.playerMove('s');
+        int hp = player.getHp();
+        level.EnemyMove(board.getEnemies().get(0));
+
+        assertNotEquals("Player should lose HP after attacking", hp, player.getHp());
+
         level.playerMove('a');
     }
 
