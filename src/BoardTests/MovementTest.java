@@ -39,7 +39,6 @@ public class MovementTest {
         parser.parseLevel(files[0]);
         level = parser.interpret();
         board = level.getArrayGameBoard();
-        board.getEnemies().get(0).setHp(0);
     }
 
     @Test
@@ -81,6 +80,7 @@ public class MovementTest {
 
     @Test
     public void testAttackMonster(){
+        board.getEnemies().get(0).setHp(0);
         Position newPos = new Position(player.getPosition().getX(), player.getPosition().getY());
         newPos.setX(newPos.getX()+4);
         level.playerMove('d');
