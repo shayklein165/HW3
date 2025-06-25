@@ -77,6 +77,8 @@ public class ArrayGameBoard implements PositionChanged {
         board[player.getPosition().getX()][player.getPosition().getY()].setTile('X');
     }
 
+    public void setPlayer(Player player){this.player = player;}
+
     @Override
     public void call(Tile tile, Position oldPos, Position newPos) {
         if(newPos.getX() < board.length && newPos.getY() < board[0].length){

@@ -13,7 +13,7 @@ public class Hunter extends Player {
 
     public Hunter(String name, Position position, int maxhp, int attack, int defense, int range) {
         super(name, position, maxhp, attack, defense, range);
-        arrowscnt = 0;
+        arrowscnt = 10*getLevel();
         tickscnt = 0;
         spellname = "Shoot";
     }
@@ -78,7 +78,6 @@ public class Hunter extends Player {
         return(String.format("%s tried to shoot an arrow but there were no enemies in range.", getName()));
     }
 
-    public int getArrowscnt() {
-        return arrowscnt;
-    }
+    public int getArrowscnt() {return arrowscnt;}
+    public void setArrowscnt(int arrowscnt) {this.arrowscnt = arrowscnt;}
 }

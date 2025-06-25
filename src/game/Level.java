@@ -232,14 +232,7 @@ public class Level {
             playerMove(move);
         }
         else if (move == 'e') {
-            String canCast = arrayGameBoard.getPlayer().canCastability();
-            if(canCast.isEmpty()) {
-                SoundPlayer.playSound("sounds/cast_ability.wav");
-                castAbility(arrayGameBoard.getPlayer());
-            }
-            else{
-                messageCallback.send(canCast);
-            }
+            castAbility(arrayGameBoard.getPlayer());
 
         }
 
@@ -251,8 +244,15 @@ public class Level {
         return arrayGameBoard.getPlayer().isAlive();
     }
 
-    private void castAbility(Player player) {
-        player.castAbility(this);
+    public void castAbility(Player player) {
+        String canCast = arrayGameBoard.getPlayer().canCastability();
+        if(canCast.isEmpty()) {
+            SoundPlayer.playSound("sounds/cast_ability.wav");
+            player.castAbility(this);
+        }
+        else{
+            messageCallback.send(canCast);
+        }
     }
 
     public void EnemyMove(Enemy e) {
@@ -270,7 +270,7 @@ public class Level {
         }
         i = rnd.nextInt(list.size());
         Enemy e = list.get(i);
-        e.reciveDamage(e.getHp() - (warrior.getMaxHp()/10));
+        e.reciveDamage(warrior.getMaxHp()/10);
         // the enemy will try to defend itself?
         // need to insert callback?
         if (!e.isAlive()) {
