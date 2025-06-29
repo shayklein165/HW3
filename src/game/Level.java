@@ -239,7 +239,9 @@ public class Level {
         List<Enemy> enemies= arrayGameBoard.getEnemies();
         for(Enemy e: enemies)
         {
-            EnemyMove(e);
+            if(arrayGameBoard.getPlayer().isAlive()){
+                EnemyMove(e);
+            }
         }
         return arrayGameBoard.getPlayer().isAlive();
     }
