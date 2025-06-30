@@ -156,7 +156,6 @@ public class Level {
         if(!inBounds(newPosition)){
             messageCallback.send(String.format("%s can't move in direction %c.", player.getName(), action));
         }
-        player.gameTick();
         Tile tile = arrayGameBoard.getBoard()[newPosition.getX()][newPosition.getY()];
         List<Enemy> enemies = arrayGameBoard.getEnemies();
         for(Enemy e: enemies){
@@ -228,6 +227,7 @@ public class Level {
             castAbility(arrayGameBoard.getPlayer());
 
         }
+        arrayGameBoard.getPlayer().gameTick();
 
         List<Enemy> enemies= arrayGameBoard.getEnemies();
         for(Enemy e: enemies)
@@ -247,7 +247,6 @@ public class Level {
         }
         else{
             messageCallback.send(canCast);
-            player.gameTick();
         }
     }
 
