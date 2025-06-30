@@ -431,4 +431,28 @@ public class Level {
         arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
         SoundPlayer.playSound("enemy_death.wav");
     }
+
+    public void HealerAttack(Healer healer, String message) {
+        List<Enemy> list = arrayGameBoard.getEnemies();
+        List<Enemy> dead = new ArrayList<>();
+        if(list.isEmpty()){
+            return;
+        }
+        int sum = 0;
+        messageCallback.send(String.format("%s dealt %d damage to all enemies.", healer.getName(), healer.getAttack()/10));
+        for (Enemy e : list) {
+            sum += 1;
+            e.reciveDamage(healer.getAttack()/10);
+            if (!e.isAlive()){
+                messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), healer.getName() ,e.getExperience()));
+                healer.gainExperience(e.getExperience());
+                dead.add(e);
+                arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
+                SoundPlayer.playSound("enemy_death.wav");
+            }
+        }
+        for (Enemy e : dead)
+            arrayGameBoard.RemoveEnemy(e);
+        healer.setHp(healer.getHp()+ sum);
+    }
 }

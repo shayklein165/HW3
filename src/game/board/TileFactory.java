@@ -63,6 +63,7 @@ public class TileFactory {
         players.put("Bronn", (Position position)-> new Rogue("Bronn", position, 250, 35, 3, 50));
         players.put("Ygritte", (Position position)-> new Hunter("Ygritte", position, 220, 30, 2, 6));
         players.put("Shauli", (Position position)-> new RandomKiller("Shauli", position, 200, 40, 5));
+        players.put("Hector", (Position position)-> new Healer("Hector", position, 190, 30, 3, 10));
     }
 
     public Tile CreateTile(char c, Position position, Player player){
@@ -153,6 +154,8 @@ public class TileFactory {
         list.add(players.get("Bronn").apply(new Position(0,0)));
         list.add(players.get("Ygritte").apply(new Position(0,0)));
         list.add(players.get("Shauli").apply(new Position(0,0)));
+        list.add(players.get("Hector").apply(new Position(0, 0)));
+
         return list;
     }
 
