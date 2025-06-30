@@ -27,7 +27,7 @@ public class GeneralTests {
         player = new Warrior("Test Player", position, 10000, 5000, 0, 2);
         FileParser parser = new FileParser(player, this::send);
 
-        File root = new File("testLevel");
+        File root = new File(ActionsTest.class.getResource("testLevel").getPath());
         File[] files = root.listFiles();
         assert files != null;
         parser.parseLevel(files[0]);

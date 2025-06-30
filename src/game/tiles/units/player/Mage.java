@@ -1,6 +1,5 @@
 package game.tiles.units.player;
 import game.Level;
-import game.tiles.units.HeroicUnit;
 import game.tiles.units.Mana;
 import game.utils.Position;
 import game.utils.SoundPlayer;
@@ -95,7 +94,7 @@ public class Mage extends Player {
         String ret = "";
         setExperience(getExperience() + xp);
         while (getExperience() >= 50 * getLevel()) {
-            SoundPlayer.playSound("sounds/level_up.wav");
+            SoundPlayer.playSound("level_up.wav");
             ret = (getName() + "reached level " + getLevel() + ": + " + 5 * this.getLevel()+ " Health, +" + 2 * this.getLevel()+ " Attack, +" +  this.getLevel() + "Defense");
             this.LevelUp();
         }

@@ -1,9 +1,7 @@
 package game.tiles.units.player;
 import game.Level;
-import game.tiles.units.HeroicUnit;
 import game.utils.Position;
 import game.utils.SoundPlayer;
-import jdk.jshell.spi.ExecutionControl;
 
 public class Rogue extends Player {
 
@@ -53,7 +51,7 @@ public class Rogue extends Player {
         setExperience(getExperience() + xp);
         String ret = "";
         while (getExperience() >= 50 * getLevel()) {
-            SoundPlayer.playSound("sounds/level_up.wav");
+            SoundPlayer.playSound("level_up.wav");
             ret = (getName() + "reached level " + getLevel() + ": + " + 5 * this.getLevel()+ " Health, +" + 2 * this.getLevel()+ " Attack, +" +  this.getLevel() + "Defense");
             this.LevelUp();
         }

@@ -61,7 +61,7 @@ public class Level {
             arrayGameBoard.KillPlayer();
             messageCallback.send(String.format("%s was killed by %s.", player.getName(),enemy.getName()));
             messageCallback.send("you lost.");
-            SoundPlayer.playSound("sounds/game_over.wav");
+            SoundPlayer.playSound("game_over.wav");
             try{
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -74,7 +74,7 @@ public class Level {
 
     // here, the player is the attacker. returns true if the enemy is dead. otherwise, false.
     public boolean attack(Player player, Enemy enemy){
-        SoundPlayer.playSound("sounds/attack.wav");
+        SoundPlayer.playSound("attack.wav");
         messageCallback.send(String.format("%s engaged in combat with %s.", player.getName(), enemy.getName()));
         messageCallback.send(player.describe());
         messageCallback.send(enemy.describe());
@@ -100,7 +100,7 @@ public class Level {
 
             messageCallback.send(String.format("%s died.", enemy.getName()));
             messageCallback.send(String.format("%s gained %d experience.", player.getName(), enemy.getExperience()));
-            SoundPlayer.playSound("sounds/enemy_death.wav");
+            SoundPlayer.playSound("enemy_death.wav");
         }
         return (!b);
     }
@@ -249,7 +249,7 @@ public class Level {
     public void castAbility(Player player) {
         String canCast = arrayGameBoard.getPlayer().canCastability();
         if(canCast.isEmpty()) {
-            SoundPlayer.playSound("sounds/cast_ability.wav");
+            SoundPlayer.playSound("cast_ability.wav");
             player.castAbility(this);
         }
         else{
@@ -280,7 +280,7 @@ public class Level {
             warrior.gainExperience(e.getExperience());
             arrayGameBoard.RemoveEnemy(e);
             arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
-            SoundPlayer.playSound("sounds/enemy_death.wav");
+            SoundPlayer.playSound("enemy_death.wav");
         }
 
     }
@@ -308,7 +308,7 @@ public class Level {
                 mage.gainExperience(e.getExperience());
                 arrayGameBoard.RemoveEnemy(e);
                 arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
-                SoundPlayer.playSound("sounds/enemy_death.wav");
+                SoundPlayer.playSound("enemy_death.wav");
             }
             hits++;
         }
@@ -333,7 +333,7 @@ public class Level {
                 rogue.gainExperience(e.getExperience());
                 arrayGameBoard.RemoveEnemy(e);
                 arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
-                SoundPlayer.playSound("sounds/enemy_death.wav");
+                SoundPlayer.playSound("enemy_death.wav");
             }
         }
     }
@@ -361,7 +361,7 @@ public class Level {
             hunter.gainExperience(closeste.getExperience());
             arrayGameBoard.RemoveEnemy(closeste);
             arrayGameBoard.setTile(new Empty(closeste.getPosition()), closeste.getPosition());
-            SoundPlayer.playSound("sounds/enemy_death.wav");
+            SoundPlayer.playSound("enemy_death.wav");
         }
     }
 
@@ -410,7 +410,7 @@ public class Level {
         messageCallback.send(String.format("%s hit %s for %s ability damage.", boss.getName(), arrayGameBoard.getPlayer().getName(), boss.getAttack()-defenseRoll));
 
         if(!arrayGameBoard.getPlayer().isAlive()){
-            SoundPlayer.playSound("sounds/game_over.wav");
+            SoundPlayer.playSound("game_over.wav");
             arrayGameBoard.KillPlayer();
             messageCallback.send(String.format("%s was killed by %s.", arrayGameBoard.getPlayer().getName(),boss.getName()));
             messageCallback.send("you lost.");

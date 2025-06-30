@@ -1,14 +1,15 @@
 package game.utils;
 
 import javax.sound.sampled.*;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 
 public class SoundPlayer {
-    public static void playSound(String path) {
+    public static void playSound(String fileName) {
         try {
-            File soundFile = new File(path);
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
+            BufferedInputStream inputStream = new BufferedInputStream(SoundPlayer.class.getResourceAsStream("sounds/" + fileName));
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(inputStream);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
             clip.start();
