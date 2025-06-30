@@ -267,7 +267,7 @@ public class Level {
     public void WarriorAttack(Warrior warrior, String message){
         messageCallback.send(message);
         Random rnd = new Random();
-        int i = 0;
+        int i;
         List<Enemy> list = SelectEnemyInRange();
         if (list.isEmpty()) {
             return;
@@ -275,8 +275,7 @@ public class Level {
         i = rnd.nextInt(list.size());
         Enemy e = list.get(i);
         e.reciveDamage(warrior.getMaxHp()/10);
-        // the enemy will try to defend itself?
-        // need to insert callback?
+        messageCallback.send(warrior.getName() + " hit " + e.getName() + " for " + (warrior.getMaxHp()/10) + " ability damage.");
         if (!e.isAlive()) {
             messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), warrior.getName() ,e.getExperience()));
             warrior.gainExperience(e.getExperience());
