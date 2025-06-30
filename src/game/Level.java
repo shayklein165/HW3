@@ -247,6 +247,7 @@ public class Level {
         }
         else{
             messageCallback.send(canCast);
+            player.gameTick();
         }
     }
 
