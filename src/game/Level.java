@@ -136,16 +136,7 @@ public class Level {
 
     public void gameDisplay()
     {
-        Tile[][] board = arrayGameBoard.getBoard();
-        for (int i = 0; i < board[0].length; i++)
-        {
-            for (int j = 0; j < board.length; j++)
-            {
-                System.out.print(board[j][i]);
-            }
-            System.out.println();
-        }
-        System.out.println();
+        messageCallback.send(arrayGameBoard.toString());
     }
 
     public Position getNewPosition(Position current, char direction) {

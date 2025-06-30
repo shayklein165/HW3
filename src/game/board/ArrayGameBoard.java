@@ -85,4 +85,16 @@ public class ArrayGameBoard implements PositionChanged {
             board[newPos.getX()][newPos.getY()] = tile;
         }
     }
+
+    public String toString() {
+        StringBuilder ret = new StringBuilder();
+        for (int i = 0; i < board[0].length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                Tile tile = board[j][i];
+                ret.append(tile.toString());
+            }
+            ret.append('\n');
+        }
+        return ret.toString();
+    }
 }
