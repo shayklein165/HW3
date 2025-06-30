@@ -222,12 +222,15 @@ public class Level {
         char move = inputProvider.inputQuery();
         if (movement.Contains(move)) {
             playerMove(move);
+            arrayGameBoard.getPlayer().gameTick();
         }
         else if (move == 'e') {
             castAbility(arrayGameBoard.getPlayer());
-
         }
-        arrayGameBoard.getPlayer().gameTick();
+        else if (move == 'q') {
+            arrayGameBoard.getPlayer().gameTick();
+        }
+
 
         List<Enemy> enemies= arrayGameBoard.getEnemies();
         for(Enemy e: enemies)
