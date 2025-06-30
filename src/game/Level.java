@@ -276,7 +276,7 @@ public class Level {
         // the enemy will try to defend itself?
         // need to insert callback?
         if (!e.isAlive()) {
-            messageCallback.send(String.format("%s died %s gained %d experience", warrior.getName(), e.getName() ,e.getExperience()));
+            messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), warrior.getName() ,e.getExperience()));
             warrior.gainExperience(e.getExperience());
             arrayGameBoard.RemoveEnemy(e);
             arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
@@ -304,7 +304,7 @@ public class Level {
             messageCallback.send(mage.getName() + " hit " + e.getName() + " for " + (mage.getSpellpower()-defenseRoll) + " ability damage.");
 
             if (!e.isAlive()) {
-                messageCallback.send(String.format("%s died. %s gained %d experience.", mage.getName(), e.getName() ,e.getExperience()));
+                messageCallback.send(String.format("%s died. %s gained %d experience.", e.getName(), mage.getName() ,e.getExperience()));
                 mage.gainExperience(e.getExperience());
                 arrayGameBoard.RemoveEnemy(e);
                 arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
@@ -329,7 +329,7 @@ public class Level {
             messageCallback.send(rogue.getName() + " hit " + e.getName() + " for " + (rogue.getAttack() - defenseRoll)+" ability damage.");
 
             if (!e.isAlive()) {
-                messageCallback.send(String.format("%s died %s gained %d experience", rogue.getName(), e.getName() ,e.getExperience()));
+                messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), rogue.getName() ,e.getExperience()));
                 rogue.gainExperience(e.getExperience());
                 arrayGameBoard.RemoveEnemy(e);
                 arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
@@ -357,7 +357,7 @@ public class Level {
         if (hunter.getAttack() > defenseRoll)
             closeste.reciveDamage(hunter.getAttack() - defenseRoll);
         if (!closeste.isAlive()) {
-            messageCallback.send(String.format("%s died %s gained %d experience", hunter.getName(), closeste.getName() ,closeste.getExperience()));
+            messageCallback.send(String.format("%s died %s gained %d experience", closeste.getName(), hunter.getName() ,closeste.getExperience()));
             hunter.gainExperience(closeste.getExperience());
             arrayGameBoard.RemoveEnemy(closeste);
             arrayGameBoard.setTile(new Empty(closeste.getPosition()), closeste.getPosition());
@@ -415,5 +415,20 @@ public class Level {
             messageCallback.send(String.format("%s was killed by %s.", arrayGameBoard.getPlayer().getName(),boss.getName()));
             messageCallback.send("you lost.");
         }
+    }
+
+    public void RandomKillerAttack(RandomKiller randomKiller, String message) {
+        List<Enemy> list = arrayGameBoard.getEnemies();
+        if(list.isEmpty()){
+            return;
+        }
+        int i = (int) (Math.random() * list.size());
+        Enemy e = list.get(i);
+        messageCallback.send(message+e.getName());
+        messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), randomKiller.getName() ,e.getExperience()));
+        randomKiller.gainExperience(e.getExperience());
+        arrayGameBoard.RemoveEnemy(e);
+        arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
+        SoundPlayer.playSound("enemy_death.wav");
     }
 }
