@@ -91,7 +91,9 @@ public class Level {
         boolean b = enemy.isAlive();
         if (!b){
             arrayGameBoard.RemoveEnemy(enemy);
-            arrayGameBoard.setTile(new Empty(enemy.getPosition()),enemy.getPosition());
+            Empty empty = new Empty(enemy.getPosition());
+            empty.setListener(arrayGameBoard);
+            arrayGameBoard.setTile(empty, enemy.getPosition());
             arrayGameBoard.getBoard()[enemy.getPosition().getX()][enemy.getPosition().getY()].setListener(arrayGameBoard);
             String message = player.gainExperience(enemy.getExperience());
             if(!message.isEmpty()){
@@ -279,7 +281,9 @@ public class Level {
             messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), warrior.getName() ,e.getExperience()));
             warrior.gainExperience(e.getExperience());
             arrayGameBoard.RemoveEnemy(e);
-            arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
+            Empty empty = new Empty(e.getPosition());
+            empty.setListener(arrayGameBoard);
+            arrayGameBoard.setTile(empty, e.getPosition());
             SoundPlayer.playSound("enemy_death.wav");
         }
 
@@ -307,7 +311,9 @@ public class Level {
                 messageCallback.send(String.format("%s died. %s gained %d experience.", e.getName(), mage.getName() ,e.getExperience()));
                 mage.gainExperience(e.getExperience());
                 arrayGameBoard.RemoveEnemy(e);
-                arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
+                Empty empty = new Empty(e.getPosition());
+                empty.setListener(arrayGameBoard);
+                arrayGameBoard.setTile(empty, e.getPosition());
                 SoundPlayer.playSound("enemy_death.wav");
             }
             hits++;
@@ -332,7 +338,9 @@ public class Level {
                 messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), rogue.getName() ,e.getExperience()));
                 rogue.gainExperience(e.getExperience());
                 arrayGameBoard.RemoveEnemy(e);
-                arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
+                Empty empty = new Empty(e.getPosition());
+                empty.setListener(arrayGameBoard);
+                arrayGameBoard.setTile(empty, e.getPosition());
                 SoundPlayer.playSound("enemy_death.wav");
             }
         }
@@ -360,7 +368,9 @@ public class Level {
             messageCallback.send(String.format("%s died %s gained %d experience", closeste.getName(), hunter.getName() ,closeste.getExperience()));
             hunter.gainExperience(closeste.getExperience());
             arrayGameBoard.RemoveEnemy(closeste);
-            arrayGameBoard.setTile(new Empty(closeste.getPosition()), closeste.getPosition());
+            Empty empty = new Empty(closeste.getPosition());
+            empty.setListener(arrayGameBoard);
+            arrayGameBoard.setTile(empty, closeste.getPosition());
             SoundPlayer.playSound("enemy_death.wav");
         }
     }
@@ -428,7 +438,9 @@ public class Level {
         messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), randomKiller.getName() ,e.getExperience()));
         randomKiller.gainExperience(e.getExperience());
         arrayGameBoard.RemoveEnemy(e);
-        arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
+        Empty empty = new Empty(e.getPosition());
+        empty.setListener(arrayGameBoard);
+        arrayGameBoard.setTile(empty, e.getPosition());
         SoundPlayer.playSound("enemy_death.wav");
     }
 
@@ -447,7 +459,9 @@ public class Level {
                 messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), healer.getName() ,e.getExperience()));
                 healer.gainExperience(e.getExperience());
                 dead.add(e);
-                arrayGameBoard.setTile(new Empty(e.getPosition()), e.getPosition());
+                Empty empty = new Empty(e.getPosition());
+                empty.setListener(arrayGameBoard);
+                arrayGameBoard.setTile(empty, e.getPosition());
                 SoundPlayer.playSound("enemy_death.wav");
             }
         }
