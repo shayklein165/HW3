@@ -249,6 +249,7 @@ public class Level {
             player.castAbility(this);
         }
         else{
+            player.gameTick();
             messageCallback.send(canCast);
         }
     }
