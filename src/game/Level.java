@@ -427,7 +427,7 @@ public class Level {
         }
         int i = (int) (Math.random() * list.size());
         Enemy e = list.get(i);
-        messageCallback.send(message+e.getName());
+        messageCallback.send(message);
         messageCallback.send(String.format("%s died %s gained %d experience", e.getName(), randomKiller.getName() ,e.getExperience()));
         randomKiller.gainExperience(e.getExperience());
         arrayGameBoard.RemoveEnemy(e);
@@ -438,6 +438,7 @@ public class Level {
     }
 
     public void HealerAttack(Healer healer, String message) {
+        messageCallback.send(message);
         List<Enemy> list = arrayGameBoard.getEnemies();
         List<Enemy> dead = new ArrayList<>();
         if(list.isEmpty()){

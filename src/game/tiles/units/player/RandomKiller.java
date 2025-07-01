@@ -58,7 +58,7 @@ public class RandomKiller extends Player {
 
     @Override
     public void castAbility(Level level){
-        String message = (getName() + " used " + getSpellName() + ", healing for " + (10 * getDefense()) + ".");
+        String message = (getName() + " used " + getSpellName() + ".");
         setHp(getHp() - (getMaxHp()/2));
         level.RandomKillerAttack(this, message);
     }
